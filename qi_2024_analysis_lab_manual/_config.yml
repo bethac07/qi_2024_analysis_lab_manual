@@ -35,3 +35,11 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  use_edit_page_button: true
+  comments:
+    hypothesis: true
+
+sphinx:
+  config:
+    bibtex_reference_style: super
+    myst_enable_extensions: ['colon_fence', 'dollarmath', 'linkify', 'substitution', 'tasklist', 'html_image']
