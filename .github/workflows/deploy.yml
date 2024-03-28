@@ -8,8 +8,6 @@ on:
 
 env:
   BASE_URL: /${{ github.event.repository.name }}
-
-environment:
   name: github-pages
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
