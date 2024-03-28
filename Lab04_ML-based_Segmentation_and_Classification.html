@@ -1,0 +1,670 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Segmentation: Pixel Classification &#8212; QI 2024 Analysis Lab Manual</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab04_ML-based_Segmentation_and_Classification';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deep Learning for Microscopy Image Analysis" href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html" />
+    <link rel="prev" title="Image Correction and Intensity Measurements" href="Lab03_Image_Correction_and_Intensity_Measurements.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="QI 2024 Analysis Lab Manual - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="QI 2024 Analysis Lab Manual - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to QI 2024
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lab01_Estimating_SNR_and_Resolution_and_basic_image_processing.html">Estimating SNR &amp; Resolution</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab02_Image_Processing_and_Basic_Detection.html">Image Processing and Basic Detection</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab03_Image_Correction_and_Intensity_Measurements.html">Image Correction and Intensity Measurements</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Segmentation: Pixel Classification</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html">Deep Learning for Microscopy Image Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab06_3D_Image_Analysis.html">3D Image Analysis</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab07_Image_Time_Series_Analysis.html">Image Time Series Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual/edit/main/docs/Lab04_ML-based_Segmentation_and_Classification.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual/issues/new?title=Issue%20on%20page%20%2FLab04_ML-based_Segmentation_and_Classification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Lab04_ML-based_Segmentation_and_Classification.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Segmentation: Pixel Classification</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Segmentation: Pixel Classification</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="segmentation-pixel-classification">
+<h1>Segmentation: Pixel Classification<a class="headerlink" href="#segmentation-pixel-classification" title="Link to this heading">#</a></h1>
+<p>Learning Objectives</p>
+<ul class="simple">
+<li><p>Train a pixel classifier to segment images</p></li>
+<li><p>Learn to use ilastik</p></li>
+<li><p>Experiment with how features and data affect performance</p></li>
+</ul>
+<p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
+<p><strong>Training a Random Forest Pixel Classifier in ilastik</strong></p>
+<ul class="simple">
+<li><p>Welcome to the world of software with good documentation and
+tutorials! Take a deep breath and really soak it in, then check out
+the ilastik pixel classifier tutorial here:
+<a class="reference external" href="https://bit.ly/3x11EZf"><u>https://bit.ly/3x11EZf</u></a>.<br />
+Let us know if you hit a snag!</p></li>
+<li><p>You can use the data in Machine_Learning/Pixel_Classifier/ (link to
+Lab Data can be found on top of this page!). Note that you’ll need to
+change the axes to “tyx” because these images are not a z-stack.</p>
+<ul>
+<li><p><em>Question:</em> There is a train and a test stack. Why is that?</p></li>
+</ul>
+</li>
+<li><p>Try to segment the images by providing training examples for four
+classes:
+<img alt="_images/image1.png" src="_images/image1.png" /></p>
+<ul>
+<li><p>Cell bodies:
+<img alt="_images/image2.png" src="_images/image2.png" /></p></li>
+<li><p>Synapses:<img alt="_images/image3.png" src="_images/image3.png" /></p></li>
+<li><p>Granule cell layer:</p></li>
+<li><p>…and “<em>Other stuff</em>”</p></li>
+</ul>
+</li>
+<li><p>Can you unambiguously define/draw labels for each of the classes?<br />
+If not, would that be a problem? Why or why not?</p></li>
+<li><p>Pay attention to how the segmentation changes as you add training
+data. Can you understand why it changes as it does? If not ask!</p></li>
+<li><p>We learned about this in the lecture - what exactly is this “random
+forest pixel classifier” doing behind the scenes? If it’s not clear,
+ask!</p></li>
+<li><p>Using what you learned about filtering, what can you say about the
+features we might need for this segmentation task? What are the
+minimal set that might do? Try that out. If your segmentation needs
+improvement, what features might you need to add?</p></li>
+<li><p>When you think you’re done with training, try the model on the test
+image. How does it perform? What does this tell you about your data,
+the model, and how you trained it?</p></li>
+<li><p>Start a new pixel classification project with the same data so you can
+play around with how the training data affects the resulting model and
+classification.</p>
+<ul>
+<li><p>What happens if you give the model a ton of examples of one class
+and very few examples of the others? Why is that?</p></li>
+<li><p>What happens if you only annotate the brightest cell bodies you can
+find? Why?</p></li>
+</ul>
+</li>
+</ul>
+<p>Cell Classification</p>
+<p>Learning Objectives</p>
+<ul class="simple">
+<li><p>Segment cells</p></li>
+<li><p>Extract features from cells</p></li>
+<li><p>Feature-based cell classification</p></li>
+</ul>
+<p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
+<p><strong>Segment Nuclei for Feature Extraction</strong></p>
+<ul class="simple">
+<li><p>Start a new project in ilastik using the workflow “Pixel
+Classification + Object Classification”</p></li>
+<li><p>Use the file in Machine_Learning/Cell_Classifier/. The first step will
+be to train a pixel classifier to segment the nuclei, just like you
+did in the previous exercise.</p></li>
+<li><p>Why do we need to segment the cells before we classify them? Are there
+other approaches that might let us classify cells without segmenting
+them? What are the pros and cons (ask us to discuss if it’s not
+clear!)</p></li>
+<li><p>Once you have a good pixel classifier, you can move on to the
+thresholding step to convert your probabilities into a mask.</p></li>
+</ul>
+<p><strong>Classifying Mitotic and Interphase Cells</strong></p>
+<ul class="simple">
+<li><p>Now, you can follow this tutorial:
+<a class="reference external" href="https://bit.ly/35BXgVx"><u>https://bit.ly/35BXgVx</u></a>, starting at
+the “From segmentation to objects” step.</p></li>
+<li><p>Can you find a minimal set of features that will classify these cells
+into dividing and non-dividing? Does adding more features help? Is
+there any reason we might not want to add <em>all</em> the features?</p></li>
+<li><p>If you only label cells in the first few frames of the time-series,
+are your classifications accurate at the end? What does this tell you
+about your model? Do you think the model would work well on a
+different image time series? If not, what might improve its
+performance on new data?</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p><strong>[Bonus] Play with Labkit (pixel classification in Fiji)</strong></p>
+<ul class="simple">
+<li><p>You find Labkit on an update site called “Labkit”. Ask us if you have
+trouble installing it.</p></li>
+</ul>
+<p><strong>[Bonus] Challenging Segmentations</strong></p>
+<ul class="simple">
+<li><p>Pick the hardest image you’ve seen in the course and try to segment it
+using the ilastik RF pixel classifier. Can you crack it? Can you
+understand why or why not?</p></li>
+</ul>
+<p><strong>[Bonus] Breaking it</strong></p>
+<ul class="simple">
+<li><p>Can you find an image segmentation or object classification problem
+that you <em>can’t</em> solve with ilastik? If you don’t have time to
+actually try it, can you think about what sort of problem might be
+unsolvable by any pixel classification approach?</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Lab03_Image_Correction_and_Intensity_Measurements.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Image Correction and Intensity Measurements</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Deep Learning for Microscopy Image Analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Segmentation: Pixel Classification</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QI 2024
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

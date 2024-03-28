@@ -1,0 +1,862 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Image Correction and Intensity Measurements &#8212; QI 2024 Analysis Lab Manual</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab03_Image_Correction_and_Intensity_Measurements';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Segmentation: Pixel Classification" href="Lab04_ML-based_Segmentation_and_Classification.html" />
+    <link rel="prev" title="Image Processing and Basic Detection" href="Lab02_Image_Processing_and_Basic_Detection.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="QI 2024 Analysis Lab Manual - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="QI 2024 Analysis Lab Manual - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to QI 2024
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lab01_Estimating_SNR_and_Resolution_and_basic_image_processing.html">Estimating SNR &amp; Resolution</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab02_Image_Processing_and_Basic_Detection.html">Image Processing and Basic Detection</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Image Correction and Intensity Measurements</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab04_ML-based_Segmentation_and_Classification.html">Segmentation: Pixel Classification</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html">Deep Learning for Microscopy Image Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab06_3D_Image_Analysis.html">3D Image Analysis</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab07_Image_Time_Series_Analysis.html">Image Time Series Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual/edit/main/docs/Lab03_Image_Correction_and_Intensity_Measurements.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual/issues/new?title=Issue%20on%20page%20%2FLab03_Image_Correction_and_Intensity_Measurements.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Lab03_Image_Correction_and_Intensity_Measurements.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Image Correction and Intensity Measurements</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Image Correction and Intensity Measurements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"></a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="image-correction-and-intensity-measurements">
+<h1>Image Correction and Intensity Measurements<a class="headerlink" href="#image-correction-and-intensity-measurements" title="Link to this heading">#</a></h1>
+<p>Learning Objectives</p>
+<ul class="simple">
+<li><p>Prepare correction images</p></li>
+<li><p>Apply corrections to image data</p></li>
+<li><p>Measure intensities with and without corrections</p></li>
+</ul>
+<p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
+<p><strong>Preparing your Image Corrections</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><em>NOTE: You’re encouraged to try these corrections on your own data. However, we also have some canned data available if you prefer (see link above)</em></p></th>
+</tr>
+</thead>
+</table>
+<ol class="arabic simple">
+<li><p>Create Averaged dark images</p></li>
+</ol>
+<blockquote>
+<div><p><em>NOTE: If you are using the canned data you can skip this part as we
+have provided averaged images</em></p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>Load your dark correction images</p></li>
+<li><p>Average them together by going to stack-&gt;Z-Project and selecting
+“Average intensity” and clicking OK.</p></li>
+<li><p>Calculate the mean and STD of the entire dark current image. How
+much variability is there? Is it in a specific spatial pattern? You
+can use the line scan (Analyze-&gt;plot profile) to measure patterns
+along a particular axis. If you use a horizontal rectangular
+selection it will average along the Y axis and better reveal any
+patterns that may be present.</p></li>
+<li><p>How does the variability in these images compare to your signal?
+Would you expect different cameras to have more variability here?</p></li>
+<li><p>Save your averaged dark image for later use.</p></li>
+</ol>
+<!-- -->
+<ol class="arabic simple" start="2">
+<li><p>Create Averaged and Filtered Flat-field correction (FFC) images</p></li>
+</ol>
+<blockquote>
+<div><p><em>NOTE: If you are using the canned data you can skip this part as we
+have provided averaged images</em></p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>Load your flat-field correction images</p></li>
+<li><p>Average these images together over time by going to
+stack-&gt;Z-Project and selecting “Average intensity” and clicking OK.</p>
+<ol class="arabic simple">
+<li><p><em>NOTE: If you have debris etc. in some of your images, using a
+median intensity projection instead may better remove these
+artifacts.</em></p></li>
+</ol>
+</li>
+<li><p>How clean is the resulting averaged image? Remember, any errors
+(noise, specks of debris etc) in this image will be propagated to
+your data during the correction process! If it is noisy you can
+apply some filtering to reduce the noise.</p>
+<ol class="arabic simple">
+<li><p><em>NOTE: If you are using images from a CMOS camera, it will have
+variable gain from pixel to pixel and so may appear noisy - this
+is NOT noise and you do NOT want to filter it away!! Do not
+apply any filtering to CMOS images!!!</em></p></li>
+</ol>
+</li>
+<li><p>Now, correct the offset in your FFC image. Subtract the dark image
+from it using the image calculator. Go to process-&gt;image
+calculator, select the FFC image as Image1, “subtract” as the
+operation and the dark image as image 2.</p></li>
+<li><p>Now, normalize your averaged FFC image. Convert it to 32 bit,
+calculate the mean value (you can measure an entire image by
+pressing m with nothing selected), and then divide the image by this
+mean value by going to Process-&gt;Math-&gt;Divide.</p></li>
+<li><p>If you measure the mean of the normalized image what is it? Why do
+we want to do this?</p></li>
+<li><p>Save your averaged normalized flat-field correction image for later
+use.</p></li>
+<li><p>How much variability is there in your illumination pattern? You can
+measure this by doing a linescan. Draw a line selection across the
+entire image and then press Ctrl+K to plot the intensity along this
+line. How much does this profile vary across the image? What does
+this variability tell you about when/why these correction images are
+necessary?</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p><strong>Measure intensity with and without dark and flat-field correction</strong></p>
+<ol class="arabic simple">
+<li><p>Open the bead images you acquired for flat field correction. If you
+are using canned data this will be “MAX_s1to50_10x SF red beads
+1percent 6micron.tif”</p></li>
+<li><p>Play around with the display (brightness and contrast) - the beads
+<em>should</em> be uniform intensity but they’re not - can you adjust the
+display so you can see the variability in intensity?</p></li>
+<li><p>Measure the mean intensity in the background (away from any beads).
+What is the value? Why is this?</p></li>
+<li><p>Open the dark image you prepared earlier (if using canned data, open
+DarkImage.tif).</p></li>
+<li><p>The offset and dark current are additive, so the correction is a
+subtraction. Subtract your averaged dark image via Process-&gt;Image
+Calculator.</p></li>
+<li><p>Save this dark current-corrected image just in case.</p></li>
+<li><p>Measure the mean intensity in the background of this corrected image
+(away from any beads). What is the value now? Why is this?</p></li>
+<li><p>Use the “find maxima” feature you learned about before to detect all
+the beads, then measure them by pressing m.</p></li>
+<li><p>Use Excel to calculate the mean and standard deviation of your bead
+intensities. Also calculate the “coefficient of variation” which is
+the standard deviation divided by mean.</p></li>
+<li><p>Now, open the averaged flat-field correction image you prepared
+earlier (‘FlatField-10x SF-bin1-Filter TRITC.tif’ if you’re using
+canned data).</p></li>
+<li><p>Illumination has a multiplicative effect on intensity, so the
+correction is division. Apply the flat-field correction by dividing
+the dark-current-&amp;-offset-corrected image by the flat-field
+correction image, again via Process-&gt;Image Calculator.</p></li>
+<li><p>Play around with the brightness and contrast now - do the bead
+intensities appear more uniform? (They should).</p></li>
+<li><p>Again detect the beads in the flat-field corrected image using the
+find maxima tool and measure their intensities.</p></li>
+<li><p>Again use Excel to calculate the mean, standard deviation and
+coefficient of variation (CV) of the bead intensities. How has the
+CV changed? Why is that?</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1><a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p><strong>Measure intensity with and without local background subtraction</strong></p>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><p><em>&gt;&gt; In this example you will deal with variable
+background, where we must approximate the background in every pixel of
+the image. In samples where the background is not variable you can be
+more precise by measuring the background somewhere outside of the sample
+and then subtracting that single number from the entire image.</em></p>
+<p><em>&gt;&gt; For the sake of time we will have you apply <u>only</u>
+a background subtraction to the images in this section of the lab, but
+if you wanted to be precise you would want to <u>also</u> apply an
+offset and flat field correction to these images.</em></p></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><p>Open the bead images you acquired for local background subtraction.
+If you are using the canned data this will be “10x s fluor mosaic
+variable background selected frame.tif”</p></li>
+<li><p>Draw a line scan across the field of view (ideally avoiding beads)
+and use the plot profile function to visualize and measure the
+variability in background.</p></li>
+<li><p>Use the find maxima feature to detect the beads and measure their
+intensity.</p></li>
+<li><p>Again use Excel to calculate the mean, standard deviation and
+coefficient of variation of the bead intensities. Save this
+spreadsheet for later reference.</p></li>
+<li><p>Now, apply a local background subtraction</p></li>
+<li><p>Again draw a line scan across the field of view and use plot profile
+to visualize and measure the background variation. How does it
+compare to before?</p></li>
+<li><p>Detect the beads and measure their intensity.</p></li>
+<li><p>Again use Excel to calculate the mean, standard deviation and
+coefficient of variation. Compare these values to those you measured
+in the raw image, before background subtraction. How do they
+compare? Would a background subtraction be important for making
+quantitative intensity measurements of biological samples?</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id3">
+<h1><a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<p><strong>Calculate a registration transform between two image channels</strong></p>
+<ol class="arabic simple">
+<li><p>Load one of your tetraspeck bead image sets (two channels from one
+stage position). If you are using the canned dataset this will be
+“tspeck_1024_1518_003_z27.ome.tif” (drag it into BioFormats plugin
+shortcut window).</p></li>
+<li><p>If your images are in a single composite (2-channel) image, split
+the channels by going to Image-&gt;Color-&gt;Split Channels</p></li>
+<li><p>Open the registration plugin by going to
+plugins-&gt;registration-&gt;Descriptor based registration</p></li>
+<li><p>Choose one of your image channels to be a reference and the other to
+register. It doesn’t matter which is which, but it DOES matter that
+you remember which you chose!!</p></li>
+<li><p>Make sure that the first three boxes are set to interactive, the
+transformation model is set to rigid (2d) and set the “images
+pre-alignment” to “approximately aligned”. For the rest of the
+settings you can use the defaults.</p></li>
+<li><p>Now click OK. You will be presented with a preview of the points
+that the algorithm is detecting to align your images. Do these
+settings look familiar? Does this sound like anything we’ve learned
+about?</p></li>
+<li><p>Adjust the sliders until it is only detecting beads (shown by small
+green circles), then click Done.</p></li>
+<li><p>Look at the resulting composite (called “fused”). Is the alignment
+better? You should see near-perfect overlap of your spots.</p>
+<ol class="arabic simple">
+<li><p><em>NOTE: This plugin stores the most recently successful
+registration transform, so you don’t need to save any file to
+save your transform.</em></p></li>
+<li><p><em>NOTE: “fused” is a composite image that overlays the ‘anchor’
+and ‘registered’ images. To switch between ‘anchor’ and
+‘registered’, create a hyperstack: Image &gt; Hyperstacks &gt; Stack
+to hyperstack.</em></p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id4">
+<h1><a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+<p><strong>Apply the registration transform to align two image channels</strong></p>
+<ol class="arabic simple">
+<li><p>Load a different tetraspeck bead image set (not the same image pair
+you used to calculate the transform). We will apply our registration
+to this image for the sake of the lab, but in practice you would be
+applying this registration to images of your sample of interest. If
+you are using the canned data this will be
+“tspeck_1024_1518_002_z21.ome.tif”</p></li>
+<li><p>If your images are in a single composite (2-channel) image, split
+the channels by going to Image-&gt;Color-&gt;Split Channels.</p></li>
+<li><p>Go to Plugins-&gt;Registration-&gt;Descriptor based registration</p></li>
+<li><p>Check the “re-apply last model” box, make sure you have the images
+selected in the same order you used to create the transform, and
+click OK.</p></li>
+<li><p>Take a close look at the composite registered image that the plugin
+produces. How well do the spots overlap now? Are they closer than
+before the registration?</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id5">
+<h1><a class="headerlink" href="#id5" title="Link to this heading">#</a></h1>
+<p><strong>Calculate bleedthrough coefficient</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>For this section we will use canned data from a FRET probe, where bleedthrough / crosstalk is especially strong. These images are from a single-labelled control where only one of the FRET fluorophores is present (CFP).</p></th>
+</tr>
+</thead>
+</table>
+<ol class="arabic simple">
+<li><p>Open the image of the CFP fluorophore
+“CFPonly_CFP_background_offset_FFC.tif” and the same sample using
+the FRET illumination and filter set
+“CFPonly_FRET_background_offset_FFC.tif”</p></li>
+</ol>
+<blockquote>
+<div><p><em>NOTE: These images have already had offset, background and flat-field
+corrections applied to them, so you don’t need to do that now. If you
+were using your own images you would need to apply these corrections
+first.</em></p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>We can sneakily use the colocalization tool to calculate the
+bleedthrough coefficient. Go to Analyze-&gt;Colocalization-&gt;Coloc 2.</p></li>
+<li><p>Make sure that Channel 1 is CFP-Only-CFP and Channel 2 is
+CFP-Only-FRET. Set the “Threshold regression” to “Bisection” - this
+doesn’t matter for what we’re doing but it will keep the plugin from
+taking forever. Then click OK and wait a few seconds for the results
+to pop up.</p></li>
+<li><p>We don’t care about co-localization, so we can ignore any warnings
+and most of the values the software displays, but this plugin also
+fits a line to our 2D image intensity scatter plot/histogram. You
+can view this histogram and the fit by selecting “2D Intensity
+histogram” from the drop-down menu at the top.</p></li>
+<li><p>How does the fit look? You should have a VERY high Pearson’s R value
+(very close to 1). If everything looks good, write down the <em>slope</em>
+of the fit - this is your bleedthrough coefficient.</p></li>
+<li><p>Now, test out your bleedthrough coefficient by performing a
+bleedthrough correction on the CFP-Only-FRET image - after the
+correction there should be little or no intensity.</p>
+<ol class="arabic simple">
+<li><p>Convert your CFP-Only-CFP image to 32 bit. Then, multiply it by
+the bleedthrough coefficient using Process-&gt;Math-&gt;Multiply and
+typing in the bleedthrough coefficient.</p></li>
+<li><p>Now, subtract this scaled CFP-Only-CFP image from the
+CFP-Only-FRET image using Process-&gt;Image Calculator.</p></li>
+<li><p>This should almost completely remove the fluorescence in the
+CFP-Only-FRET image, because in this experiment this image is
+completely due to bleedthrough / crosstalk. There may be some
+residual intensity - can you think of why this might be?</p></li>
+</ol>
+</li>
+</ol>
+<p><strong>[Bonus] ImageJ Macros</strong></p>
+<ul class="simple">
+<li><p>Pick the most painful or annoying analysis task from the labs so far,
+or a new one you want to try. Go to Plugins &gt; Macros &gt; Record</p></li>
+<li><p>Start performing your task. Notice what happens in the macro recorder.</p></li>
+<li><p>When you’re done, click “create” in the macro recorder.</p></li>
+<li><p>Close your processed images, re-open your original image(s), and try
+running the macro.</p></li>
+<li><p>Look at the text of the macro - try to understand some of the
+commands. How could you adjust your analysis by editing this?</p></li>
+<li><p>Save your macro for future use. You can re-open it by simply dragging
+it onto the Fiji toolbar.</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Lab02_Image_Processing_and_Basic_Detection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Image Processing and Basic Detection</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Lab04_ML-based_Segmentation_and_Classification.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Segmentation: Pixel Classification</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Image Correction and Intensity Measurements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QI 2024
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

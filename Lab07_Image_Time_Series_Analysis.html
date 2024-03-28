@@ -1,0 +1,788 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Image Time Series Analysis &#8212; QI 2024 Analysis Lab Manual</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab07_Image_Time_Series_Analysis';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="3D Image Analysis" href="Lab06_3D_Image_Analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="QI 2024 Analysis Lab Manual - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="QI 2024 Analysis Lab Manual - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to QI 2024
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lab01_Estimating_SNR_and_Resolution_and_basic_image_processing.html">Estimating SNR &amp; Resolution</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab02_Image_Processing_and_Basic_Detection.html">Image Processing and Basic Detection</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab03_Image_Correction_and_Intensity_Measurements.html">Image Correction and Intensity Measurements</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab04_ML-based_Segmentation_and_Classification.html">Segmentation: Pixel Classification</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html">Deep Learning for Microscopy Image Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab06_3D_Image_Analysis.html">3D Image Analysis</a></li>
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Image Time Series Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual/edit/main/docs/Lab07_Image_Time_Series_Analysis.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual/issues/new?title=Issue%20on%20page%20%2FLab07_Image_Time_Series_Analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Lab07_Image_Time_Series_Analysis.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Image Time Series Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="image-time-series-analysis">
+<h1>Image Time Series Analysis<a class="headerlink" href="#image-time-series-analysis" title="Link to this heading">#</a></h1>
+<p><strong>Learning Objectives</strong></p>
+<ul class="simple">
+<li><p>(Semi-)automated Tracking with Mastodon in Fiji</p></li>
+<li><p>Using Trackmate from within Mastodon</p></li>
+<li><p>Tracking with ilastik</p></li>
+<li><p>Bonus: exporting from ilastik, editing in Mastodon</p></li>
+<li><p>Bleach Correction</p></li>
+<li><p>FRAP</p></li>
+</ul>
+<p><strong>Part 1: Tracking</strong></p>
+<p><strong>Overview</strong></p>
+<p>Tracking is an unsolved problem. It can be easy, but it usually is not.
+If you need to reach flawless results, you have to curate manually.</p>
+<p>This being said, manual tracking is very time consuming and
+boring/annoying. Hence, we will be exploring semi-automatic tracking
+regimes and also see how automated results can then be loaded for manual
+curation.</p>
+<p>More specifically, we will get to know <em><strong>Mastodon</strong></em> and learn more
+about <em><strong>ilastik</strong></em>. Mastodon is a Fiji plugin designed to deal with
+truly huge time-lapses, which makes it an exquisitely valuable choice
+for many tracking projects.</p>
+<p>We know ilastik already from other exercises, but today we will explore
+some of ilastik’s tracking features. The automated tracking in Ilastik is
+quite involved. Some key ideas we discussed in the lecture.</p>
+<p><em><strong>Note:</strong></em> this lab is intended to be interactive. If you find
+something cool… don’t hold back… share it with others. These tools are
+rather complex and we will certainly not be able to see all their
+features.</p>
+<p><strong>Exercise #0: Get the data we need</strong></p>
+<p>Please start to download the following data (you can also find it in the
+LabData folder on our google drive):</p>
+<ol class="arabic simple">
+<li><p>Drosophila.tif -
+<a class="reference external" href="http://tinyurl.com/yy5nsuce"><u>http://tinyurl.com/yy5nsuce</u></a></p></li>
+<li><p>2D+t tracking example for ilastik:
+<a class="reference external" href="http://tinyurl.com/y67af3mz"><u>http://tinyurl.com/y67af3mz</u></a></p></li>
+<li><p>3D+t tracking example for ilastik:
+<a class="reference external" href="http://tinyurl.com/y4sdzg9p"><u>http://tinyurl.com/y4sdzg9p</u></a></p></li>
+</ol>
+<p><strong>Exercise #1: (Semi-)automated Tracking in Mastodon</strong></p>
+<p><em><strong>Required:</strong> Fiji + Mastodon + drosophila.tif</em></p>
+<p><em><strong>Important:</strong></em> Collect screenshots or remember what you learned here.
+Be prepared to show the coolest thing you found out tomorrow morning
+(you absolutely will be volunteered to share your findings).</p>
+<p><em><strong>Step 1:</strong> Start a Mastodon project from a single tiff File</em></p>
+<ol class="arabic simple">
+<li><p>Put the file ‘drosophila.tif’ in some folder. Link to download this
+file can be found further up in Exercise 0.</p></li>
+<li><p>In Fiji do: Help &gt; Update &gt; Manage update sites</p>
+<ul class="simple">
+<li><p>Check boxes next to “Mastodon”.</p></li>
+<li><p>Close &gt; Apply changes &gt; restart Fiji</p></li>
+</ul>
+</li>
+<li><p>Open ‘drosophila.tif’ in Fiji.</p></li>
+<li><p>In Fiji, start Mastodon: Plugins &gt; Mastodon</p></li>
+<li><p>In Mastodon, start a new project by clicking “new Mastodon project”.</p>
+<ul class="simple">
+<li><p>Click on “use an image open in ImageJ” and select the drosophila
+you just opened in Fiji.</p></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div><img alt="_images/image22.png" src="_images/image22.png" />
+</div></blockquote>
+<ul class="simple">
+<li><p>Click on “create” to create the new Mastodon project. A new window
+will open.</p></li>
+</ul>
+<blockquote>
+<div><img alt="_images/image110.png" src="_images/image110.png" />
+</div></blockquote>
+<ul class="simple">
+<li><p>In this new window, you can now open BDVs and TrackSchemes by clicking
+the respective buttons.</p></li>
+</ul>
+<ol class="arabic simple" start="6">
+<li><p>Please try to navigate the data and play with a few BDV shortcuts.
+Navigating 3D space can be confusing and a few shortcuts are really,
+really valuable. Here a quick reminder to what we’ve seen yesterday:</p>
+<ul class="simple">
+<li><p>If you left click and drag, you can reslice in arbitrary
+directions.<br />
+Note the overview sketch on the top left… very helpful!</p></li>
+<li><p>Right click and drag is moving the volume around.</p></li>
+<li><p>Shift + X/Y/Z is rotating between the three exes parallel
+directions. Also here these rotations happen around the current
+mouse location.</p></li>
+<li><p>The mouse wheel is shifting the visible image plane in and out.</p></li>
+<li><p>Shift + ctrl + mouse wheel (on windows) is zooming in and out.</p></li>
+<li><p>Spend some additional time to internalize some more shortcuts:<br />
+<a class="reference external" href="https://imagej.net/BigDataViewer#Basic_Navigation"><u>https://imagej.net/BigDataViewer#Basic_Navigation</u></a></p></li>
+</ul>
+</li>
+</ol>
+<p><em><strong>Step 2:</strong> Manually track some cells</em></p>
+<ol class="arabic simple">
+<li><p>Get the Mastodon cheat sheet:
+<a class="reference external" href="http://tinyurl.com/y2rxfhlv"><u>http://tinyurl.com/y2rxfhlv</u></a></p></li>
+<li><p>Figure out how to:</p>
+<ol class="arabic simple">
+<li><p>Manually add cell detections (<strong>a</strong>)</p></li>
+<li><p>Change their size to better fit the data (<strong>q/e</strong>)</p></li>
+<li><p>Move detections around (<strong>hold space + drag</strong>)</p></li>
+<li><p>Look at the detections you created using the TrackSceme view</p></li>
+<li><p>Link detections across time (<strong>hold L + drag</strong>)</p>
+<ol class="arabic simple">
+<li><p>Do this in TrackScheme</p></li>
+<li><p>Do this in one in a BDV window</p></li>
+</ol>
+</li>
+<li><p>Delete detections/links (<strong>d</strong>)</p></li>
+<li><p>Figure out what the lock symbols in the top left of each view
+window are for…</p></li>
+<li><p>Figure out what the ‘context’ in a TrackSceme controls (you will
+need to have tracked some lineages for this).</p></li>
+<li><p>Did you spot the undo function yet? (<strong>Ctrl + z</strong>)</p></li>
+<li><p>Ask yourself how long it would take to manually track every
+single nucleus in this really quite small dataset. Once this
+sunk in, pity everyone who has to do that for his/her project.</p></li>
+</ol>
+</li>
+</ol>
+<p><em><strong>Step 3:</strong> Semi-automatic tracking to speed things up</em></p>
+<ol class="arabic simple">
+<li><p>Get some instructions:
+<a class="reference external" href="http://tinyurl.com/y39vgnuy"><u>http://tinyurl.com/y39vgnuy</u></a>
+(warning, they are slightly outdated, screenshots will look a bit
+different than the Mastodon you are using today…)</p></li>
+<li><p>Now speed up your tracking work and try to find an efficient way to
+navigate Mastodon. (Remember, tomorrow we will volunteer people to
+show and compare found ways to track fast and efficiently…)</p></li>
+</ol>
+<p><em><strong>Step 4:</strong> Automatic tracking using the TrackMate plugin</em></p>
+<ol class="arabic simple">
+<li><p>Use (in Mastodon, <strong>not</strong> Fiji): Plugins &gt; Tracking &gt; Detection…
+and detect cells in some part of the volume (the ROI-box to select a
+part can also be using from within BDV).</p></li>
+<li><p>Then use: Plugins &gt; Tracking &gt; Linking… and link those detections
+to each other. This will not lead to perfect results. Don’t worry
+about that!</p></li>
+<li><p>Play with options, check if you can improve results somehow.</p></li>
+</ol>
+<p><strong>Exercise #2: Tracking in Ilastik</strong></p>
+<p>Please go to
+<a class="reference external" href="https://ilastik.github.io/documentation/tracking/tracking"><u>https://ilastik.github.io/documentation/tracking/tracking</u></a>
+and follow the instructions on this page.</p>
+<p>Since downloads from the ilastik website can be slow. If so, please use
+the following links to get the sample data and projects (<em>likely you
+have downloaded this in Exercise 0 already, no need to download it
+again</em>):</p>
+<ol class="arabic simple">
+<li><p>2D+t tracking example for ilastik:
+<a class="reference external" href="http://tinyurl.com/y67af3mz"><u>http://tinyurl.com/y67af3mz</u></a></p></li>
+<li><p>3D+t tracking example for ilastik:
+<a class="reference external" href="http://tinyurl.com/y4sdzg9p"><u>http://tinyurl.com/y4sdzg9p</u></a></p></li>
+</ol>
+<p>The 2D example will be way faster to work with, but please choose any of
+the two. After the download is completed, unzip the file and open
+“<em><strong>conservationTracking.ilp</strong></em>” in ilastik (double click should do it).</p>
+<p>Please collect some screenshots or remember what you liked most. Be
+prepared to show the coolest thing you found out tomorrow morning. Some
+of you will be volunteered to share their findings… ;)</p>
+<p>Some things to try after you start feeling comfortable with ilastik.
+There is much more interesting stuff to explore. Here some inspiration:</p>
+<ol class="arabic simple">
+<li><p>For the 2D+t example…</p>
+<ol class="arabic simple">
+<li><p>Can you spot some cells in the last time-point that are actually
+mergers of more than 2 cells? Can you change this somehow and
+make ilastik also detect mergers of more then 2 objects?</p></li>
+<li><p>Please play with the individual steps and observe the many image
+layers. Which one might be particularly useful? When?</p></li>
+</ol>
+</li>
+<li><p>For the 3D+t example…</p>
+<ol class="arabic simple">
+<li><p>How long did it take to track automatically? Is there a way to
+speed this up? (Ask the online manual…)</p></li>
+</ol>
+</li>
+</ol>
+<p><strong>Part 2: Photobleaching</strong></p>
+<p>Learning Objectives</p>
+<ul class="simple">
+<li><p>Apply and scrutinize photobleach correction</p></li>
+<li><p>Double-normalized FRAP analysis</p></li>
+</ul>
+<p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
+<p><strong>Bleach Correction</strong></p>
+<p>In this portion of the lab, you will compensate for photobleaching by
+fitting an exponential model to the decaying fluorescence intensity, and
+then correcting for this decay.</p>
+<p>Load the data:</p>
+<ul class="simple">
+<li><p>Go to folder BleachCorrection</p></li>
+<li><p>Load TRITC into Fiji by dragging the folder into the Fiji window
+(click yes when asked to open as a stack, but leave the checkboxes
+unchecked).</p></li>
+</ul>
+<p>Apply Fiji’s built-in photobleach correction plugin</p>
+<ul class="simple">
+<li><p>Image &gt; Adjust &gt; Bleach Correction</p></li>
+<li><p>Correction Method: Exponential Fit. Press OK.</p></li>
+<li><p>This plugin outputs a corrected image as well the fitted exponential
+decay. Since you have not selected an ROI it is using the average
+intensity in the entire image to perform the correction. Have a look
+at the corrected image: does it look like what you would expect?</p></li>
+<li><p>You can select a region and measure its intensity over time by drawing
+an ROI and then going to Image-&gt;Stacks-&gt;Plot Z Axis Profile (since
+there’s no Z axis this will actually plot a profile over time). Make a
+measurement like this of the center of a nucleus as well as the
+background. What do you see?</p></li>
+<li><p>Now, re-load the original dataset and select an ROI of a nucleus. Be
+sure it stays on the nucleus during the entire time series! Now
+perform the photobleach correction again. What do you see now? Why is
+this? What is the “right” way to photobleach correct these images?</p></li>
+<li><p>Make a note of the decay rate (parameter ‘b’) from the exponential
+fit.</p></li>
+<li><p>Repeat for the FITC channel. Which image is bleaching faster?</p></li>
+<li><p>How well does the correction work on the FITC channel? Do we need to
+select an ROI here? Why or why not?</p></li>
+<li><p>We now have approximately the same average intensity at the end of the
+FITC time series. Is the SNR the same at the beginning and end? Does
+the photobleach correction affect the SNR?</p></li>
+</ul>
+<p><strong>FRAP</strong></p>
+<ul class="simple">
+<li><p>Load the data: FRAP/33108 SU295 try1.tif (Or use your own if you
+prefer)</p></li>
+<li><p>Create an ROI over the square bleached region. Add it to the ROI
+Manager (press ‘t’).</p></li>
+<li><p>Plot the intensity in this region over time (Image &gt; Stacks &gt; Plot
+Z-axis Profile)</p></li>
+<li><p>Does the intensity recover to a stable value?</p></li>
+<li><p>Could we use a photobleaching correction like in the previous
+exercise? Why or why not?</p></li>
+</ul>
+<p>Now we will run a FRAP plugin. This is going to apply a similar analysis
+that you did above: photobleach correction, and then exponential
+fitting, but it will do it using a double-normalization approach. You
+can find this plugin by going to
+<a class="reference external" href="https://bit.ly/3xdsQUR"><u>https://bit.ly/3xdsQUR</u></a>, or we’ve
+provided a copy in the lab data folder. Then, unzip the plugin and copy
+it to the “plugins” folder inside the folder Fiji is installed in, then
+restart Fiji.</p>
+<ul class="simple">
+<li><p>First, perform a <em>uniform</em> background subtraction on your images by
+measuring the mean intensity in a region of the background and then
+going to Process &gt; Math &gt; Subtract. Why do we want to do a uniform
+subtraction rather than e.g. a rolling ball?</p></li>
+<li><p>You will need to have two ROIs in the ROI Manager. One for the square
+bleached region, and a second ROI for the whole cell (including the
+frapped region). If you can’t include the whole cell, just include a
+large region of the same cell which includes the frapped region. When
+might this non-whole-cell ROI be OK? When might it be problematic?</p></li>
+<li><p>Launch the FRAP Profiler plugin (Plugins &gt; FRAP Profiler v2).</p></li>
+<li><p>Enter the correct time interval, so that your recovery rate is in the
+correct units.</p></li>
+<li><p>Run first with a single exponential. Compare the fitted curve to the
+raw data in the figure that is created (in the procFRAP and normFRAP
+windows). (Ideally we would compare this quantitatively but the plugin
+doesn’t support this :( )</p></li>
+<li><p>Re-run the plugin with double exponential. Is the fit better? A double
+exponential models a two step process, e.g., fast but weak association
+of the molecule of interest, followed by slower stronger association.</p></li>
+<li><p>What is the % mobile?</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Lab06_3D_Image_Analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3D Image Analysis</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QI 2024
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

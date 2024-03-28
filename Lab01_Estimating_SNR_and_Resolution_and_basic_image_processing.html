@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Estimating SNR &amp; Resolution &#8212; QI 2024 Analysis Lab Manual</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab01_Estimating_SNR_and_Resolution_and_basic_image_processing';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Image Processing and Basic Detection" href="Lab02_Image_Processing_and_Basic_Detection.html" />
+    <link rel="prev" title="Welcome to QI 2024" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="QI 2024 Analysis Lab Manual - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="QI 2024 Analysis Lab Manual - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to QI 2024
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Estimating SNR &amp; Resolution</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab02_Image_Processing_and_Basic_Detection.html">Image Processing and Basic Detection</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab03_Image_Correction_and_Intensity_Measurements.html">Image Correction and Intensity Measurements</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab04_ML-based_Segmentation_and_Classification.html">Segmentation: Pixel Classification</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html">Deep Learning for Microscopy Image Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab06_3D_Image_Analysis.html">3D Image Analysis</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab07_Image_Time_Series_Analysis.html">Image Time Series Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual/edit/main/docs/Lab01_Estimating_SNR_and_Resolution_and_basic_image_processing.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual/issues/new?title=Issue%20on%20page%20%2FLab01_Estimating_SNR_and_Resolution_and_basic_image_processing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Lab01_Estimating_SNR_and_Resolution_and_basic_image_processing.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Estimating SNR & Resolution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Estimating SNR &amp; Resolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="estimating-snr-resolution">
+<h1>Estimating SNR &amp; Resolution<a class="headerlink" href="#estimating-snr-resolution" title="Link to this heading">#</a></h1>
+<p>Learning Objectives</p>
+<ul class="simple">
+<li><p>Get familiar with Fiji</p></li>
+<li><p>Estimate SNR</p></li>
+<li><p>Estimate resolution</p></li>
+<li><p>Reduce noise by filtering</p></li>
+<li><p>Subtract background</p></li>
+<li><p>Detect point sources via LoG</p></li>
+</ul>
+<p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
+<p><strong>SNR</strong></p>
+<ul class="simple">
+<li><p>Open Fiji</p></li>
+<li><p>Open the image stack “One point source 67nm pix variable SNR.ome.tif”
+by dragging the image onto Fiji</p></li>
+<li><p>You may need to adjust the lookup table. Press Ctrl+Shift+C (or Image
+&gt; Adjust &gt; Brightness/Contrast …) to bring up the brightness and
+contrast window. Adjust the levels until you can see the noise, so you
+can see the full range of the signal. Note that this is not altering
+the data, just how it is visualized!</p></li>
+<li><p>Check the image properties in Image-&gt;Properties. Is the pixel size
+right (67nm)? If not, correct it. It’s always important to be sure
+that the image metadata has been correctly stored and read, as this
+will be used to convert measurements from pixels into microns.</p></li>
+<li><p>Scroll through the stack back and forth a few times. Start from the
+lowest SNR image and then scroll backwards - when can you first make
+out the spot by eye? Write this number down so you can see if you can
+beat it computationally!</p></li>
+<li><p>Try detecting local maxima in the stack.</p>
+<ul>
+<li><p>Go to a medium-SNR image (approximately mid-way through the stack)</p></li>
+<li><p>Go to Process-&gt;Find Maxima. Check the “Preview point selection”
+box, make sure the “Light background” box is un-checked and the
+“Exclude edge maxima” box is checked. The “Prominence” parameter is
+how bright a pixel must be relative to its neighbors to be counted.
+Increase this value until you have only one detection on the
+selected frame.</p></li>
+<li><p>Now, open the provided macro to try this detection on all images.
+Drag and drop the file “FindStackMaxima.ijm” onto Fiji (main window,
+not the Bioformats shortcut window) to open the macro
+(alternatively, use File &gt; Open …).</p></li>
+<li><p>Click “Run” and when the box pops up, type in the noise tolerance
+(“Prominence”) you selected in step above, then click OK.</p></li>
+<li><p>Scroll through the resulting stack - it will have a single white
+pixel at each location where a point was detected. What is the last
+image (lowest SNR) that was correctly detected (i.e. only one point
+was found).</p></li>
+<li><p>See how far into the stack you can get accurate detection by trying
+different noise tolerances. Hint: You can also change the output to
+“Count” to make it easier to see on what frame things go wrong. Make
+a note of your personal best (highest frame number with only 1
+detection).</p></li>
+</ul>
+</li>
+<li><p>Try measuring the SNR</p>
+<ul>
+<li><p>Click the rectangle selection on the Fiji toolbar.</p></li>
+<li><p>Select a region in the background and then press “m” to measure it.</p></li>
+<li><p>Look at the results window. An important measurement may be missing.
+If so, go to Results-&gt;Set Measurements… and add the missing
+measurement. You can now close the results window and measure your
+background area again.</p></li>
+<li><p>Now measure the peak intensity by holding your mouse cursor over the
+brightest area in the PSF. The intensity value will be displayed in
+the ImageJ toolbar.</p></li>
+<li><p>What is the approximate SNR by this method? Is the peak intensity we
+measured the best way to approximate SNR?</p></li>
+<li><p>Repeat this measurement on a few frames. How does the SNR you
+measure compare to the detection error (number of incorrectly
+detected points) that you saw above?</p></li>
+<li><p>When you’re done with this, ask the TAs – they have a cheat-sheet
+for the correct SNRs.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p><strong>Resolution</strong></p>
+<ul class="simple">
+<li><p>Quick and dirty resolution estimation by FWHM</p>
+<ul>
+<li><p>Go to a high-SNR frame and click on the line selection on the Fiji
+toolbar</p></li>
+<li><p>Draw a line through the middle of the PSF.</p></li>
+<li><p>Now perform a linescan by pressing Ctrl+K or going to Analyze-&gt;Plot
+Profile</p></li>
+<li><p>Can you estimate the size of the PSF? You can hold the mouse over
+the plot to get specific intensity and X values. Try measuring the
+width of the peak at one half of the maximum value. This is called
+the Full-Width at Half-Maximum (FWHM).</p></li>
+<li><p>Now try to repeat this on a lower SNR frame. Quite a bit harder to
+estimate here, right?</p></li>
+</ul>
+</li>
+<li><p>Measuring amplitude and resolution by gaussian fitting</p>
+<ul>
+<li><p>Select one of your linescan plot windows. Copy the data by going to
+Data &gt; “Copy 1st Dataset”</p></li>
+<li><p>Go to Analyze-&gt;Tools-&gt;Curve Fitting</p></li>
+<li><p>In the drop-down box, select “Gaussian”</p></li>
+<li><p>Clear the data from the box, and paste in your data by pressing
+Ctrl+V or right-click and select Paste</p></li>
+<li><p>Click Fit. Look at the resulting gaussian fit and fitted gaussian
+parameters:</p>
+<ul>
+<li><p><em>a</em> is your background - this should closely match the mean value
+of the rectangular measurement you made before</p></li>
+<li><p><em>b</em> <em>minus a</em> is the amplitude of your gaussian. Is this a better
+or worse estimation of the signal strength than the peak value you
+measured before?</p></li>
+<li><p><em>d</em> is the standard deviation (STD, sigma) of the gaussian. How is
+this related to resolution? You can convert this STD to FWHM by
+multiplying by 2.355. How does this compare to your previous
+measurement?</p></li>
+<li><p><em>c</em> is the estimated point source position along the line you
+drew. You can use the same line and repeat this process on a lower
+SNR image - how does the estimated position change? Even with
+gaussian fitting we will have significant error at low SNR!!</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1><a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p><strong>Filtering</strong></p>
+<ul class="simple">
+<li><p>Filtering to handle noise</p>
+<ul>
+<li><p>First, duplicate the stack so we can later compare the filtered and
+un-filtered images. Press Ctrl+SHIFT+D or go to Image-&gt;Duplicate,
+be sure the “duplicate stack” box is checked.</p></li>
+<li><p>Apply a PSF-matched Gaussian filter to the raw data. Go to
+Process-&gt;Filters-&gt;Gaussian Blur. What sigma should we use? (Hint:
+Remember the gaussian fitting we did before!)</p></li>
+<li><p>Scroll through the resulting stack - how far into the stack can you
+visually identify the point now? How does this compare to the
+unfiltered stack?</p></li>
+<li><p>Note that both the peak brightness in the point AND the background
+standard deviation have decreased. Which decreased more? What is the
+resulting SNR in the filtered stack? How does this compare to the
+original un-filtered stack?</p></li>
+<li><p>Now try finding local maxima again using the FindStackMaxima macro.
+How far into the stack can you go now before your detection fails?
+(It’s OK to exclude edge maxima due to edge-effects in the
+filtering)</p></li>
+<li><p>Try out a few different filter sizes, both bigger and smaller than
+PSF-matched. Try detecting points in the resulting filtered stack.
+What are the pros &amp; cons of different filter sizes? Why is
+PSF-matched a good choice?</p></li>
+</ul>
+</li>
+<li><p>Spatial Sampling and variable point intensities</p>
+<ul>
+<li><p>You are demo-ing two cameras. One is a highly sensitive EMCCD with
+16 micron pixel sizes and one is the brand new for the year 2135
+“TalleyCam-3000” with 1 micron pixels, but lower sensitivity.</p></li>
+<li><p>Compare the two stacks “variable brightness point sources 160nm pix
+variable SNR” and “variable brightness point sources 10nm pix
+variable SNR”. Visually, which camera makes it easier to see the
+points at a given SNR?</p>
+<ul>
+<li><p><em>NOTE: The SNR is equivalent in the two stacks at each frame.</em></p></li>
+</ul>
+</li>
+<li><p>Scroll through the stacks and try some of the point detection and
+localization exercises above. Note how the variable spot intensities
+make it more challenging to accurately detect the spots.</p></li>
+<li><p>In what situations would you prefer to have the EMCCD? That is, what
+experiments and analysis would be best suited to this camera?</p></li>
+<li><p>In what situations would you prefer to have the TalleyCam-3000? That
+is, what experiments and analysis would be best suited to this
+camera?</p></li>
+<li><p>NOTE: These are simulated images and an artificial scenario. In
+reality, which camera would make it easier to achieve high SNR?</p></li>
+</ul>
+</li>
+<li><p>Laplacian of Gaussian Filtering (LoG)</p>
+<ul>
+<li><p>Load the “variable background 500 point sources–” image by simply
+dragging it onto the Fiji toolbar</p></li>
+<li><p>Perform laplacian of gaussian filtering on the image using FeatureJ:
+Plugins-&gt;FeatureJ-&gt;FeatureJ Laplacian</p>
+<ul>
+<li><p><em>NOTE</em>: This uses the FeatureJ plugin. If this plugin is not
+installed, go to Help &gt; Update &gt; Manage update sites, check the
+‘ImageScience’ box, close that window, click ‘Apply Changes’, and
+restart Fiji.</p></li>
+</ul>
+</li>
+<li><p>The “smoothing scale” is the sigma of the laplacian of gaussian
+filter. What should this be set to? Select it and then click OK</p></li>
+<li><p>Notice that the resulting image is 32 bit. Mouse over some of the
+pixels to see their values. Why does FeatureJ convert the image to
+32 bit?</p></li>
+<li><p>The resulting image has bright spots as negative values. Why is
+this? Invert the image by going to Edit-&gt;Invert</p></li>
+<li><p>Now find maxima in this image. How accurate is the count? Is there
+now a larger range of noise tolerances which give an accurate
+result?</p></li>
+<li><p>If you feel like it, try LoG filtering on the “noisier” image as
+well.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id3">
+<h1><a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<p><strong>Bonus</strong></p>
+<ul class="simple">
+<li><p>If you have the data, try the techniques you learned today on some of
+your own bead data to estimate the SNR and resolution. What was your
+best resolution? Your worst SNR?</p></li>
+<li><p>Come up with your own way to visualize detection accuracy vs. SNR in
+one of the example variable SNR stacks from above. Save your plot for
+discussion tomorrow morning.</p>
+<ul>
+<li><p>Compare this plot with different filtering approaches.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to QI 2024</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Lab02_Image_Processing_and_Basic_Detection.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Image Processing and Basic Detection</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Estimating SNR &amp; Resolution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QI 2024
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

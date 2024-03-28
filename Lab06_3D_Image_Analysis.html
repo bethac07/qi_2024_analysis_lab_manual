@@ -1,0 +1,792 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3D Image Analysis &#8212; QI 2024 Analysis Lab Manual</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab06_3D_Image_Analysis';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Image Time Series Analysis" href="Lab07_Image_Time_Series_Analysis.html" />
+    <link rel="prev" title="Deep Learning for Microscopy Image Analysis" href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="QI 2024 Analysis Lab Manual - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="QI 2024 Analysis Lab Manual - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to QI 2024
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lab01_Estimating_SNR_and_Resolution_and_basic_image_processing.html">Estimating SNR &amp; Resolution</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab02_Image_Processing_and_Basic_Detection.html">Image Processing and Basic Detection</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab03_Image_Correction_and_Intensity_Measurements.html">Image Correction and Intensity Measurements</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab04_ML-based_Segmentation_and_Classification.html">Segmentation: Pixel Classification</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html">Deep Learning for Microscopy Image Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3D Image Analysis</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Lab07_Image_Time_Series_Analysis.html">Image Time Series Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual/edit/main/docs/Lab06_3D_Image_Analysis.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bethac07/QI 2024 Analysis Lab Manual/issues/new?title=Issue%20on%20page%20%2FLab06_3D_Image_Analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Lab06_3D_Image_Analysis.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3D Image Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3D Image Analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"></a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="d-image-analysis">
+<h1>3D Image Analysis<a class="headerlink" href="#d-image-analysis" title="Link to this heading">#</a></h1>
+<p>Learning Objectives</p>
+<ul class="simple">
+<li><p>Visualizing 3D data</p></li>
+<li><p>Basic segmentation on 3D images</p></li>
+<li><p>Image registration for 3D reconstruction</p></li>
+<li><p>Machine learning segmentation in 3D</p></li>
+</ul>
+<p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
+<p><strong>Visualization</strong></p>
+<ul class="simple">
+<li><p>Open Fiji</p></li>
+<li><p>Load Drosophila_zstack-20x-medium_H103486 (if you’re on a slow
+machine, load Drosophila_zstack-20x-default_H103492 instead). This is
+a 3-channel, 3D volume. The default visualization shows one z-plane
+and one channel at a time. There are a few other ways to visualize 3D
+data, some of which are listed below. Try them out, and see what are
+their advantages and disadvantages.</p></li>
+<li><p><strong>Orthogonal Views</strong>. Go to Image &gt; Stacks &gt; Orthogonal Views. What
+are we seeing here? Can you understand what each window shows you? In
+which view is easiest to see the separation between nuclei? Why might
+that be?</p></li>
+<li><p><strong>Clear Volume</strong>. <em>(If the plugin is not installed, you should enable
+the proper update site “ClearVolume”, update, and restart Fiji.)</em>
+Close the 3D Viewer. Go to Plugins &gt; Clear Volume(at the bottom of
+the list) &gt; Open in Clear Volume. Play around with the interface. In
+particular, change the values of VoxelDimension.X/Y/Z at the top right
+to see what happens.</p></li>
+<li><p><strong>BigDataViewer.</strong> This is a “re slicing” viewer that is included with
+Fiji and you can view your stack in it by going to
+Plugins-&gt;BigDataViewer-&gt;open current image. What might be the pros
+and cons of viewing images like this compared to in a 3D projection
+like in ClearVolume?</p></li>
+<li><p>Do you see anything suspicious about the intensity values in this
+image? If so can you think of some possible explanations?</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p><strong>3D Object Segmentation, Shape and Intensity Measurements</strong></p>
+<ul class="simple">
+<li><p>Close all secondary Fiji windows and reload
+Drosophila_zstack-20x-medium_H103486 (or
+Drosophila_zstack-20x-default_H103492 if you’re on a slow machine).</p></li>
+<li><p>Split the three channels by going to Image &gt; Color &gt; Split Channels.
+Close all but the second channel, which corresponds to nuclei. We are
+going to segment these nuclei via 3D marker-controlled watershed. As
+in 2D, we’ll need 3 “images”: marker, watershed surface, and mask.
+Typically we use nuclei as markers to segment cells, but here we will
+get all three images from the same source. Change the image type to
+32-bit (Image &gt; Type &gt; 32-bit). Create 3 copies of the stack (via
+Image &gt; Duplicate), naming them “surface”, “mask”, and “marker”.
+(Make sure the “duplicate stack” option is checked.)</p></li>
+<li><p><strong>Watershed surface</strong>. Select the “surface” image. We can use the
+inverted nuclei channel as watershed surface (remember the watershed
+algorithm floods a surface from dark to bright areas). To make the
+segmentation smoother, however, we need to blur the image a bit. This
+is done via Process &gt; Filters &gt; Gaussian Blur 3D. Notice that now
+there are 3 sigmas to set, one for each dimension, and that they are
+in ‘voxel’ units, not microns. Should the 3 sigmas be the same? To
+answer this, go to Image &gt; Properties and check the voxel size in
+x,y, and z. Now go to Process &gt; Filters &gt; Gaussian Blur 3D. Choose
+an appropriate sigma, and apply the filter. Visualize the result in
+3D. Try other sigmas (appropriately scaled) if necessary. Now invert
+the image: Edit &gt; Invert. This is the watershed surface. To clean up
+your workspace, save it (File &gt; Save as &gt; Tiff) and close it.</p></li>
+<li><p><strong>Mask</strong>. This will restrict the area into which the watershed regions
+will grow. It can be obtained by thresholding a blurred version of the
+nuclei image, where the sigmas are a bit larger than the ones used
+above. Select the “mask” image. Apply a 3D gaussian filter (Process &gt;
+Filters &gt; Gaussian Blur 3D), with sigma a bit larger (say 50%) than
+the one used above. Threshold the result (Image &gt; Adjust &gt;
+Threshold). Choose a threshold such that the resulting mask contains
+all the nuclei, then click Apply. If prompted, click Convert to Mask.
+To clean up your workspace, save the result (File &gt; Save as &gt; Tiff)
+and close it.</p></li>
+<li><p><strong>Marker</strong>. To find markers, we will treat the nuclei as “point
+sources”, and detect them by finding local maxima in the Laplacian of
+Gaussian image. Select the “marker” image. We now compute the proper
+sigma to locate the nuclei. We want to detect nuclei, so what should
+we measure to determine this sigma? Now go to Plugins &gt; FeatureJ &gt;
+FeatureJ Laplacian, adjust the smoothing scale (don’t forget about the
+voxel calibration!), and click OK. Candidates for markers are the
+local minima in the resulting filtered image. To find them, go to
+Plugins &gt; MorphoLibJ &gt; Minima and Maxima &gt; Regional Min &amp; Max 3D.
+Select Regional Minima with Connectivity 26 and click Ok. What do you
+think? Too many point sources in the background? We can filter them
+using our previously computed mask. Load “mask” by dragging it into
+Fiji. Now go to Process &gt; Image Calculator. And multiply the mask by
+the image with point sources. Save the result as “marker”.</p></li>
+<li><p><strong>Watershed</strong>. Now close all secondary windows and load the “surface”,
+“mask”, and “marker” images. Go to Plugins &gt; MorphoLibJ &gt;
+Segmentation &gt; Marker-Controlled Watershed. Set Input, Marker, and
+Mask appropriately. Check all checkboxes. Click Ok.</p></li>
+<li><p>Can you overlay the original image and watershed segmentation to
+visualize them simultaneously in 3D?</p></li>
+<li><p><strong>Shape Measurements</strong>. Select the watershed image. Go to Plugins &gt;
+MorphoLibJ &gt; Analyse &gt; Analyze Regions 3D. Select desired shape
+measurements and click Ok.</p></li>
+<li><p><strong>Intensity Measurements</strong>. Go to Plugins &gt; MorphoLibJ &gt; Analyze &gt;
+Intensity Measurements 2D/3D. Which image should you set as Input?
+Which as Labels? Check the desired measurements and click Ok.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1><a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p><strong>3D Crop</strong></p>
+<ul class="simple">
+<li><p>This is useful if the data size is big and you want to rapidly test
+your analysis options before applying them to the larger set.</p></li>
+<li><p>Re-open the image you’ve been working with. Go to Image &gt; Color &gt;
+Split Channels. Select channel 2. Go to Plugins &gt; Stacks &gt; Crop
+(3D). Check “Three pane view” and uncheck “Change origin”. Click Ok.
+In the Crop Options window, check all options under “Also crop these
+images”. Set the bounding boxes as desired and click Crop.</p></li>
+<li><p>Merge the resulting channels (Image &gt; Color &gt; Merge Channels), and
+visualize the result in 3D if interested.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id3">
+<h1><a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<p><strong>Registration for 3D Volume Reconstruction</strong></p>
+<ul class="simple">
+<li><p>Open the “mouse_brain_sections_downsampled32x_arpy.ome.tif” stack.
+You’ve seen a single tissue section from this brain before, but now
+we’re going to try to visualize the entire brain.</p></li>
+<li><p>Visualize this stack in ClearVolume. This should look like most of a
+mouse brain - why does it appear “squished”? Look at the voxel
+dimensions - the actual voxel sizes in this image are (x,y,z) =
+(10.5,10.5,40) microns - correct them. Now does the aspect ratio look
+more appropriate? Remember the discussion of voxel size calibration.</p></li>
+<li><p>Notice the misalignment between the tissue sections - this gives the
+brain a rough outline. You can also see this by scrolling through the
+image stack with the ImageJ viewer. We can fix this!</p></li>
+<li><p>Close ClearVolume, then duplicate the original image stack. We will
+apply a stack registration to this duplicated stack. The plugin we
+will utilize will use the currently selected slice in the currently
+selected stack as a reference to register all the other slices, so
+scroll to a slice you think would serve as a good reference. Then, go
+to Plugins &gt; Registration &gt; StackReg (if StackReg is not installed,
+add ‘BIG-EPFL’ to the list of update sites, then update and restart
+Fiji). What kind of transform do you think is best to align all these
+slices? Select it and then click OK. Be patient - it will take some
+time to finish. <em>Note:</em> If you ever have to register multi-channel
+images, there is a plugin called “HyperStackReg” you can install from
+the “HyperStackReg” update site!</p></li>
+<li><p>Now visualize the registered stack in ClearVolume and compare it to
+the original. Does it look better? What might be necessary to further
+improve the registration?</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id4">
+<h1><a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id5">
+<h1><a class="headerlink" href="#id5" title="Link to this heading">#</a></h1>
+<p><strong>3D Pixel Classifier Choose-your-own-adventure</strong></p>
+<p>The goal here is to use machine learning to attempt to segment closely
+spaced nuclei. You have two options for how to proceed. Ilastik will be
+familiar, but Labkit will let you work in Fiji (and, spoiler alert, it
+may also save you time in the tracking lab later on!). If you have time,
+try both!</p>
+<p><strong>Labkit</strong></p>
+<p>Labkit can also perform 3D segmentation with a random forest pixel
+classifier, and it lets you work right in Fiji, which must feel like
+home at this point. It visualizes the data with BigDataViewer (which you
+used earlier, more info <a class="reference external" href="https://imagej.net/plugins/bdv/"><u>here</u></a>)
+and can handle very large datasets. There is more info on Labkit
+available <a class="reference external" href="https://imagej.net/plugins/labkit/"><u>here</u></a>.</p>
+<ul class="simple">
+<li><p>Go to Help -&gt; Update and add the “Labkit” update site, and restart
+Fiji</p></li>
+<li><p>Open drosophilus_floriansus.tif and then go to Plugins -&gt; Labkit -&gt;
+Open current image. You can access more options for viewing the data
+by clicking “settings” in the upper left corner.</p></li>
+<li><p>After you’ve annotated a few areas of foreground and background, in
+the lower left “Segmentation” box you’ll need to select the pixel
+classifier and click the ▶ button to train the model and see the
+current result.</p></li>
+<li><p>To handle large datasets, the dataset is broken up into blocks and
+Labkit only makes predictions on the currently visible blocks. When
+your done, if you want to export the entire segmentation, click the
+drop-down arrow next to the pixel classifier in the lower left
+window - there you’ll see options to segment the entire dataset and
+save the result.</p></li>
+</ul>
+<p><strong>ilastik</strong></p>
+<p>You can use Machine Learning to create a surface for watershed
+segmentation, by training a model to highlight the regions you want to
+segment.</p>
+<ul class="simple">
+<li><p>Open drosophilus_floriansus.tif. If you want to keep things simple you
+can select a few crops in a small area containing a few dozen nuclei.
+Export the image to .tiff using File-&gt;Save as-&gt;.tiff</p></li>
+<li><p>Create a new pixel classification project in ilastik and load in the
+.tiff stack. Train a model that highlights the nuclei. What classes
+should you label? What output of the model should you use as watershed
+surface?</p></li>
+<li><p>When you’re done, try loading the result into Fiji and viewing it in
+3D using your favorite 3D viewer from earlier in the lab!</p></li>
+</ul>
+<p><strong>The Aftermath</strong></p>
+<ul class="simple">
+<li><p>Are your nuclei all perfectly separated? If not, what method have you
+learned that might help you split them? What output of the model would
+you use to do that?</p></li>
+<li><p>Have you learned about other machine learning approaches that might
+handle closely spaced nuclei better? What are they and what are their
+pros and cons relative to this approach?</p></li>
+<li><p>Once you’re happy with your result, export the segmentation and
+overlay it with the raw data as a composite image. Then visualize it
+with your favorite 3D visualization tool from earlier in the lab.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id6">
+<h1><a class="headerlink" href="#id6" title="Link to this heading">#</a></h1>
+<p><strong>Bonus</strong></p>
+<ul class="simple">
+<li><p>Think of something you want to segment/detect and measure in the 3D
+data you’ve acquired in the lab and go for it! Come up with a plan,
+and if you run into trouble just ask us!</p></li>
+<li><p>Make a cool visualization to share with the class! In ClearVolume you
+can click the “start stop recording button” to record e.g. a 3D
+rotation and zoom of your data. Then, load the folder full of images
+it saves back into Fiji as a stack, and go to file-&gt;save as-&gt;.avi to
+save them as a .avi movie file.</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Deep Learning for Microscopy Image Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Lab07_Image_Time_Series_Analysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Image Time Series Analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3D Image Analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By QI 2024
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
