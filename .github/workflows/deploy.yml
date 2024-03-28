@@ -47,7 +47,8 @@ jobs:
           path: "qi_2024_analysis_lab_manual/_build/html"
 
       # Deploy the book's HTML to GitHub Pages
-      - name: GitHub Pages action
-        uses: peaceiris/actions-gh-pages@v3.6.1
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
         with:
           publish_dir: qi_2024_analysis_lab_manual/_build/html
