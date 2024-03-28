@@ -32,7 +32,7 @@ truly huge time-lapses, which makes it an exquisitely valuable choice
 for many tracking projects.
 
 We know ilastik already from other exercises, but today we will explore
-some of ilastik’s tracking features. The automated tracking in Ilasik is
+some of ilastik’s tracking features. The automated tracking in Ilastik is
 quite involved. Some key ideas we discussed in the lecture.
 
 ***Note:*** this lab is intended to be interactive. If you find
