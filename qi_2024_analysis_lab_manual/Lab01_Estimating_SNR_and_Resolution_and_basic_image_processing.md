@@ -2,21 +2,23 @@
 
 Learning Objectives
 
-- Get familiar with Fiji
+- [ ] Get familiar with Fiji
 
-- Estimate SNR
+- [ ] Estimate SNR
 
-- Estimate resolution
+- [ ] Estimate resolution
 
-- Reduce noise by filtering
+- [ ] Reduce noise by filtering
 
-- Subtract background
+- [ ] Subtract background
 
-- Detect point sources via LoG
+- [ ] Detect point sources via LoG
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
-**SNR**
+---
+
+## **SNR**
 
 - Open Fiji
 
@@ -94,9 +96,9 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
   - When you’re done with this, ask the TAs -- they have a cheat-sheet
     for the correct SNRs.
 
-# 
+---
 
-**Resolution**
+## **Resolution**
 
 - Quick and dirty resolution estimation by FWHM
 
@@ -148,9 +150,9 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
       SNR image - how does the estimated position change? Even with
       gaussian fitting we will have significant error at low SNR!!
 
-# 
+---
 
-**Filtering**
+## **Filtering**
 
 - Filtering to handle noise
 
@@ -238,9 +240,9 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
   - If you feel like it, try LoG filtering on the “noisier” image as
     well.
 
-# 
+---
 
-**Bonus**
+## **Bonus**
 
 - If you have the data, try the techniques you learned today on some of
   your own bead data to estimate the SNR and resolution. What was your
