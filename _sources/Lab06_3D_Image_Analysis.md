@@ -24,8 +24,8 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
 - Open Fiji
 
-- Load Drosophila_zstack-20x-medium_H103486 (if you're on a slow
-  machine, load Drosophila_zstack-20x-default_H103492 instead). This is
+- Load `Drosophila_zstack-20x-medium_H103486` (if you're on a slow
+  machine, load `Drosophila_zstack-20x-default_H103492` instead). This is
   a 3-channel, 3D volume. The default visualization shows one z-plane
   and one channel at a time. There are a few other ways to visualize 3D
   data, some of which are listed below. Try them out, and see what are
@@ -55,8 +55,8 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 ## **3D Object Segmentation, Shape and Intensity Measurements**
 
 - Close all secondary Fiji windows and reload
-  Drosophila_zstack-20x-medium_H103486 (or
-  Drosophila_zstack-20x-default_H103492 if you're on a slow machine).
+  `Drosophila_zstack-20x-medium_H103486` (or
+  `Drosophila_zstack-20x-default_H103492` if you're on a slow machine).
 
 - Split the three channels by going to Image \> Color \> Split Channels.
   Close all but the second channel, which corresponds to nuclei. We are
