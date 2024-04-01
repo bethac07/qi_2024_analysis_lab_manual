@@ -8,7 +8,7 @@
 title                       : QI 2024 Analysis Lab Manual  # The title of the book. Will be placed in the left navbar.
 author                      : QI 2024  # The author of the book
 copyright                   : "2024"  # Copyright year to be placed in the footer
-logo                        : logo.png  # A path to the book logo
+logo                        : image001.png  # A path to the book logo
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
