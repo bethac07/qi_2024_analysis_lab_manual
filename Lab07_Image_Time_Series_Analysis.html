@@ -402,7 +402,26 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-tracking"><strong>Part 1: Tracking</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-data-we-need">Get the data we need</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semi-automated-tracking-in-mastodon">(Semi-)automated Tracking in Mastodon</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-a-mastodon-project-from-a-single-tiff-file">Step 1: Start a Mastodon project from a single tiff File</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-manually-track-some-cells">Step 2: Manually track some cells</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-semi-automatic-tracking-to-speed-things-up">Step 3: Semi-automatic tracking to speed things up</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-automatic-tracking-using-the-trackmate-plugin">Step 4: Automatic tracking using the TrackMate plugin</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-in-ilastik">Tracking in Ilastik</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-photobleaching"><strong>Part 2: Photobleaching</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Learning Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bleach-correction">Bleach Correction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frap">FRAP</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -416,21 +435,23 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="image-time-series-analysis">
 <h1>Image Time Series Analysis<a class="headerlink" href="#image-time-series-analysis" title="Link to this heading">#</a></h1>
-<p><em>Lab authors: TBU-Hunter Elliott &amp; Marcelo Cicconet</em> .</p>
+<p><em>Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug</em> .</p>
 <p><small>This file last updated 2024-04-01.</small></p>
 <hr class="docutils" />
+<section id="part-1-tracking">
+<h2><strong>Part 1: Tracking</strong><a class="headerlink" href="#part-1-tracking" title="Link to this heading">#</a></h2>
 <section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<h3>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h3>
 <ul class="contains-task-list simple">
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> (Semi-)automated Tracking with Mastodon in Fiji</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Using Trackmate from within Mastodon</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Tracking with ilastik</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Bonus: exporting from ilastik, editing in Mastodon</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Bleach Correction</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> FRAP</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Bonus: exporting from ilastik, editing in Mastodon - note from Beth - this isn’t there</p></li>
 </ul>
-<p><strong>Part 1: Tracking</strong></p>
-<p><strong>Overview</strong></p>
+</section>
+<hr class="docutils" />
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h3>
 <p>Tracking is an unsolved problem. It can be easy, but it usually is not.
 If you need to reach flawless results, you have to curate manually.</p>
 <p>This being said, manual tracking is very time consuming and
@@ -444,11 +465,16 @@ for many tracking projects.</p>
 <p>We know ilastik already from other exercises, but today we will explore
 some of ilastik’s tracking features. The automated tracking in Ilastik is
 quite involved. Some key ideas we discussed in the lecture.</p>
-<p><em><strong>Note:</strong></em> this lab is intended to be interactive. If you find
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This lab is intended to be interactive. If you find
 something cool… don’t hold back… share it with others. These tools are
 rather complex and we will certainly not be able to see all their
 features.</p>
-<p><strong>Exercise #0: Get the data we need</strong></p>
+</div>
+</section>
+<section id="get-the-data-we-need">
+<h3>Get the data we need<a class="headerlink" href="#get-the-data-we-need" title="Link to this heading">#</a></h3>
 <p>Please start to download the following data (you can also find it in the
 LabData folder on our google drive):</p>
 <ol class="arabic simple">
@@ -459,12 +485,18 @@ LabData folder on our google drive):</p>
 <li><p>3D+t tracking example for ilastik:
 <a class="reference external" href="http://tinyurl.com/y4sdzg9p"><u>http://tinyurl.com/y4sdzg9p</u></a></p></li>
 </ol>
-<p><strong>Exercise #1: (Semi-)automated Tracking in Mastodon</strong></p>
+</section>
+<section id="semi-automated-tracking-in-mastodon">
+<h3>(Semi-)automated Tracking in Mastodon<a class="headerlink" href="#semi-automated-tracking-in-mastodon" title="Link to this heading">#</a></h3>
 <p><em><strong>Required:</strong> Fiji + Mastodon + drosophila.tif</em></p>
-<p><em><strong>Important:</strong></em> Collect screenshots or remember what you learned here.
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Collect screenshots or remember what you learned here.
 Be prepared to show the coolest thing you found out tomorrow morning
 (you absolutely will be volunteered to share your findings).</p>
-<p><em><strong>Step 1:</strong> Start a Mastodon project from a single tiff File</em></p>
+</div>
+<section id="step-1-start-a-mastodon-project-from-a-single-tiff-file">
+<h4>Step 1: Start a Mastodon project from a single tiff File<a class="headerlink" href="#step-1-start-a-mastodon-project-from-a-single-tiff-file" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Put the file ‘drosophila.tif’ in some folder. Link to download this
 file can be found further up in Exercise 0.</p></li>
@@ -516,7 +548,9 @@ mouse location.</p></li>
 </ul>
 </li>
 </ol>
-<p><em><strong>Step 2:</strong> Manually track some cells</em></p>
+</section>
+<section id="step-2-manually-track-some-cells">
+<h4>Step 2: Manually track some cells<a class="headerlink" href="#step-2-manually-track-some-cells" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Get the Mastodon cheat sheet:
 <a class="reference external" href="http://tinyurl.com/y2rxfhlv"><u>http://tinyurl.com/y2rxfhlv</u></a></p></li>
@@ -544,7 +578,9 @@ sunk in, pity everyone who has to do that for his/her project.</p></li>
 </ol>
 </li>
 </ol>
-<p><em><strong>Step 3:</strong> Semi-automatic tracking to speed things up</em></p>
+</section>
+<section id="step-3-semi-automatic-tracking-to-speed-things-up">
+<h4>Step 3: Semi-automatic tracking to speed things up<a class="headerlink" href="#step-3-semi-automatic-tracking-to-speed-things-up" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Get some instructions:
 <a class="reference external" href="http://tinyurl.com/y39vgnuy"><u>http://tinyurl.com/y39vgnuy</u></a>
@@ -554,7 +590,9 @@ different than the Mastodon you are using today…)</p></li>
 navigate Mastodon. (Remember, tomorrow we will volunteer people to
 show and compare found ways to track fast and efficiently…)</p></li>
 </ol>
-<p><em><strong>Step 4:</strong> Automatic tracking using the TrackMate plugin</em></p>
+</section>
+<section id="step-4-automatic-tracking-using-the-trackmate-plugin">
+<h4>Step 4: Automatic tracking using the TrackMate plugin<a class="headerlink" href="#step-4-automatic-tracking-using-the-trackmate-plugin" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Use (in Mastodon, <strong>not</strong> Fiji): Plugins &gt; Tracking &gt; Detection…
 and detect cells in some part of the volume (the ROI-box to select a
@@ -564,7 +602,10 @@ to each other. This will not lead to perfect results. Don’t worry
 about that!</p></li>
 <li><p>Play with options, check if you can improve results somehow.</p></li>
 </ol>
-<p><strong>Exercise #2: Tracking in Ilastik</strong></p>
+</section>
+</section>
+<section id="tracking-in-ilastik">
+<h3>Tracking in Ilastik<a class="headerlink" href="#tracking-in-ilastik" title="Link to this heading">#</a></h3>
 <p>Please go to
 <a class="reference external" href="https://ilastik.github.io/documentation/tracking/tracking"><u>https://ilastik.github.io/documentation/tracking/tracking</u></a>
 and follow the instructions on this page.</p>
@@ -603,14 +644,21 @@ speed this up? (Ask the online manual…)</p></li>
 </ol>
 </li>
 </ol>
-<p><strong>Part 2: Photobleaching</strong></p>
-<p>Learning Objectives</p>
-<ul class="simple">
-<li><p>Apply and scrutinize photobleach correction</p></li>
-<li><p>Double-normalized FRAP analysis</p></li>
+</section>
+</section>
+<section id="part-2-photobleaching">
+<h2><strong>Part 2: Photobleaching</strong><a class="headerlink" href="#part-2-photobleaching" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Learning Objectives<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Apply and scrutinize photobleach correction</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Double-normalized FRAP analysis</p></li>
 </ul>
 <p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
-<p><strong>Bleach Correction</strong></p>
+</section>
+<hr class="docutils" />
+<section id="bleach-correction">
+<h3>Bleach Correction<a class="headerlink" href="#bleach-correction" title="Link to this heading">#</a></h3>
 <p>In this portion of the lab, you will compensate for photobleaching by
 fitting an exponential model to the decaying fluorescence intensity, and
 then correcting for this decay.</p>
@@ -647,7 +695,9 @@ select an ROI here? Why or why not?</p></li>
 FITC time series. Is the SNR the same at the beginning and end? Does
 the photobleach correction affect the SNR?</p></li>
 </ul>
-<p><strong>FRAP</strong></p>
+</section>
+<section id="frap">
+<h3>FRAP<a class="headerlink" href="#frap" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Load the data: FRAP/33108 SU295 try1.tif (Or use your own if you
 prefer)</p></li>
@@ -689,6 +739,7 @@ exponential models a two step process, e.g., fast but weak association
 of the molecule of interest, followed by slower stronger association.</p></li>
 <li><p>What is the % mobile?</p></li>
 </ul>
+</section>
 </section>
 </section>
 
@@ -756,7 +807,26 @@ of the molecule of interest, followed by slower stronger association.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-tracking"><strong>Part 1: Tracking</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-data-we-need">Get the data we need</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semi-automated-tracking-in-mastodon">(Semi-)automated Tracking in Mastodon</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-start-a-mastodon-project-from-a-single-tiff-file">Step 1: Start a Mastodon project from a single tiff File</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-manually-track-some-cells">Step 2: Manually track some cells</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-semi-automatic-tracking-to-speed-things-up">Step 3: Semi-automatic tracking to speed things up</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-automatic-tracking-using-the-trackmate-plugin">Step 4: Automatic tracking using the TrackMate plugin</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-in-ilastik">Tracking in Ilastik</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-photobleaching"><strong>Part 2: Photobleaching</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Learning Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bleach-correction">Bleach Correction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frap">FRAP</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

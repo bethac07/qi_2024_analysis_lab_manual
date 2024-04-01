@@ -1,12 +1,14 @@
 # Image Time Series Analysis
 
-*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
+*Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug* . 
 
 <small>This file last updated 2024-04-01.</small>
 
 ---
 
-## Learning Objectives
+## **Part 1: Tracking**
+
+### Learning Objectives
 
 - [ ] (Semi-)automated Tracking with Mastodon in Fiji
 
@@ -14,15 +16,11 @@
 
 - [ ] Tracking with ilastik
 
-- [ ] Bonus: exporting from ilastik, editing in Mastodon
+- [ ] Bonus: exporting from ilastik, editing in Mastodon - note from Beth - this isn't there
 
-- [ ] Bleach Correction
+---
 
-- [ ] FRAP
-
-**Part 1: Tracking**
-
-**Overview**
+### Overview
 
 Tracking is an unsolved problem. It can be easy, but it usually is not.
 If you need to reach flawless results, you have to curate manually.
@@ -41,12 +39,14 @@ We know ilastik already from other exercises, but today we will explore
 some of ilastik’s tracking features. The automated tracking in Ilastik is
 quite involved. Some key ideas we discussed in the lecture.
 
-***Note:*** this lab is intended to be interactive. If you find
+```{note}
+This lab is intended to be interactive. If you find
 something cool… don’t hold back… share it with others. These tools are
 rather complex and we will certainly not be able to see all their
 features.
+```
 
-**Exercise \#0: Get the data we need**
+### Get the data we need
 
 Please start to download the following data (you can also find it in the
 LabData folder on our google drive):
@@ -60,15 +60,17 @@ LabData folder on our google drive):
 3.  3D+t tracking example for ilastik:
     [<u>http://tinyurl.com/y4sdzg9p</u>](http://tinyurl.com/y4sdzg9p)
 
-**Exercise \#1: (Semi-)automated Tracking in Mastodon**
+### (Semi-)automated Tracking in Mastodon
 
 ***Required:** Fiji + Mastodon + drosophila.tif*
 
-***Important:*** Collect screenshots or remember what you learned here.
+```{important}
+Collect screenshots or remember what you learned here.
 Be prepared to show the coolest thing you found out tomorrow morning
 (you absolutely will be volunteered to share your findings).
+```
 
-***Step 1:** Start a Mastodon project from a single tiff File*
+#### Step 1: Start a Mastodon project from a single tiff File
 
 1.  Put the file ‘drosophila.tif’ in some folder. Link to download this
     file can be found further up in Exercise 0.
@@ -119,7 +121,7 @@ Be prepared to show the coolest thing you found out tomorrow morning
     - Spend some additional time to internalize some more shortcuts:  
       [<u>https://imagej.net/BigDataViewer#Basic_Navigation</u>](https://imagej.net/BigDataViewer#Basic_Navigation)
 
-***Step 2:** Manually track some cells*
+#### Step 2: Manually track some cells
 
 1.  Get the Mastodon cheat sheet:
     [<u>http://tinyurl.com/y2rxfhlv</u>](http://tinyurl.com/y2rxfhlv)
@@ -154,7 +156,7 @@ Be prepared to show the coolest thing you found out tomorrow morning
         single nucleus in this really quite small dataset. Once this
         sunk in, pity everyone who has to do that for his/her project.
 
-***Step 3:** Semi-automatic tracking to speed things up*
+#### Step 3: Semi-automatic tracking to speed things up
 
 1.  Get some instructions:
     [<u>http://tinyurl.com/y39vgnuy</u>](http://tinyurl.com/y39vgnuy)
@@ -165,7 +167,7 @@ Be prepared to show the coolest thing you found out tomorrow morning
     navigate Mastodon. (Remember, tomorrow we will volunteer people to
     show and compare found ways to track fast and efficiently…)
 
-***Step 4:** Automatic tracking using the TrackMate plugin*
+#### Step 4: Automatic tracking using the TrackMate plugin
 
 1.  Use (in Mastodon, **not** Fiji): Plugins \> Tracking \> Detection…
     and detect cells in some part of the volume (the ROI-box to select a
@@ -177,7 +179,7 @@ Be prepared to show the coolest thing you found out tomorrow morning
 
 3.  Play with options, check if you can improve results somehow.
 
-**Exercise \#2: Tracking in Ilastik**
+### Tracking in Ilastik
 
 Please go to
 [<u>https://ilastik.github.io/documentation/tracking/tracking</u>](https://ilastik.github.io/documentation/tracking/tracking)
@@ -219,17 +221,19 @@ There is much more interesting stuff to explore. Here some inspiration:
     1.  How long did it take to track automatically? Is there a way to
         speed this up? (Ask the online manual…)
 
-**Part 2: Photobleaching**
+## **Part 2: Photobleaching**
 
-Learning Objectives
+### Learning Objectives
 
-- Apply and scrutinize photobleach correction
+- [ ] Apply and scrutinize photobleach correction
 
-- Double-normalized FRAP analysis
+- [ ] Double-normalized FRAP analysis
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
-**Bleach Correction**
+---
+
+### Bleach Correction
 
 In this portion of the lab, you will compensate for photobleaching by
 fitting an exponential model to the decaying fluorescence intensity, and
@@ -277,7 +281,7 @@ Apply Fiji's built-in photobleach correction plugin
   FITC time series. Is the SNR the same at the beginning and end? Does
   the photobleach correction affect the SNR?
 
-**FRAP**
+### FRAP
 
 - Load the data: FRAP/33108 SU295 try1.tif (Or use your own if you
   prefer)
