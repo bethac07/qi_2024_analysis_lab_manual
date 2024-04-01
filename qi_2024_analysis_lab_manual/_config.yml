@@ -26,8 +26,8 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/bethac07/QI 2024 Analysis Lab Manual  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
+  url: https://github.com/bethac07/qi_2024_analysis_lab_manual  # Online location of your book
+  path_to_book: qi_2024_analysis_lab_manual  # Optional path to your book, relative to the repository root
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
