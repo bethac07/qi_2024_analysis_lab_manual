@@ -184,12 +184,6 @@
 <li class="toctree-l1"><a class="reference internal" href="Lab04_ML-based_Segmentation_and_Classification.html">Segmentation and Pixel Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html">Deep Learning for Microscopy Image Analysis</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3D Image Analysis</a></li>
-
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="Lab07_Image_Time_Series_Analysis.html">Image Time Series Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Resources</span></p>
@@ -408,18 +402,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3D Image Analysis</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization"><strong>Visualization</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-object-segmentation-shape-and-intensity-measurements"><strong>3D Object Segmentation, Shape and Intensity Measurements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-crop"><strong>3D Crop</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registration-for-3d-volume-reconstruction"><strong>Registration for 3D Volume Reconstruction</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-pixel-classifier-choose-your-own-adventure"><strong>3D Pixel Classifier Choose-your-own-adventure</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labkit">Labkit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ilastik">ilastik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-aftermath">The Aftermath</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus"><strong>Bonus</strong></a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -432,7 +427,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="d-image-analysis">
 <h1>3D Image Analysis<a class="headerlink" href="#d-image-analysis" title="Link to this heading">#</a></h1>
-<p><em>Lab authors: TBU-Hunter Elliott &amp; Marcelo Cicconet</em> .</p>
+<p><em>Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug</em> .</p>
 <p><small>This file last updated 2024-04-01.</small></p>
 <hr class="docutils" />
 <section id="learning-objectives">
@@ -444,7 +439,10 @@ document.write(`
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Machine learning segmentation in 3D</p></li>
 </ul>
 <p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
-<p><strong>Visualization</strong></p>
+</section>
+<hr class="docutils" />
+<section id="visualization">
+<h2><strong>Visualization</strong><a class="headerlink" href="#visualization" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Open Fiji</p></li>
 <li><p>Load Drosophila_zstack-20x-medium_H103486 (if you’re on a slow
@@ -472,10 +470,8 @@ like in ClearVolume?</p></li>
 image? If so can you think of some possible explanations?</p></li>
 </ul>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p><strong>3D Object Segmentation, Shape and Intensity Measurements</strong></p>
+<section id="d-object-segmentation-shape-and-intensity-measurements">
+<h2><strong>3D Object Segmentation, Shape and Intensity Measurements</strong><a class="headerlink" href="#d-object-segmentation-shape-and-intensity-measurements" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Close all secondary Fiji windows and reload
 Drosophila_zstack-20x-medium_H103486 (or
@@ -540,9 +536,8 @@ Intensity Measurements 2D/3D. Which image should you set as Input?
 Which as Labels? Check the desired measurements and click Ok.</p></li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id2">
-<h1><a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
-<p><strong>3D Crop</strong></p>
+<section id="d-crop">
+<h2><strong>3D Crop</strong><a class="headerlink" href="#d-crop" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>This is useful if the data size is big and you want to rapidly test
 your analysis options before applying them to the larger set.</p></li>
@@ -555,9 +550,8 @@ images”. Set the bounding boxes as desired and click Crop.</p></li>
 visualize the result in 3D if interested.</p></li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id3">
-<h1><a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
-<p><strong>Registration for 3D Volume Reconstruction</strong></p>
+<section id="registration-for-3d-volume-reconstruction">
+<h2><strong>Registration for 3D Volume Reconstruction</strong><a class="headerlink" href="#registration-for-3d-volume-reconstruction" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Open the “mouse_brain_sections_downsampled32x_arpy.ome.tif” stack.
 You’ve seen a single tissue section from this brain before, but now
@@ -587,18 +581,15 @@ the original. Does it look better? What might be necessary to further
 improve the registration?</p></li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id4">
-<h1><a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id5">
-<h1><a class="headerlink" href="#id5" title="Link to this heading">#</a></h1>
-<p><strong>3D Pixel Classifier Choose-your-own-adventure</strong></p>
+<section id="d-pixel-classifier-choose-your-own-adventure">
+<h2><strong>3D Pixel Classifier Choose-your-own-adventure</strong><a class="headerlink" href="#d-pixel-classifier-choose-your-own-adventure" title="Link to this heading">#</a></h2>
 <p>The goal here is to use machine learning to attempt to segment closely
 spaced nuclei. You have two options for how to proceed. Ilastik will be
 familiar, but Labkit will let you work in Fiji (and, spoiler alert, it
 may also save you time in the tracking lab later on!). If you have time,
 try both!</p>
-<p><strong>Labkit</strong></p>
+<section id="labkit">
+<h3>Labkit<a class="headerlink" href="#labkit" title="Link to this heading">#</a></h3>
 <p>Labkit can also perform 3D segmentation with a random forest pixel
 classifier, and it lets you work right in Fiji, which must feel like
 home at this point. It visualizes the data with BigDataViewer (which you
@@ -622,7 +613,9 @@ drop-down arrow next to the pixel classifier in the lower left
 window - there you’ll see options to segment the entire dataset and
 save the result.</p></li>
 </ul>
-<p><strong>ilastik</strong></p>
+</section>
+<section id="ilastik">
+<h3>ilastik<a class="headerlink" href="#ilastik" title="Link to this heading">#</a></h3>
 <p>You can use Machine Learning to create a surface for watershed
 segmentation, by training a model to highlight the regions you want to
 segment.</p>
@@ -637,7 +630,9 @@ surface?</p></li>
 <li><p>When you’re done, try loading the result into Fiji and viewing it in
 3D using your favorite 3D viewer from earlier in the lab!</p></li>
 </ul>
-<p><strong>The Aftermath</strong></p>
+</section>
+<section id="the-aftermath">
+<h3>The Aftermath<a class="headerlink" href="#the-aftermath" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Are your nuclei all perfectly separated? If not, what method have you
 learned that might help you split them? What output of the model would
@@ -650,9 +645,9 @@ overlay it with the raw data as a composite image. Then visualize it
 with your favorite 3D visualization tool from earlier in the lab.</p></li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id6">
-<h1><a class="headerlink" href="#id6" title="Link to this heading">#</a></h1>
-<p><strong>Bonus</strong></p>
+</section>
+<section id="bonus">
+<h2><strong>Bonus</strong><a class="headerlink" href="#bonus" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Think of something you want to segment/detect and measure in the 3D
 data you’ve acquired in the lab and go for it! Come up with a plan,
@@ -663,6 +658,7 @@ rotation and zoom of your data. Then, load the folder full of images
 it saves back into Fiji as a stack, and go to file-&gt;save as-&gt;.avi to
 save them as a .avi movie file.</p></li>
 </ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -729,18 +725,19 @@ save them as a .avi movie file.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3D Image Analysis</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization"><strong>Visualization</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-object-segmentation-shape-and-intensity-measurements"><strong>3D Object Segmentation, Shape and Intensity Measurements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-crop"><strong>3D Crop</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registration-for-3d-volume-reconstruction"><strong>Registration for 3D Volume Reconstruction</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-pixel-classifier-choose-your-own-adventure"><strong>3D Pixel Classifier Choose-your-own-adventure</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labkit">Labkit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ilastik">ilastik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-aftermath">The Aftermath</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus"><strong>Bonus</strong></a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
