@@ -1,6 +1,7 @@
 # Deep Learning for Microscopy Image Analysis
 
 *Lab authors: Damian Dalle Nogare and Florian Jug* . 
+
 <small>This file last updated 2024-04-01.</small>
 
 ---
