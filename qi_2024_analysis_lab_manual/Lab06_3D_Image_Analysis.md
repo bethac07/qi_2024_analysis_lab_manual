@@ -1,14 +1,22 @@
 # 3D Image Analysis
 
-Learning Objectives
+---
 
-- Visualizing 3D data
+*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
 
-- Basic segmentation on 3D images
+<small>This file last updated 2024-04-01.</small>
 
-- Image registration for 3D reconstruction
+---
 
-- Machine learning segmentation in 3D
+## Learning Objectives
+
+- [ ] Visualizing 3D data
+
+- [ ] Basic segmentation on 3D images
+
+- [ ] Image registration for 3D reconstruction
+
+- [ ] Machine learning segmentation in 3D
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 

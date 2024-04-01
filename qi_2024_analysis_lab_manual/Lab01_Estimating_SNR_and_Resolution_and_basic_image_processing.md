@@ -8,7 +8,7 @@
 
 ---
 
-Learning Objectives
+## Learning Objectives
 
 - [ ] Get familiar with Fiji
 

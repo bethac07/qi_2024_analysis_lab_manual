@@ -1,12 +1,20 @@
 # Segmentation: Pixel Classification 
 
-Learning Objectives
+---
 
-- Train a pixel classifier to segment images
+*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
 
-- Learn to use ilastik
+<small>This file last updated 2024-04-01.</small>
 
-- Experiment with how features and data affect performance
+---
+
+## Learning Objectives
+
+- [ ] Train a pixel classifier to segment images
+
+- [ ] Learn to use ilastik
+
+- [ ] Experiment with how features and data affect performance
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 

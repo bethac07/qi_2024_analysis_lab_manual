@@ -1,10 +1,18 @@
 # Image Processing and Basic Detection
 
-Learning Objectives
+---
 
-- <span class="mark">Experimenting with filtering</span>
+*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
 
-- <span class="mark">Detecting edges and ridges</span>
+<small>This file last updated 2024-04-01.</small>
+
+---
+
+## Learning Objectives
+
+- [ ] Experimenting with filtering
+
+- [ ] Detecting edges and ridges
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 

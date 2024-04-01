@@ -1,12 +1,20 @@
 # Image Correction and Intensity Measurements
 
-Learning Objectives
+---
 
-- Prepare correction images
+*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
 
-- Apply corrections to image data
+<small>This file last updated 2024-04-01.</small>
 
-- Measure intensities with and without corrections
+---
+
+## Learning Objectives
+
+- [ ] Prepare correction images
+
+- [ ] Apply corrections to image data
+
+- [ ] Measure intensities with and without corrections
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs) 
 
