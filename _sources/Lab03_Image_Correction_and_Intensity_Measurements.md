@@ -1,7 +1,5 @@
 # Image Correction and Intensity Measurements
 
----
-
 <small>This file last updated 2024-04-01.</small>
 
 ---

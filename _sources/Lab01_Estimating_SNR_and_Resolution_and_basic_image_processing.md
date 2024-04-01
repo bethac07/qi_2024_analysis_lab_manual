@@ -1,7 +1,5 @@
 # Estimating SNR & Resolution
 
----
-
 *Lab authors: Hunter Elliott & Marcelo Cicconet*
 
 <small>This file last updated 2024-04-01.</small>
