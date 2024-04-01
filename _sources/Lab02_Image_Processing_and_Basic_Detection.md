@@ -16,6 +16,8 @@
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
+---
+
 ## **Edge Filtering & Edge Detection**
 
 *The goal here is to detect at least some of the edges between the cells

@@ -568,9 +568,9 @@ gaussian fitting we will have significant error at low SNR!!</p></li>
 <hr class="docutils" />
 <section id="filtering">
 <h2><strong>Filtering</strong><a class="headerlink" href="#filtering" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Filtering to handle noise</p>
 <ul>
+<li><p>Filtering to handle noise</p>
+<ul class="simple">
 <li><p>First, duplicate the stack so we can later compare the filtered and
 un-filtered images. Press Ctrl+SHIFT+D or go to Image-&gt;Duplicate,
 be sure the “duplicate stack” box is checked.</p></li>
@@ -595,18 +595,20 @@ PSF-matched a good choice?</p></li>
 </ul>
 </li>
 <li><p>Spatial Sampling and variable point intensities</p>
-<ul>
+<ul class="simple">
 <li><p>You are demo-ing two cameras. One is a highly sensitive EMCCD with
 16 micron pixel sizes and one is the brand new for the year 2135
 “TalleyCam-3000” with 1 micron pixels, but lower sensitivity.</p></li>
 <li><p>Compare the two stacks “variable brightness point sources 160nm pix
 variable SNR” and “variable brightness point sources 10nm pix
 variable SNR”. Visually, which camera makes it easier to see the
-points at a given SNR?</p>
-<ul>
-<li><p><em>NOTE: The SNR is equivalent in the two stacks at each frame.</em></p></li>
+points at a given SNR?</p></li>
 </ul>
-</li>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The SNR is equivalent in the two stacks at each frame.</p>
+</div>
+<ul class="simple">
 <li><p>Scroll through the stacks and try some of the point detection and
 localization exercises above. Note how the variable spot intensities
 make it more challenging to accurately detect the spots.</p></li>
@@ -615,23 +617,28 @@ experiments and analysis would be best suited to this camera?</p></li>
 <li><p>In what situations would you prefer to have the TalleyCam-3000? That
 is, what experiments and analysis would be best suited to this
 camera?</p></li>
-<li><p>NOTE: These are simulated images and an artificial scenario. In
-reality, which camera would make it easier to achieve high SNR?</p></li>
 </ul>
 </li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These are simulated images and an artificial scenario. In reality, which camera would make it easier to achieve high SNR?</p>
+</div>
+<ul class="simple">
 <li><p>Laplacian of Gaussian Filtering (LoG)</p>
 <ul>
 <li><p>Load the “variable background 500 point sources–” image by simply
 dragging it onto the Fiji toolbar</p></li>
 <li><p>Perform laplacian of gaussian filtering on the image using FeatureJ:
-Plugins-&gt;FeatureJ-&gt;FeatureJ Laplacian</p>
-<ul>
-<li><p><em>NOTE</em>: This uses the FeatureJ plugin. If this plugin is not
-installed, go to Help &gt; Update &gt; Manage update sites, check the
-‘ImageScience’ box, close that window, click ‘Apply Changes’, and
-restart Fiji.</p></li>
+Plugins-&gt;FeatureJ-&gt;FeatureJ Laplacian</p></li>
 </ul>
 </li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This uses the FeatureJ plugin. If this plugin is not installed, go to Help &gt; Update &gt; Manage update sites, check the ‘ImageScience’ box, close that window, click ‘Apply Changes’, and restart Fiji.</p>
+</div>
+<ul class="simple">
 <li><p>The “smoothing scale” is the sigma of the laplacian of gaussian
 filter. What should this be set to? Select it and then click OK</p></li>
 <li><p>Notice that the resulting image is 32 bit. Mouse over some of the
@@ -644,8 +651,6 @@ now a larger range of noise tolerances which give an accurate
 result?</p></li>
 <li><p>If you feel like it, try LoG filtering on the “noisier” image as
 well.</p></li>
-</ul>
-</li>
 </ul>
 </section>
 <hr class="docutils" />
