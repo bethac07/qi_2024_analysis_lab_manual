@@ -1,5 +1,11 @@
 # Estimating SNR & Resolution
 
+---
+
+*Lab authors: Hunter Elliott & Marcelo Cicconet*
+
+---
+
 Learning Objectives
 
 - [ ] Get familiar with Fiji
