@@ -202,7 +202,9 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
     variable SNR”. Visually, which camera makes it easier to see the
     points at a given SNR?
 
-    - *NOTE: The SNR is equivalent in the two stacks at each frame.*
+   ```{note} 
+   The SNR is equivalent in the two stacks at each frame.
+   ```
 
   - Scroll through the stacks and try some of the point detection and
     localization exercises above. Note how the variable spot intensities
@@ -215,8 +217,9 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
     is, what experiments and analysis would be best suited to this
     camera?
 
-  - NOTE: These are simulated images and an artificial scenario. In
-    reality, which camera would make it easier to achieve high SNR?
+ ```{note} 
+ These are simulated images and an artificial scenario. In reality, which camera would make it easier to achieve high SNR?
+ ```
 
 - Laplacian of Gaussian Filtering (LoG)
 
@@ -226,10 +229,9 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
   - Perform laplacian of gaussian filtering on the image using FeatureJ:
     Plugins-\>FeatureJ-\>FeatureJ Laplacian
 
-    - *NOTE*: This uses the FeatureJ plugin. If this plugin is not
-      installed, go to Help \> Update \> Manage update sites, check the
-      'ImageScience' box, close that window, click 'Apply Changes', and
-      restart Fiji.
+```{note} 
+This uses the FeatureJ plugin. If this plugin is not installed, go to Help \> Update \> Manage update sites, check the 'ImageScience' box, close that window, click 'Apply Changes', and restart Fiji.
+```
 
   - The “smoothing scale” is the sigma of the laplacian of gaussian
     filter. What should this be set to? Select it and then click OK
