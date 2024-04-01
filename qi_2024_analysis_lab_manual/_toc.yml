@@ -13,3 +13,7 @@ parts:
   - file: Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.md
   - file: Lab06_3D_Image_Analysis.md
   - file: Lab07_Image_Time_Series_Analysis.md
+- caption:  Additional Resources
+  chapters:
+  - file: bibliography
+  - file: genindex

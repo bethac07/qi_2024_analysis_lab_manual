@@ -41,5 +41,4 @@ html:
 
 sphinx:
   config:
-    bibtex_reference_style: super
     myst_enable_extensions: ['colon_fence', 'dollarmath', 'linkify', 'substitution', 'tasklist', 'html_image']
