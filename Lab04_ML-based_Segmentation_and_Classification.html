@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Segmentation: Pixel Classification &#8212; QI 2024 Analysis Lab Manual</title>
+    <title>Segmentation and Pixel Classification &#8212; QI 2024 Analysis Lab Manual</title>
   
   
   
@@ -181,8 +181,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Lab01_Estimating_SNR_and_Resolution_and_basic_image_processing.html">Estimating SNR &amp; Resolution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lab02_Image_Processing_and_Basic_Detection.html">Image Processing and Basic Detection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lab03_Image_Correction_and_Intensity_Measurements.html">Image Correction and Intensity Measurements</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Segmentation: Pixel Classification</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Segmentation and Pixel Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html">Deep Learning for Microscopy Image Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lab06_3D_Image_Analysis.html">3D Image Analysis</a></li>
 
@@ -399,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Segmentation: Pixel Classification</h1>
+    <h1>Segmentation and Pixel Classification</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -409,13 +408,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Segmentation: Pixel Classification</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation"><strong>Segmentation</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-random-forest-pixel-classifier-in-ilastik">Training a Random Forest Pixel Classifier in ilastik</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-classification"><strong>Cell Classification</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Learning Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-nuclei-for-feature-extraction">Segment Nuclei for Feature Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifying-mitotic-and-interphase-cells">Classifying Mitotic and Interphase Cells</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-play-with-labkit-pixel-classification-in-fiji"><strong>[Bonus] Play with Labkit (pixel classification in Fiji)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-challenging-segmentations"><strong>[Bonus] Challenging Segmentations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-breaking-it"><strong>[Bonus] Breaking it</strong></a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -426,21 +433,25 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="segmentation-pixel-classification">
-<h1>Segmentation: Pixel Classification<a class="headerlink" href="#segmentation-pixel-classification" title="Link to this heading">#</a></h1>
-<hr class="docutils" />
-<p><em>Lab authors: TBU-Hunter Elliott &amp; Marcelo Cicconet</em> .</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="segmentation-and-pixel-classification">
+<h1>Segmentation and Pixel Classification<a class="headerlink" href="#segmentation-and-pixel-classification" title="Link to this heading">#</a></h1>
+<p><em>Lab authors: Damian Dalle Nogare and Florian Jug</em> .</p>
 <p><small>This file last updated 2024-04-01.</small></p>
 <hr class="docutils" />
+<section id="segmentation">
+<h2><strong>Segmentation</strong><a class="headerlink" href="#segmentation" title="Link to this heading">#</a></h2>
 <section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<h3>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h3>
 <ul class="contains-task-list simple">
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Train a pixel classifier to segment images</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Learn to use ilastik</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Experiment with how features and data affect performance</p></li>
 </ul>
 <p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
-<p><strong>Training a Random Forest Pixel Classifier in ilastik</strong></p>
+</section>
+<hr class="docutils" />
+<section id="training-a-random-forest-pixel-classifier-in-ilastik">
+<h3>Training a Random Forest Pixel Classifier in ilastik<a class="headerlink" href="#training-a-random-forest-pixel-classifier-in-ilastik" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Welcome to the world of software with good documentation and
 tutorials! Take a deep breath and really soak it in, then check out
@@ -449,24 +460,29 @@ the ilastik pixel classifier tutorial here:
 Let us know if you hit a snag!</p></li>
 <li><p>You can use the data in Machine_Learning/Pixel_Classifier/ (link to
 Lab Data can be found on top of this page!). Note that you’ll need to
-change the axes to “tyx” because these images are not a z-stack.</p>
-<ul>
-<li><p><em>Question:</em> There is a train and a test stack. Why is that?</p></li>
+change the axes to “tyx” because these images are not a z-stack.</p></li>
 </ul>
-</li>
+<div class="important admonition">
+<p class="admonition-title">Question</p>
+<p>There is a train and a test stack. Why is that?</p>
+</div>
+<ul class="simple">
 <li><p>Try to segment the images by providing training examples for four
 classes:
-<img alt="_images/image1.png" src="_images/image1.png" /></p>
+<a class="reference internal" href="_images/image1.png"><img alt="_images/image1.png" src="_images/image1.png" style="height: 60px;" /></a></p>
 <ul>
 <li><p>Cell bodies:
-<img alt="_images/image2.png" src="_images/image2.png" /></p></li>
-<li><p>Synapses:<img alt="_images/image3.png" src="_images/image3.png" /></p></li>
-<li><p>Granule cell layer:</p></li>
+<a class="reference internal" href="_images/image2.png"><img alt="_images/image2.png" src="_images/image2.png" style="height: 60px;" /></a></p></li>
+<li><p>Synapses: <a class="reference internal" href="_images/image3.png"><img alt="_images/image3.png" src="_images/image3.png" style="height: 60px;" /></a></p></li>
+<li><p>Granule cell layer</p></li>
 <li><p>…and “<em>Other stuff</em>”</p></li>
 </ul>
 </li>
-<li><p>Can you unambiguously define/draw labels for each of the classes?<br />
-If not, would that be a problem? Why or why not?</p></li>
+<li><p>Can you unambiguously define/draw labels for each of the classes?</p>
+<ul>
+<li><p>If not, would that be a problem? Why or why not?</p></li>
+</ul>
+</li>
 <li><p>Pay attention to how the segmentation changes as you add training
 data. Can you understand why it changes as it does? If not ask!</p></li>
 <li><p>We learned about this in the lecture - what exactly is this “random
@@ -490,15 +506,22 @@ find? Why?</p></li>
 </ul>
 </li>
 </ul>
-<p>Cell Classification</p>
-<p>Learning Objectives</p>
-<ul class="simple">
-<li><p>Segment cells</p></li>
-<li><p>Extract features from cells</p></li>
-<li><p>Feature-based cell classification</p></li>
+</section>
+</section>
+<hr class="docutils" />
+<section id="cell-classification">
+<h2><strong>Cell Classification</strong><a class="headerlink" href="#cell-classification" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Learning Objectives<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Segment cells</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Extract features from cells</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Feature-based cell classification</p></li>
 </ul>
 <p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
-<p><strong>Segment Nuclei for Feature Extraction</strong></p>
+</section>
+<section id="segment-nuclei-for-feature-extraction">
+<h3>Segment Nuclei for Feature Extraction<a class="headerlink" href="#segment-nuclei-for-feature-extraction" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Start a new project in ilastik using the workflow “Pixel
 Classification + Object Classification”</p></li>
@@ -512,7 +535,9 @@ clear!)</p></li>
 <li><p>Once you have a good pixel classifier, you can move on to the
 thresholding step to convert your probabilities into a mask.</p></li>
 </ul>
-<p><strong>Classifying Mitotic and Interphase Cells</strong></p>
+</section>
+<section id="classifying-mitotic-and-interphase-cells">
+<h3>Classifying Mitotic and Interphase Cells<a class="headerlink" href="#classifying-mitotic-and-interphase-cells" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Now, you can follow this tutorial:
 <a class="reference external" href="https://bit.ly/35BXgVx"><u>https://bit.ly/35BXgVx</u></a>, starting at
@@ -528,26 +553,30 @@ performance on new data?</p></li>
 </ul>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p><strong>[Bonus] Play with Labkit (pixel classification in Fiji)</strong></p>
+<section id="bonus-play-with-labkit-pixel-classification-in-fiji">
+<h2><strong>[Bonus] Play with Labkit (pixel classification in Fiji)</strong><a class="headerlink" href="#bonus-play-with-labkit-pixel-classification-in-fiji" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>You find Labkit on an update site called “Labkit”. Ask us if you have
 trouble installing it.</p></li>
 </ul>
-<p><strong>[Bonus] Challenging Segmentations</strong></p>
+</section>
+<section id="bonus-challenging-segmentations">
+<h2><strong>[Bonus] Challenging Segmentations</strong><a class="headerlink" href="#bonus-challenging-segmentations" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Pick the hardest image you’ve seen in the course and try to segment it
 using the ilastik RF pixel classifier. Can you crack it? Can you
 understand why or why not?</p></li>
 </ul>
-<p><strong>[Bonus] Breaking it</strong></p>
+</section>
+<section id="bonus-breaking-it">
+<h2><strong>[Bonus] Breaking it</strong><a class="headerlink" href="#bonus-breaking-it" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Can you find an image segmentation or object classification problem
 that you <em>can’t</em> solve with ilastik? If you don’t have time to
 actually try it, can you think about what sort of problem might be
 unsolvable by any pixel classification approach?</p></li>
 </ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -614,13 +643,21 @@ unsolvable by any pixel classification approach?</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Segmentation: Pixel Classification</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation"><strong>Segmentation</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-random-forest-pixel-classifier-in-ilastik">Training a Random Forest Pixel Classifier in ilastik</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-classification"><strong>Cell Classification</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Learning Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#segment-nuclei-for-feature-extraction">Segment Nuclei for Feature Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifying-mitotic-and-interphase-cells">Classifying Mitotic and Interphase Cells</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-play-with-labkit-pixel-classification-in-fiji"><strong>[Bonus] Play with Labkit (pixel classification in Fiji)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-challenging-segmentations"><strong>[Bonus] Challenging Segmentations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-breaking-it"><strong>[Bonus] Breaking it</strong></a></li>
+</ul>
   </nav></div>
 
 </div></div>

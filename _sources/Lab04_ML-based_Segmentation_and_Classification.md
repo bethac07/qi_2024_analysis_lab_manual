@@ -1,14 +1,14 @@
-# Segmentation: Pixel Classification 
+# Segmentation and Pixel Classification 
 
----
-
-*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
+*Lab authors: Damian Dalle Nogare and Florian Jug* . 
 
 <small>This file last updated 2024-04-01.</small>
 
 ---
 
-## Learning Objectives
+## **Segmentation** 
+
+### Learning Objectives
 
 - [ ] Train a pixel classifier to segment images
 
@@ -18,7 +18,9 @@
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
-**Training a Random Forest Pixel Classifier in ilastik**
+---
+
+### Training a Random Forest Pixel Classifier in ilastik
 
 - Welcome to the world of software with good documentation and
   tutorials! Take a deep breath and really soak it in, then check out
@@ -30,23 +32,27 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
   Lab Data can be found on top of this page!). Note that you’ll need to
   change the axes to “tyx” because these images are not a z-stack.
 
-  - *Question:* There is a train and a test stack. Why is that?
+```{admonition} Question
+:class: important
+
+There is a train and a test stack. Why is that?
+ ```
 
 - Try to segment the images by providing training examples for four
-  classes:
-  <img src="images/lab04/image1.png" style="width:1.26042in;height:0.97312in" />
+  classes: 
+  <img src="images/lab04/image1.png" height="60px" />
 
-  - Cell bodies:
-    <img src="images/lab04/image2.png" style="width:1.26042in;height:0.96875in" />
+  - Cell bodies: 
+    <img src="images/lab04/image2.png" height="60px" />
 
-  - Synapses:<img src="images/lab04/image3.png" style="width:1.26042in;height:0.91261in" />
+  - Synapses: <img src="images/lab04/image3.png" height="60px" />
 
-  - Granule cell layer:
+  - Granule cell layer
 
   - ...and “*Other stuff*”
 
 - Can you unambiguously define/draw labels for each of the classes?  
-  If not, would that be a problem? Why or why not?
+  - If not, would that be a problem? Why or why not?
 
 - Pay attention to how the segmentation changes as you add training
   data. Can you understand why it changes as it does? If not ask!
@@ -74,19 +80,21 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
   - What happens if you only annotate the brightest cell bodies you can
     find? Why?
 
-Cell Classification
+---
 
-Learning Objectives
+## **Cell Classification** 
 
-- Segment cells
+### Learning Objectives
 
-- Extract features from cells
+- [ ] Segment cells
 
-- Feature-based cell classification
+- [ ] Extract features from cells
+
+- [ ] Feature-based cell classification
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
-**Segment Nuclei for Feature Extraction**
+### Segment Nuclei for Feature Extraction
 
 - Start a new project in ilastik using the workflow “Pixel
   Classification + Object Classification”
@@ -103,7 +111,7 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 - Once you have a good pixel classifier, you can move on to the
   thresholding step to convert your probabilities into a mask.
 
-**Classifying Mitotic and Interphase Cells**
+### Classifying Mitotic and Interphase Cells
 
 - Now, you can follow this tutorial:
   [<u>https://bit.ly/35BXgVx</u>](https://bit.ly/35BXgVx), starting at
@@ -119,20 +127,18 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
   different image time series? If not, what might improve its
   performance on new data?
 
-# 
-
-**\[Bonus\] Play with Labkit (pixel classification in Fiji)**
+##  **\[Bonus\] Play with Labkit (pixel classification in Fiji)**
 
 - You find Labkit on an update site called “Labkit”. Ask us if you have
   trouble installing it.
 
-**\[Bonus\] Challenging Segmentations**
+## **\[Bonus\] Challenging Segmentations**
 
 - Pick the hardest image you’ve seen in the course and try to segment it
   using the ilastik RF pixel classifier. Can you crack it? Can you
   understand why or why not?
 
-**\[Bonus\] Breaking it**
+## **\[Bonus\] Breaking it**
 
 - Can you find an image segmentation or object classification problem
   that you *can’t* solve with ilastik? If you don’t have time to
