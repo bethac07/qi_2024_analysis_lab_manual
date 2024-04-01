@@ -1,6 +1,6 @@
 # 3D Image Analysis
 
-*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
+*Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug* . 
 
 <small>This file last updated 2024-04-01.</small>
 
@@ -18,7 +18,9 @@
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
-**Visualization**
+---
+
+## **Visualization**
 
 - Open Fiji
 
@@ -50,9 +52,7 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 - Do you see anything suspicious about the intensity values in this
   image? If so can you think of some possible explanations?
 
-# 
-
-**3D Object Segmentation, Shape and Intensity Measurements**
+## **3D Object Segmentation, Shape and Intensity Measurements**
 
 - Close all secondary Fiji windows and reload
   Drosophila_zstack-20x-medium_H103486 (or
@@ -124,9 +124,7 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
   Intensity Measurements 2D/3D. Which image should you set as Input?
   Which as Labels? Check the desired measurements and click Ok.
 
-# 
-
-**3D Crop**
+## **3D Crop**
 
 - This is useful if the data size is big and you want to rapidly test
   your analysis options before applying them to the larger set.
@@ -140,9 +138,7 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 - Merge the resulting channels (Image \> Color \> Merge Channels), and
   visualize the result in 3D if interested.
 
-# 
-
-**Registration for 3D Volume Reconstruction**
+## **Registration for 3D Volume Reconstruction**
 
 - Open the “mouse_brain_sections_downsampled32x_arpy.ome.tif” stack.
   You’ve seen a single tissue section from this brain before, but now
@@ -175,11 +171,7 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
   the original. Does it look better? What might be necessary to further
   improve the registration?
 
-#  
-
-# 
-
-**3D Pixel Classifier Choose-your-own-adventure**
+## **3D Pixel Classifier Choose-your-own-adventure**
 
 The goal here is to use machine learning to attempt to segment closely
 spaced nuclei. You have two options for how to proceed. Ilastik will be
@@ -187,7 +179,7 @@ familiar, but Labkit will let you work in Fiji (and, spoiler alert, it
 may also save you time in the tracking lab later on!). If you have time,
 try both!
 
-**Labkit**
+### Labkit
 
 Labkit can also perform 3D segmentation with a random forest pixel
 classifier, and it lets you work right in Fiji, which must feel like
@@ -215,7 +207,7 @@ available [<u>here</u>](https://imagej.net/plugins/labkit/).
   window - there you’ll see options to segment the entire dataset and
   save the result.
 
-**ilastik**
+### ilastik
 
 You can use Machine Learning to create a surface for watershed
 segmentation, by training a model to highlight the regions you want to
@@ -233,7 +225,7 @@ segment.
 - When you’re done, try loading the result into Fiji and viewing it in
   3D using your favorite 3D viewer from earlier in the lab!
 
-**The Aftermath**
+### The Aftermath
 
 - Are your nuclei all perfectly separated? If not, what method have you
   learned that might help you split them? What output of the model would
@@ -247,9 +239,7 @@ segment.
   overlay it with the raw data as a composite image. Then visualize it
   with your favorite 3D visualization tool from earlier in the lab.
 
-# 
-
-**Bonus**
+## **Bonus**
 
 - Think of something you want to segment/detect and measure in the 3D
   data you’ve acquired in the lab and go for it! Come up with a plan,
