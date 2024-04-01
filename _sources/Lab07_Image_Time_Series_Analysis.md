@@ -1,18 +1,26 @@
 # Image Time Series Analysis
 
-**Learning Objectives**
+---
 
-- (Semi-)automated Tracking with Mastodon in Fiji
+*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
 
-- Using Trackmate from within Mastodon
+<small>This file last updated 2024-04-01.</small>
 
-- Tracking with ilastik
+---
 
-- Bonus: exporting from ilastik, editing in Mastodon
+## Learning Objectives
 
-- Bleach Correction
+- [ ] (Semi-)automated Tracking with Mastodon in Fiji
 
-- FRAP
+- [ ] Using Trackmate from within Mastodon
+
+- [ ] Tracking with ilastik
+
+- [ ] Bonus: exporting from ilastik, editing in Mastodon
+
+- [ ] Bleach Correction
+
+- [ ] FRAP
 
 **Part 1: Tracking**
 

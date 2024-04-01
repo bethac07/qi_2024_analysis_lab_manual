@@ -1,16 +1,24 @@
 # Deep Learning for Microscopy Image Analysis
 
-**Learning Objectives**
+---
 
-- Appreciate how Neural Networks are trained
+*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
 
-- Learn how to get to and use Google Colab
+<small>This file last updated 2024-04-01.</small>
 
-- Denoising with Noise2Void in “Zero”
+---
 
-- Segmentation with StarDist in “Zero”
+## Learning Objectives
 
-- Segmentation with Cellpose
+- [ ] Appreciate how Neural Networks are trained
+
+- [ ] Learn how to get to and use Google Colab
+
+- [ ] Denoising with Noise2Void in “Zero”
+
+- [ ] Segmentation with StarDist in “Zero”
+
+- [ ] Segmentation with Cellpose
 
 Lab Data: [<u>https://bit.ly/3uEFiKg</u>](https://bit.ly/3uEFiKg)
 
