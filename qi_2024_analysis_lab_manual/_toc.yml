@@ -16,5 +16,6 @@ parts:
   - file: Lab07_Image_Time_Series_Analysis.md
 - caption:  Additional Resources
   chapters:
+  - file: links
   - file: bibliography
   - file: genindex
