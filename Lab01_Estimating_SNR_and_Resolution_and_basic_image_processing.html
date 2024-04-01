@@ -179,9 +179,6 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Estimating SNR &amp; Resolution</a></li>
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="Lab02_Image_Processing_and_Basic_Detection.html">Image Processing and Basic Detection</a></li>
 
 
@@ -414,12 +411,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Estimating SNR &amp; Resolution</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snr"><strong>SNR</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolution"><strong>Resolution</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering"><strong>Filtering</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus"><strong>Bonus</strong></a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -433,16 +429,18 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="estimating-snr-resolution">
 <h1>Estimating SNR &amp; Resolution<a class="headerlink" href="#estimating-snr-resolution" title="Link to this heading">#</a></h1>
 <p>Learning Objectives</p>
-<ul class="simple">
-<li><p>Get familiar with Fiji</p></li>
-<li><p>Estimate SNR</p></li>
-<li><p>Estimate resolution</p></li>
-<li><p>Reduce noise by filtering</p></li>
-<li><p>Subtract background</p></li>
-<li><p>Detect point sources via LoG</p></li>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Get familiar with Fiji</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Estimate SNR</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Estimate resolution</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Reduce noise by filtering</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Subtract background</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Detect point sources via LoG</p></li>
 </ul>
 <p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
-<p><strong>SNR</strong></p>
+<hr class="docutils" />
+<section id="snr">
+<h2><strong>SNR</strong><a class="headerlink" href="#snr" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Open Fiji</p></li>
 <li><p>Open the image stack “One point source 67nm pix variable SNR.ome.tif”
@@ -508,9 +506,9 @@ for the correct SNRs.</p></li>
 </li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p><strong>Resolution</strong></p>
+<hr class="docutils" />
+<section id="resolution">
+<h2><strong>Resolution</strong><a class="headerlink" href="#resolution" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Quick and dirty resolution estimation by FWHM</p>
 <ul>
@@ -557,9 +555,9 @@ gaussian fitting we will have significant error at low SNR!!</p></li>
 </li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id2">
-<h1><a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
-<p><strong>Filtering</strong></p>
+<hr class="docutils" />
+<section id="filtering">
+<h2><strong>Filtering</strong><a class="headerlink" href="#filtering" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Filtering to handle noise</p>
 <ul>
@@ -640,9 +638,9 @@ well.</p></li>
 </li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id3">
-<h1><a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
-<p><strong>Bonus</strong></p>
+<hr class="docutils" />
+<section id="bonus">
+<h2><strong>Bonus</strong><a class="headerlink" href="#bonus" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>If you have the data, try the techniques you learned today on some of
 your own bead data to estimate the SNR and resolution. What was your
@@ -655,6 +653,7 @@ discussion tomorrow morning.</p>
 </ul>
 </li>
 </ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -721,12 +720,11 @@ discussion tomorrow morning.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Estimating SNR &amp; Resolution</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snr"><strong>SNR</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolution"><strong>Resolution</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering"><strong>Filtering</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus"><strong>Bonus</strong></a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
