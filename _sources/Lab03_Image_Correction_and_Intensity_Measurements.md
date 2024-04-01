@@ -2,8 +2,6 @@
 
 ---
 
-*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
-
 <small>This file last updated 2024-04-01.</small>
 
 ---
@@ -18,15 +16,19 @@
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs) 
 
-**Preparing your Image Corrections**
+---
 
-| *NOTE: You’re encouraged to try these corrections on your own data. However, we also have some canned data available if you prefer (see link above)* |
-|------------------------------------------------------------------------------------------------------------------------------------------------------|
+## **Preparing your Image Corrections**
 
-1.  Create Averaged dark images
+```{note} 
+You’re encouraged to try these corrections on your own data. However, we also have some canned data available if you prefer (see link above) 
+```
 
-> *NOTE: If you are using the canned data you can skip this part as we
-> have provided averaged images*
+### Create Averaged dark images
+
+```{note} 
+If you are using the canned data you can skip this part as we have provided averaged images
+```
 
 1.  Load your dark correction images
 
@@ -45,31 +47,29 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
 5.  Save your averaged dark image for later use.
 
-<!-- -->
+### Create Averaged and Filtered Flat-field correction (FFC) images
 
-2.  Create Averaged and Filtered Flat-field correction (FFC) images
-
-> *NOTE: If you are using the canned data you can skip this part as we
-> have provided averaged images*
+```{note} 
+If you are using the canned data you can skip this part as we have provided averaged images
+```
 
 1.  Load your flat-field correction images
 
 2.  Average these images together over time by going to
     stack-\>Z-Project and selecting “Average intensity” and clicking OK.
 
-    1.  *NOTE: If you have debris etc. in some of your images, using a
-        median intensity projection instead may better remove these
-        artifacts.*
+```{tip} 
+If you have debris etc. in some of your images, using a median intensity projection instead may better remove these artifacts.
+```
 
 3.  How clean is the resulting averaged image? Remember, any errors
     (noise, specks of debris etc) in this image will be propagated to
     your data during the correction process! If it is noisy you can
     apply some filtering to reduce the noise.
 
-    1.  *NOTE: If you are using images from a CMOS camera, it will have
-        variable gain from pixel to pixel and so may appear noisy - this
-        is NOT noise and you do NOT want to filter it away!! Do not
-        apply any filtering to CMOS images!!!*
+```{warning} 
+If you are using images from a CMOS camera, it will have variable gain from pixel to pixel and so may appear noisy - this is NOT noise and you do NOT want to filter it away!! Do not apply any filtering to CMOS images!!!
+```
 
 4.  Now, correct the offset in your FFC image. Subtract the dark image
     from it using the image calculator. Go to process-\>image
@@ -94,9 +94,7 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
     this variability tell you about when/why these correction images are
     necessary?
 
-# 
-
-**Measure intensity with and without dark and flat-field correction**
+## **Measure intensity with and without dark and flat-field correction**
 
 1.  Open the bead images you acquired for flat field correction. If you
     are using canned data this will be “MAX_s1to50_10x SF red beads
@@ -147,30 +145,20 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
     coefficient of variation (CV) of the bead intensities. How has the
     CV changed? Why is that?
 
-# 
+## **Measure intensity with and without local background subtraction**
 
-**Measure intensity with and without local background subtraction**
-
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><p><em>&gt;&gt; In this example you will deal with variable
+```{note}
+In this example you will deal with variable
 background, where we must approximate the background in every pixel of
 the image. In samples where the background is not variable you can be
 more precise by measuring the background somewhere outside of the sample
-and then subtracting that single number from the entire image.</em></p>
-<p><em>&gt;&gt; For the sake of time we will have you apply <u>only</u>
+and then subtracting that single number from the entire image.
+
+For the sake of time we will have you apply <u>only</u>
 a background subtraction to the images in this section of the lab, but
 if you wanted to be precise you would want to <u>also</u> apply an
-offset and flat field correction to these images.</em></p></th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
+offset and flat field correction to these images.
+```
 
 1.  Open the bead images you acquired for local background subtraction.
     If you are using the canned data this will be “10x s fluor mosaic
@@ -201,9 +189,7 @@ offset and flat field correction to these images.</em></p></th>
     compare? Would a background subtraction be important for making
     quantitative intensity measurements of biological samples?
 
-# 
-
-**Calculate a registration transform between two image channels**
+## **Calculate a registration transform between two image channels**
 
 1.  Load one of your tetraspeck bead image sets (two channels from one
     stage position). If you are using the canned dataset this will be
@@ -236,18 +222,15 @@ offset and flat field correction to these images.</em></p></th>
 8.  Look at the resulting composite (called “fused”). Is the alignment
     better? You should see near-perfect overlap of your spots.
 
-    1.  *NOTE: This plugin stores the most recently successful
-        registration transform, so you don’t need to save any file to
-        save your transform.*
+```{note} 
+This plugin stores the most recently successful registration transform, so you don’t need to save any file to save your transform.
+```
 
-    2.  *NOTE: "fused" is a composite image that overlays the 'anchor'
-        and 'registered' images. To switch between 'anchor' and
-        'registered', create a hyperstack: Image \> Hyperstacks \> Stack
-        to hyperstack.*
+```{note} 
+"fused" is a composite image that overlays the 'anchor' and 'registered' images. To switch between 'anchor' and 'registered', create a hyperstack: Image \> Hyperstacks \> Stack to hyperstack.
+```
 
-# 
-
-**Apply the registration transform to align two image channels**
+## **Apply the registration transform to align two image channels**
 
 1.  Load a different tetraspeck bead image set (not the same image pair
     you used to calculate the transform). We will apply our registration
@@ -269,22 +252,20 @@ offset and flat field correction to these images.</em></p></th>
     produces. How well do the spots overlap now? Are they closer than
     before the registration?
 
-# 
+## **Calculate bleedthrough coefficient**
 
-**Calculate bleedthrough coefficient**
-
-| For this section we will use canned data from a FRET probe, where bleedthrough / crosstalk is especially strong. These images are from a single-labelled control where only one of the FRET fluorophores is present (CFP). |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+```{note}
+For this section we will use canned data from a FRET probe, where bleedthrough / crosstalk is especially strong. These images are from a single-labelled control where only one of the FRET fluorophores is present (CFP). 
+```
 
 1.  Open the image of the CFP fluorophore
     “CFPonly_CFP_background_offset_FFC.tif” and the same sample using
     the FRET illumination and filter set
     “CFPonly_FRET_background_offset_FFC.tif”
 
-> *NOTE: These images have already had offset, background and flat-field
-> corrections applied to them, so you don’t need to do that now. If you
-> were using your own images you would need to apply these corrections
-> first.*
+```{note} 
+These images have already had offset, background and flat-field corrections applied to them, so you don’t need to do that now. If you were using your own images you would need to apply these corrections first.
+```
 
 2.  We can sneakily use the colocalization tool to calculate the
     bleedthrough coefficient. Go to Analyze-\>Colocalization-\>Coloc 2.
@@ -309,19 +290,19 @@ offset and flat field correction to these images.</em></p></th>
     bleedthrough correction on the CFP-Only-FRET image - after the
     correction there should be little or no intensity.
 
-    1.  Convert your CFP-Only-CFP image to 32 bit. Then, multiply it by
+    a.  Convert your CFP-Only-CFP image to 32 bit. Then, multiply it by
         the bleedthrough coefficient using Process-\>Math-\>Multiply and
         typing in the bleedthrough coefficient.
 
-    2.  Now, subtract this scaled CFP-Only-CFP image from the
+    b.  Now, subtract this scaled CFP-Only-CFP image from the
         CFP-Only-FRET image using Process-\>Image Calculator.
 
-    3.  This should almost completely remove the fluorescence in the
+    c.  This should almost completely remove the fluorescence in the
         CFP-Only-FRET image, because in this experiment this image is
         completely due to bleedthrough / crosstalk. There may be some
         residual intensity - can you think of why this might be?
 
-**\[Bonus\] ImageJ Macros**
+## **\[Bonus\] ImageJ Macros**
 
 - Pick the most painful or annoying analysis task from the labs so far,
   or a new one you want to try. Go to Plugins \> Macros \> Record
