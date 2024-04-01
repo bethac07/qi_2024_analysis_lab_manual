@@ -409,13 +409,17 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-remind-yourself-about-what-weve-heard-in-the-lecture">Exercise 1: Remind yourself about what we’ve heard in the lecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-first-steps-with-google-colab-dont-waste-too-much-time-here">Exercise 2: First steps with Google Colab (don’t waste too much time here…)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-first-steps-with-zerocostdl4mic">Exercise 3: First steps with ZeroCostDL4Mic</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-image-denoising-with-noise2void-in-zero">Exercise 4: Image Denoising with Noise2Void (in “Zero”)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-image-segmentation-with-stardist-in-zero">Exercise 5: Image Segmentation with StarDist (in “Zero”)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-use-fijis-noise2void-plugin">Bonus Exercise: Use Fiji’s Noise2Void Plugin</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-play-with-cellpose">Bonus Exercise: Play with CellPose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview"><strong>Overview</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-remind-yourself-about-what-weve-heard-in-the-lecture"><strong>Exercise 1: Remind yourself about what we’ve heard in the lecture</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-first-steps-with-google-colab-dont-waste-too-much-time-here"><strong>Exercise 2: First steps with Google Colab (don’t waste too much time here…)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-first-steps-with-zerocostdl4mic"><strong>Exercise 3: First steps with ZeroCostDL4Mic</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-image-denoising-with-noise2void-in-zero"><strong>Exercise 4: Image Denoising with Noise2Void (in “Zero”)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-image-segmentation-with-stardist-in-zero"><strong>Exercise 5: Image Segmentation with StarDist (in “Zero”)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-use-fijis-noise2void-plugin"><strong>Bonus Exercise: Use Fiji’s Noise2Void Plugin</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-play-with-cellpose"><strong>Bonus Exercise: Play with CellPose</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#human-in-the-loop-retraining">Human-in-the-loop retraining</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -429,8 +433,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="deep-learning-for-microscopy-image-analysis">
 <h1>Deep Learning for Microscopy Image Analysis<a class="headerlink" href="#deep-learning-for-microscopy-image-analysis" title="Link to this heading">#</a></h1>
-<p><em>Lab authors: TBU-Hunter Elliott &amp; Marcelo Cicconet</em> .</p>
-<p><small>This file last updated 2024-04-01.</small></p>
+<p><em>Lab authors: Damian Dalle Nogare and Florian Jug</em> .
+<small>This file last updated 2024-04-01.</small></p>
 <hr class="docutils" />
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
@@ -442,7 +446,9 @@ document.write(`
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Segmentation with Cellpose</p></li>
 </ul>
 <p>Lab Data: <a class="reference external" href="https://bit.ly/3uEFiKg"><u>https://bit.ly/3uEFiKg</u></a></p>
-<p><strong>Overview</strong></p>
+</section>
+<section id="overview">
+<h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>Neural networks can do useful things. Their deployment within
 user-friendly tools is, unfortunately, lacking behind. Hence, methods we
 would like to apply to our data are not available in Fiji or ilastik
@@ -452,61 +458,41 @@ enough to expose themselves to some amount of computer source code…</p>
 <p>I’m very much looking forward to hearing about your successes and
 struggles tomorrow during the Q&amp;A session. Now, please take a seat, open
 a browser, and buckle up.</p>
-<p>**Table of Contents<br />
-**</p>
-<p><a class="reference internal" href="#exercise-1-remind-yourself-about-what-weve-heard-in-the-lecture"><span class="xref myst">Exercise 1: Remind yourself about what we’ve heard in the lecture
-2</span></a></p>
-<p><a class="reference internal" href="#exercise-2-first-steps-with-google-colab-dont-waste-too-much-time-here"><span class="xref myst">Exercise 2: First steps with Google Colab (don’t waste too much time
-here…)
-3</span></a></p>
-<p><a class="reference internal" href="#exercise-3-first-steps-with-zerocostdl4mic"><span class="xref myst">Exercise 3: First steps with ZeroCostDL4Mic
-4</span></a></p>
-<p><a class="reference internal" href="#exercise-4-image-denoising-with-noise2void-in-zero"><span class="xref myst">Exercise 4: Image Denoising with Noise2Void (in “Zero”)
-6</span></a></p>
-<p><a class="reference internal" href="#exercise-5-image-segmentation-with-stardist-in-zero"><span class="xref myst">Exercise 5: Image Segmentation with StarDist (in “Zero”)
-7</span></a></p>
-<p><a class="reference internal" href="#bonus-exercise-use-fijis-noise2void-plugin"><span class="xref myst">Bonus Exercise: Use Fiji’s Noise2Void Plugin
-8</span></a></p>
 </section>
 <section id="exercise-1-remind-yourself-about-what-weve-heard-in-the-lecture">
-<h2>Exercise 1: Remind yourself about what we’ve heard in the lecture<a class="headerlink" href="#exercise-1-remind-yourself-about-what-weve-heard-in-the-lecture" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
+<h2><strong>Exercise 1: Remind yourself about what we’ve heard in the lecture</strong><a class="headerlink" href="#exercise-1-remind-yourself-about-what-weve-heard-in-the-lecture" title="Link to this heading">#</a></h2>
+<ol class="arabic">
 <li><p>Visit
 <a class="reference external" href="https://playground.tensorflow.org"><u>https://playground.tensorflow.org</u></a>
 and look around. What terms did you hear before, what is new, and
 what is confusing?</p></li>
 <li><p>Please try to:</p>
-<ol class="arabic simple">
-<li><p>On the classification example that looks like a tiny
+<p>a.  On the classification example that looks like a tiny
 checkerboard, try to get a test loss of 0.001 or less.<br />
-<img alt="_images/image11.png" src="_images/image11.png" /><img alt="_images/image4.png" src="_images/image4.png" /></p></li>
-<li><p>For the spiral-shaped classification example, try to find a
+<img alt="_images/image11.png" src="_images/image11.png" /><img alt="_images/image4.png" src="_images/image4.png" /></p>
+<p>b.  For the spiral-shaped classification example, try to find a
 network architecture with the smallest amount of nodes (neurons)
 that will drop below 0.01 (1%) test error.<br />
 <img alt="_images/image13.png" src="_images/image13.png" />
-<img alt="_images/image8.png" src="_images/image8.png" /></p></li>
-<li><p>Now switch from ‘Classification’ to ‘Regression’. What is going
+<img alt="_images/image8.png" src="_images/image8.png" /></p>
+<p>c.  Now switch from ‘Classification’ to ‘Regression’. What is going
 on here? Can you figure out how regression is different from
 classification?<br />
-<img alt="_images/image6.png" src="_images/image6.png" /></p></li>
-<li><p>Some other things to try if you feel it…</p></li>
-</ol>
-</li>
-</ol>
+<img alt="_images/image6.png" src="_images/image6.png" /></p>
+<p>d.  Some other things to try if you feel it…</p>
 <ul class="simple">
 <li><p>Add some noise to your data. What changes? Why?</p></li>
 <li><p>Try to find a setup that overfits. How do you identify overfitting?<br />
-<img alt="_images/image14.png" src="_images/image14.png" /></p>
-<ol class="arabic simple">
-<li><p>All the important terms and concepts wrt. to training and
-validation are somewhere on this one page. Check if there is
-anything that makes no sense to you and ask us</p></li>
-</ol>
-</li>
+<img alt="_images/image14.png" src="_images/image14.png" /></p></li>
 </ul>
+<p>e.  All the important terms and concepts wrt. to training and
+validation are somewhere on this one page. Check if there is
+anything that makes no sense to you and ask us</p>
+</li>
+</ol>
 </section>
 <section id="exercise-2-first-steps-with-google-colab-dont-waste-too-much-time-here">
-<h2>Exercise 2: First steps with Google Colab (don’t waste too much time here…)<a class="headerlink" href="#exercise-2-first-steps-with-google-colab-dont-waste-too-much-time-here" title="Link to this heading">#</a></h2>
+<h2><strong>Exercise 2: First steps with Google Colab (don’t waste too much time here…)</strong><a class="headerlink" href="#exercise-2-first-steps-with-google-colab-dont-waste-too-much-time-here" title="Link to this heading">#</a></h2>
 <p>The following steps should get you started in no time:</p>
 <ol class="arabic">
 <li><p>Please go to
@@ -514,7 +500,7 @@ anything that makes no sense to you and ask us</p></li>
 in with your google account. If you do not have (and do not want
 one), please team up with somebody else who has one(or is willing to
 create one).</p></li>
-<li><p>If you never used Google Colabs:</p>
+<li><p>If you never used Google Colab:</p>
 <ul class="simple">
 <li><p>click on
 <img alt="_images/image9.png" src="_images/image9.png" />&gt;
@@ -551,7 +537,7 @@ Google Drive via…<br />
 </ol>
 </section>
 <section id="exercise-3-first-steps-with-zerocostdl4mic">
-<h2>Exercise 3: First steps with ZeroCostDL4Mic<a class="headerlink" href="#exercise-3-first-steps-with-zerocostdl4mic" title="Link to this heading">#</a></h2>
+<h2><strong>Exercise 3: First steps with ZeroCostDL4Mic</strong><a class="headerlink" href="#exercise-3-first-steps-with-zerocostdl4mic" title="Link to this heading">#</a></h2>
 <p>ZeroCostDL4Mic is a collection of (hopefully) self-explanatory Jupyter
 Notebooks for Google Colab. They are meant to quickly get you started on
 learning how to use deep-learning methods specifically created for
@@ -560,7 +546,7 @@ microscopy image analysis.</p>
 so at zero cost. ZeroCostDL4Mic is designed for researchers that have
 little or no coding expertise to quickly test, train and use popular
 neural networks approaches.</p>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p>Go to
 <a class="reference external" href="https://github.com/HenriquesLab/ZeroCostDL4Mic/wiki"><u>https://github.com/HenriquesLab/ZeroCostDL4Mic/wiki</u></a></p></li>
 <li><p>Scroll down and be amazed by the amount of available methods… ;)</p></li>
@@ -577,24 +563,18 @@ downloaded just before), please upload it on your Google Drive (in
 any folder you’d like).</p></li>
 <li><p>While uploading, you can start going through the Noise2Void notebook
 we opened before.</p>
-<ol class="arabic simple">
-<li><p>At some point (at Step 2.2) you will be asked to connect to your
-Google Drive. Please do so! 🙂</p></li>
-<li><p>Note that you will now see the content of your google drive.
+<p>a.  At some point (at Step 2.2) you will be asked to connect to your
+Google Drive. Please do so! 🙂</p>
+<p>b.  Note that you will now see the content of your google drive.
 Click first on the “Files” icon, then go one folder up, and you
-should see something like this:</p></li>
-</ol>
+should see something like this:
+<img alt="_images/image19.png" src="_images/image19.png" /></p>
+<p>c.  <strong>DONE!</strong> Let’s continue in the next exercise…</p>
 </li>
-</ol>
-<blockquote>
-<div><img alt="_images/image19.png" src="_images/image19.png" />
-</div></blockquote>
-<ol class="arabic simple" start="3">
-<li><p><strong>DONE!</strong> Let’s continue in the next exercise…</p></li>
 </ol>
 </section>
 <section id="exercise-4-image-denoising-with-noise2void-in-zero">
-<h2>Exercise 4: Image Denoising with Noise2Void (in “Zero”)<a class="headerlink" href="#exercise-4-image-denoising-with-noise2void-in-zero" title="Link to this heading">#</a></h2>
+<h2><strong>Exercise 4: Image Denoising with Noise2Void (in “Zero”)</strong><a class="headerlink" href="#exercise-4-image-denoising-with-noise2void-in-zero" title="Link to this heading">#</a></h2>
 <p>In this exercise we will denoise some data with Noise2Void. Please
 remember, Noise2Void is removing pixel-noises only (Poisson noise,
 readout noise, etc.).</p>
@@ -605,7 +585,7 @@ Data link from above, or just use
 Ideally, as a group we use a bunch of different datasets, so we have
 more results to look at…</p>
 <img alt="_images/image16.png" src="_images/image16.png" />
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p>Decide what data to use (see remarks above).</p></li>
 <li><p>Copy the data to any sensible place on your Google Drive.<br />
 (<em>Why? Data on Google Drive can be read easily and FAST by Collab…</em>)</p></li>
@@ -615,40 +595,37 @@ already in the last exercise, didn’t you?).</p></li>
 while and be confusing at times. Plow through it, you will soon be
 happy!<br />
 <strong>Ask questions, help each other!</strong></p>
-<ol class="arabic simple">
-<li><p><em>Pro tip:</em> if you are in a hurry, reduce the number of epochs to
+<p>a.  <em>Pro tip:</em> if you are in a hurry, reduce the number of epochs to
 some small number, e.g. 10 or 20. Results will be much worse,
-but you can always crank that number up later…</p></li>
-<li><p>Later today, when you are done with the exercises, you might
+but you can always crank that number up later…</p>
+<p>b.  Later today, when you are done with the exercises, you might
 want to re-run your favorite notebook with the suggested number
 of epochs. Collab will work while you have fun on your free
-evening… 🙂</p></li>
-</ol>
+evening… 🙂</p>
 </li>
 </ol>
 </section>
 <section id="exercise-5-image-segmentation-with-stardist-in-zero">
-<h2>Exercise 5: Image Segmentation with StarDist (in “Zero”)<a class="headerlink" href="#exercise-5-image-segmentation-with-stardist-in-zero" title="Link to this heading">#</a></h2>
+<h2><strong>Exercise 5: Image Segmentation with StarDist (in “Zero”)</strong><a class="headerlink" href="#exercise-5-image-segmentation-with-stardist-in-zero" title="Link to this heading">#</a></h2>
 <p>Now that you have experienced how to use ZeroCostDL4Mic Collab
 notebooks, switch it up, do some instance segmentation! We suggest the
 StarDist notebook, but if you feel adventurous, choose something else
 you find most interesting in the context of your own research.</p>
 <img alt="_images/image15.png" src="_images/image15.png" />
 <p>Go through the notebook you chose. And again:</p>
-<ol class="arabic simple">
-<li><p><strong>Ask questions, help each other</strong>!</p></li>
-<li><p><em>Pro tip:</em> reduce the number of epochs to some small number to save
-yourself long waiting times!</p></li>
-<li><p>Later today, when you are done with the exercises, you might want to
-re-run your favorite notebook with the suggested number of epochs.
-Collab will work while you have fun on your free evening… 🙂</p></li>
-</ol>
+<p><strong>Ask questions, help each other</strong>!</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Reduce the number of epochs to some small number to save yourself long waiting times!</p>
+</div>
+<p>Later today, when you are done with the exercises, you might want to re-run your favorite notebook with the suggested number of epochs.
+Collab will work while you have fun on your free evening… 🙂</p>
 </section>
 <section id="bonus-exercise-use-fijis-noise2void-plugin">
-<h2>Bonus Exercise: Use Fiji’s Noise2Void Plugin<a class="headerlink" href="#bonus-exercise-use-fijis-noise2void-plugin" title="Link to this heading">#</a></h2>
+<h2><strong>Bonus Exercise: Use Fiji’s Noise2Void Plugin</strong><a class="headerlink" href="#bonus-exercise-use-fijis-noise2void-plugin" title="Link to this heading">#</a></h2>
 <p>In this exercise you will use a Noise2Void plugin in Fiji. You will have
 to install it first.</p>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p>Open Fiji.</p></li>
 <li><p>Go to Help - Update… - Manage update sites, then check the CSBDeep
 update site and say Close - Apply changes.</p></li>
@@ -658,9 +635,7 @@ update site and say Close - Apply changes.</p></li>
 and open this 2D+t tiff in Fiji.</p></li>
 <li><p>Start the “N2V train + predict” plugin.</p></li>
 <li><p>Figure it out… ;)</p>
-<ol class="arabic simple">
-<li><p><em><strong>Please ask question at ANY time</strong>!</em></p></li>
-</ol>
+<p>a.  <em><strong>Please ask question at ANY time</strong>!</em></p>
 </li>
 <li><p>If all works out ok, you will see something like…<br />
 <img alt="_images/image7.png" src="_images/image7.png" /></p></li>
@@ -671,7 +646,7 @@ reuse.<img alt="_images/image121.png" src="_images/image121.png" /></p></li>
 </ol>
 </section>
 <section id="bonus-exercise-play-with-cellpose">
-<h2>Bonus Exercise: Play with CellPose<a class="headerlink" href="#bonus-exercise-play-with-cellpose" title="Link to this heading">#</a></h2>
+<h2><strong>Bonus Exercise: Play with CellPose</strong><a class="headerlink" href="#bonus-exercise-play-with-cellpose" title="Link to this heading">#</a></h2>
 <p>Once home, you will need this link to get started:
 <a class="reference external" href="https://cellpose.readthedocs.io/en/latest/installation.html"><u>https://cellpose.readthedocs.io/en/latest/installation.html</u></a></p>
 <p>Here, at QI, we have taken this annoying step for you already. Hence,
@@ -679,25 +654,30 @@ you will find Cellpose pre-installed on the lab computers. To start it,
 go to the Windows search next to the start menu, and type “anaconda”.
 Pick and start the option “anaconda prompt”.</p>
 <p>Once this is opened, type in those two comments (the stuff after
-“<strong>&gt;</strong>”):<br />
-<em><strong>&gt;</strong></em> conda activate cellpose<br />
-<em>(cellpose) <strong>&gt;</strong></em> cellpose</p>
+“<strong>&gt;</strong>”):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">conda</span> <span class="n">activate</span> <span class="n">cellpose</span>  
+<span class="p">(</span><span class="n">cellpose</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">cellpose</span>
+</pre></div>
+</div>
 <p>You should now see something like
 this:<img alt="_images/image21.png" src="_images/image21.png" /></p>
-<p>Open the file ‘easy\001_img.tif’ by dragging it onto the open window.
+<p>Open the file <code class="docutils literal notranslate"><span class="pre">easy\001_img.tif</span></code> by dragging it onto the open window.
 You can find this file in the folder ‘DL4MIA’ in the Lab Data share, or
 download it directly via</p>
 <p><a class="reference external" href="https://drive.google.com/drive/folders/1BgoUf1f-QfcFNIsppdzTCjehkCAntbyc?usp=share_link">https://drive.google.com/drive/folders/1BgoUf1f-QfcFNIsppdzTCjehkCAntbyc?usp=share_link</a></p>
 <p>We need to tell cellpose (roughly) how large our objects are (you can do
-so via the ‘cell diameter’) field. How might we estimate this? Keep in
+so via the <code class="docutils literal notranslate"><span class="pre">cell</span> <span class="pre">diameter</span></code>) field. How might we estimate this? Keep in
 mind that this diameter must be reported in pixels.</p>
 <p>You can now segment this image by selecting one of the pre-trained
-models from within the ‘model zoo’ box. Try segmenting this image using
-the ‘cyto’ model. How good are the results?</p>
-<p><em>Hint:</em> You can toggle the visibility of segmentation masks on and off
+models from within the <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">zoo</span></code> box. Try segmenting this image using
+the <code class="docutils literal notranslate"><span class="pre">cyto</span></code> model. How good are the results?</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can toggle the visibility of segmentation masks on and off
 by hitting ‘<strong>x</strong>’ on your keyboard. Similarly, you can toggle cell
 outlines with the keyboard shortcut ‘<strong>z</strong>’. Alternatively you can do so
-in the ‘Drawing’ tab.</p>
+in the <code class="docutils literal notranslate"><span class="pre">Drawing</span></code> tab.</p>
+</div>
 <p>How well did cellpose segment your image? Where (if anywhere) did it
 fail? Try some different models from the model zoo box. Do any of these
 work better? Worse? Why might that be?</p>
@@ -710,7 +690,8 @@ possible. Can you find setting and a model that work perfectly?</p>
 <p>Spoiler, none of the models are perfectly suited to this data, but we
 can iteratively retrain a model from within the Cellpose GUI…
 interested? Ok, let’s do it! 🙂</p>
-<p><strong>Human-in-the-loop retraining</strong></p>
+<section id="human-in-the-loop-retraining">
+<h3>Human-in-the-loop retraining<a class="headerlink" href="#human-in-the-loop-retraining" title="Link to this heading">#</a></h3>
 <p>In the ‘hard’ folder you download earlier you will find a folder called
 ‘train’. In this folder you will find a number of images. Open the image
 104_img.tif’ in cellpose. Note that we are not going to train a model
@@ -738,12 +719,12 @@ containing all of the training images. You will notice there is a new
 file there, called ‘hard\train\104_img_seg.npy’. This contains your
 corrected segmentation and will become a new bit of ground truth used
 during finetuning the model. But… how do you start this finetuning step?</p>
-<p>In Cellpose, start: ‘models →<br />
+<p>In Cellpose, start: `models →<br />
 train new model with images and masks in folder’.</p>
 <p>You should see a window like this one:</p>
 <img alt="_images/image31.png" src="_images/image31.png" />
 <p>First, we need to select which initial model to use (in the screenshot
-above, we are retraining the ‘cyto’ model (but of course you may choose
+above, we are retraining the <code class="docutils literal notranslate"><span class="pre">cyto</span></code> model (but of course you may choose
 to retrain any available model). You can, and should, give your new
 model a name. You can also see which (corrected) images you are going to
 retrain the model on under ‘filenames’, and the number of masks that
@@ -761,6 +742,7 @@ model to the test data we have segmented at the start of the exercise
 (importantly: your model has not previously seen this image during
 finetuning! Why is this important again?). Is the result better than
 with the initial model you started with?</p>
+</section>
 </section>
 </section>
 
@@ -829,13 +811,17 @@ with the initial model you started with?</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-remind-yourself-about-what-weve-heard-in-the-lecture">Exercise 1: Remind yourself about what we’ve heard in the lecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-first-steps-with-google-colab-dont-waste-too-much-time-here">Exercise 2: First steps with Google Colab (don’t waste too much time here…)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-first-steps-with-zerocostdl4mic">Exercise 3: First steps with ZeroCostDL4Mic</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-image-denoising-with-noise2void-in-zero">Exercise 4: Image Denoising with Noise2Void (in “Zero”)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-image-segmentation-with-stardist-in-zero">Exercise 5: Image Segmentation with StarDist (in “Zero”)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-use-fijis-noise2void-plugin">Bonus Exercise: Use Fiji’s Noise2Void Plugin</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-play-with-cellpose">Bonus Exercise: Play with CellPose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview"><strong>Overview</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-remind-yourself-about-what-weve-heard-in-the-lecture"><strong>Exercise 1: Remind yourself about what we’ve heard in the lecture</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-first-steps-with-google-colab-dont-waste-too-much-time-here"><strong>Exercise 2: First steps with Google Colab (don’t waste too much time here…)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-first-steps-with-zerocostdl4mic"><strong>Exercise 3: First steps with ZeroCostDL4Mic</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-image-denoising-with-noise2void-in-zero"><strong>Exercise 4: Image Denoising with Noise2Void (in “Zero”)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-image-segmentation-with-stardist-in-zero"><strong>Exercise 5: Image Segmentation with StarDist (in “Zero”)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-use-fijis-noise2void-plugin"><strong>Bonus Exercise: Use Fiji’s Noise2Void Plugin</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-play-with-cellpose"><strong>Bonus Exercise: Play with CellPose</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#human-in-the-loop-retraining">Human-in-the-loop retraining</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
