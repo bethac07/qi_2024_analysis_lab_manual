@@ -2,7 +2,7 @@
 
 ---
 
-*Lab authors: TBU-Hunter Elliott & Marcelo Cicconet* . 
+*Lab authors: Hunter Elliott & Marcelo Cicconet* . 
 
 <small>This file last updated 2024-04-01.</small>
 
@@ -16,15 +16,15 @@
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
-# 
-
-**Edge Filtering & Edge Detection**
+## **Edge Filtering & Edge Detection**
 
 *The goal here is to detect at least some of the edges between the cells
 using what you've learned about derivative filters.*
 
-| Note: You will need to have the FeatureJ plugin installed for these exercises. If it's not, check the first analysis lab handout for instructions on how to do it. |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+```{note} 
+You will need to have the FeatureJ plugin installed for these exercises. If it's not, check the first analysis lab handout for instructions on how to do it. |
+```
+
 
 - Open the Neurons/4_9_13_AVG_Aligned_Stack.tif image
 
@@ -74,17 +74,18 @@ using what you've learned about derivative filters.*
   - Look at your result. Overlay it on the original image. Where did
     your edge detector succeed? Where did it fail?
 
-# 
+---
 
-**Steerable Filtering and Ridge Detection**
+## **Steerable Filtering and Ridge Detection**
 
 *In this section, you will segment microtubules by using filters to
 accentuate “ridge-like” structures in the image.*
 
-| For this exercise, you'll need a plug-in (SteerableJ) that runs on an older version of ImageJ. Please launch ImageJ_SteerableJ_Win/ImageJ.exe (or ImageJ_SteerableJ_Mac/ImajeJ.app if you're on a Mac), available with the data for this lab. Or you can follow these instructions: [<u>http://bigwww.epfl.ch/demo/steerable/download.html</u>](http://bigwww.epfl.ch/demo/steerable/download.html) |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+```{note}
+For this exercise, you'll need a plug-in (SteerableJ) that runs on an older version of ImageJ. Please launch ImageJ_SteerableJ_Win/ImageJ.exe (or ImageJ_SteerableJ_Mac/ImajeJ.app if you're on a Mac), available with the data for this lab. Or you can follow these instructions: [<u>http://bigwww.epfl.ch/demo/steerable/download.html</u>](http://bigwww.epfl.ch/demo/steerable/download.html) 
+```
 
-**Basic thresholding**
+### **Basic thresholding**
 
 *First, try segmenting the microtubules with simple thresholding (for
 comparison to steerable filters)*
@@ -101,7 +102,7 @@ comparison to steerable filters)*
   \> Threshold…). Is there a threshold that will accurately segment the
   microtubules?
 
-**Steerable Filtering**
+### **Steerable Filtering**
 
 - Re-load the image in ImageJ
 
@@ -139,22 +140,19 @@ comparison to steerable filters)*
 
 *References:*
 
-*Freeman and Adelson. The Design and Use of Steerable Filters. IEEE
-PAMI. 1991*
+{cite:t}`93808`
 
-*Jacob and Unser. Design of Steerable Filters for Feature Detection
-Using Canny-Like Criteria. IEEE PAMI. 2004*
+{cite:t}`1307008`
 
-**Bonus Exercises:**
+## **Bonus Exercises:**
 
 - Use what you’ve learned to attempt to outline the cell *and* its
-  nucleus in the image Cells/Nadia
-  20131122_RhoAMEFs_18kPa_001_w477_t01.tif
+  nucleus in the image `Cells/Nadia 20131122_RhoAMEFs_18kPa_001_w477_t01.tif`
 
   - What filter is appropriate here - an edge or a ridge filter?
 
 - Use what you’ve learned to detect some of the red and green isolated
-  axons in the image Neurons/arpy01_Chat_082_B_i_cropped.tif while
+  axons in the image `Neurons/arpy01_Chat_082_B_i_cropped.tif` while
   avoiding both the large mass of continuous red fluorescence near the
   injection site, and the autofluorescence of the cell bodies in green.
   (You will not need the blue DNA channel)

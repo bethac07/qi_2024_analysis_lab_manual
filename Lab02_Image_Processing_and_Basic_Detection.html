@@ -180,8 +180,6 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Lab01_Estimating_SNR_and_Resolution_and_basic_image_processing.html">Estimating SNR &amp; Resolution</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Image Processing and Basic Detection</a></li>
-
-
 <li class="toctree-l1"><a class="reference internal" href="Lab03_Image_Correction_and_Intensity_Measurements.html">Image Correction and Intensity Measurements</a></li>
 
 
@@ -199,6 +197,11 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="Lab07_Image_Time_Series_Analysis.html">Image Time Series Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -411,14 +414,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Image Processing and Basic Detection</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-filtering-edge-detection"><strong>Edge Filtering &amp; Edge Detection</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steerable-filtering-and-ridge-detection"><strong>Steerable Filtering and Ridge Detection</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-thresholding"><strong>Basic thresholding</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steerable-filtering"><strong>Steerable Filtering</strong></a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises"><strong>Bonus Exercises:</strong></a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -432,7 +436,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="image-processing-and-basic-detection">
 <h1>Image Processing and Basic Detection<a class="headerlink" href="#image-processing-and-basic-detection" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
-<p><em>Lab authors: TBU-Hunter Elliott &amp; Marcelo Cicconet</em> .</p>
+<p><em>Lab authors: Hunter Elliott &amp; Marcelo Cicconet</em> .</p>
 <p><small>This file last updated 2024-04-01.</small></p>
 <hr class="docutils" />
 <section id="learning-objectives">
@@ -443,18 +447,14 @@ document.write(`
 </ul>
 <p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p><strong>Edge Filtering &amp; Edge Detection</strong></p>
+<section id="edge-filtering-edge-detection">
+<h2><strong>Edge Filtering &amp; Edge Detection</strong><a class="headerlink" href="#edge-filtering-edge-detection" title="Link to this heading">#</a></h2>
 <p><em>The goal here is to detect at least some of the edges between the cells
 using what you’ve learned about derivative filters.</em></p>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Note: You will need to have the FeatureJ plugin installed for these exercises. If it’s not, check the first analysis lab handout for instructions on how to do it.</p></th>
-</tr>
-</thead>
-</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will need to have the FeatureJ plugin installed for these exercises. If it’s not, check the first analysis lab handout for instructions on how to do it. |</p>
+</div>
 <ul class="simple">
 <li><p>Open the Neurons/4_9_13_AVG_Aligned_Stack.tif image</p>
 <ul>
@@ -502,18 +502,17 @@ your edge detector succeed? Where did it fail?</p></li>
 </li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id2">
-<h1><a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
-<p><strong>Steerable Filtering and Ridge Detection</strong></p>
+<hr class="docutils" />
+<section id="steerable-filtering-and-ridge-detection">
+<h2><strong>Steerable Filtering and Ridge Detection</strong><a class="headerlink" href="#steerable-filtering-and-ridge-detection" title="Link to this heading">#</a></h2>
 <p><em>In this section, you will segment microtubules by using filters to
 accentuate “ridge-like” structures in the image.</em></p>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>For this exercise, you’ll need a plug-in (SteerableJ) that runs on an older version of ImageJ. Please launch ImageJ_SteerableJ_Win/ImageJ.exe (or ImageJ_SteerableJ_Mac/ImajeJ.app if you’re on a Mac), available with the data for this lab. Or you can follow these instructions: <a class="reference external" href="http://bigwww.epfl.ch/demo/steerable/download.html"><u>http://bigwww.epfl.ch/demo/steerable/download.html</u></a></p></th>
-</tr>
-</thead>
-</table>
-<p><strong>Basic thresholding</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For this exercise, you’ll need a plug-in (SteerableJ) that runs on an older version of ImageJ. Please launch ImageJ_SteerableJ_Win/ImageJ.exe (or ImageJ_SteerableJ_Mac/ImajeJ.app if you’re on a Mac), available with the data for this lab. Or you can follow these instructions: <a class="reference external" href="http://bigwww.epfl.ch/demo/steerable/download.html"><u>http://bigwww.epfl.ch/demo/steerable/download.html</u></a></p>
+</div>
+<section id="basic-thresholding">
+<h3><strong>Basic thresholding</strong><a class="headerlink" href="#basic-thresholding" title="Link to this heading">#</a></h3>
 <p><em>First, try segmenting the microtubules with simple thresholding (for
 comparison to steerable filters)</em></p>
 <ul class="simple">
@@ -527,7 +526,9 @@ for basic thresholding?</p></li>
 &gt; Threshold…). Is there a threshold that will accurately segment the
 microtubules?</p></li>
 </ul>
-<p><strong>Steerable Filtering</strong></p>
+</section>
+<section id="steerable-filtering">
+<h3><strong>Steerable Filtering</strong><a class="headerlink" href="#steerable-filtering" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Re-load the image in ImageJ</p></li>
 <li><p>Launch SteerableJ (Plugins &gt; SteerableJ). There are multiple
@@ -559,25 +560,26 @@ particular orientation. How could you use this to filter lines of a
 given orientation?</p></li>
 </ul>
 <p><em>References:</em></p>
-<p><em>Freeman and Adelson. The Design and Use of Steerable Filters. IEEE
-PAMI. 1991</em></p>
-<p><em>Jacob and Unser. Design of Steerable Filters for Feature Detection
-Using Canny-Like Criteria. IEEE PAMI. 2004</em></p>
-<p><strong>Bonus Exercises:</strong></p>
+<p><span id="id1">Freeman and Adelson [<a class="reference internal" href="bibliography.html#id3" title="W.T. Freeman and E.H. Adelson. The design and use of steerable filters. IEEE Transactions on Pattern Analysis and Machine Intelligence, 13(9):891-906, 1991. doi:10.1109/34.93808.">1</a>]</span></p>
+<p><span id="id2">Jacob and Unser [<a class="reference internal" href="bibliography.html#id4" title="M. Jacob and M. Unser. Design of steerable filters for feature detection using canny-like criteria. IEEE Transactions on Pattern Analysis and Machine Intelligence, 26(8):1007-1019, 2004. doi:10.1109/TPAMI.2004.44.">2</a>]</span></p>
+</section>
+</section>
+<section id="bonus-exercises">
+<h2><strong>Bonus Exercises:</strong><a class="headerlink" href="#bonus-exercises" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Use what you’ve learned to attempt to outline the cell <em>and</em> its
-nucleus in the image Cells/Nadia
-20131122_RhoAMEFs_18kPa_001_w477_t01.tif</p>
+nucleus in the image <code class="docutils literal notranslate"><span class="pre">Cells/Nadia</span> <span class="pre">20131122_RhoAMEFs_18kPa_001_w477_t01.tif</span></code></p>
 <ul>
 <li><p>What filter is appropriate here - an edge or a ridge filter?</p></li>
 </ul>
 </li>
 <li><p>Use what you’ve learned to detect some of the red and green isolated
-axons in the image Neurons/arpy01_Chat_082_B_i_cropped.tif while
+axons in the image <code class="docutils literal notranslate"><span class="pre">Neurons/arpy01_Chat_082_B_i_cropped.tif</span></code> while
 avoiding both the large mass of continuous red fluorescence near the
 injection site, and the autofluorescence of the cell bodies in green.
 (You will not need the blue DNA channel)</p></li>
 </ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -644,14 +646,15 @@ injection site, and the autofluorescence of the cell bodies in green.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Image Processing and Basic Detection</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-filtering-edge-detection"><strong>Edge Filtering &amp; Edge Detection</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steerable-filtering-and-ridge-detection"><strong>Steerable Filtering and Ridge Detection</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-thresholding"><strong>Basic thresholding</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steerable-filtering"><strong>Steerable Filtering</strong></a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises"><strong>Bonus Exercises:</strong></a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
