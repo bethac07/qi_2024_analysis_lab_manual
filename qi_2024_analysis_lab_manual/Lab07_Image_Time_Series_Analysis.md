@@ -2,7 +2,7 @@
 
 *Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug* . 
 
-<small>This file last updated 2024-04-01.</small>
+<small>This file last updated 2024-04-04.</small>
 
 ---
 
@@ -10,13 +10,10 @@
 
 ### Learning Objectives
 
-- [ ] (Semi-)automated Tracking with Mastodon in Fiji
-
-- [ ] Using Trackmate from within Mastodon
-
-- [ ] Tracking with ilastik
-
-- [ ] Bonus: exporting from ilastik, editing in Mastodon - note from Beth - this isn't there
+- (Semi-)automated Tracking with Mastodon in Fiji
+- Using Trackmate from within Mastodon
+- Tracking with ilastik
+- Bonus: exporting from ilastik, editing in Mastodon - note from Beth - this isn't there
 
 ---
 
@@ -221,13 +218,15 @@ There is much more interesting stuff to explore. Here some inspiration:
     1.  How long did it take to track automatically? Is there a way to
         speed this up? (Ask the online manual…)
 
+
+
+
 ## **Part 2: Photobleaching**
 
 ### Learning Objectives
 
-- [ ] Apply and scrutinize photobleach correction
-
-- [ ] Double-normalized FRAP analysis
+- Apply and scrutinize photobleach correction
+- Double-normalized FRAP analysis
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 

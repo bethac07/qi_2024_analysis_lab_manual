@@ -2,23 +2,18 @@
 
 *Lab authors: Hunter Elliott & Marcelo Cicconet*
 
-<small>This file last updated 2024-04-01.</small>
+<small>This file last updated 2024-04-04.</small>
 
 ---
 
 ## Learning Objectives
 
-- [ ] Get familiar with Fiji
-
-- [ ] Estimate SNR
-
-- [ ] Estimate resolution
-
-- [ ] Reduce noise by filtering
-
-- [ ] Subtract background
-
-- [ ] Detect point sources via LoG
+- Get familiar with Fiji
+- Estimate SNR
+- Estimate resolution
+- Reduce noise by filtering
+- Subtract background
+- Detect point sources via LoG
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
