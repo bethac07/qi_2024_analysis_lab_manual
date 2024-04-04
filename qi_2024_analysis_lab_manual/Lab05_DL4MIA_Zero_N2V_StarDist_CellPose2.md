@@ -8,15 +8,12 @@
 
 ## Learning Objectives
 
--  Appreciate how Neural Networks are trained
-
--  Learn how to get to and use Google Colab
-
--  Denoising with Noise2Void in “Zero”
-
--  Segmentation with StarDist in “Zero”
-
--  Segmentation with Cellpose
+- Appreciate how Neural Networks are trained
+- Segmentation with Cellpose
+- Learn how to get to and use Google Colab
+- Denoising with Noise2Void in “Zero”
+- Bonus: Use Noise2Void in Fiji
+- Bonus: Segmentation with StarDist in “Zero”
 
 Lab Data: [<u>https://bit.ly/3uEFiKg</u>](https://bit.ly/3uEFiKg)
 
@@ -185,8 +182,11 @@ back the lecture when we discussed training steps and epochs.
 <img src="images/lab05/cellpose_training_output.png" style="width:6in" />
 
 Once done, Cellpose will open the next image in the folder and
-automatically use the freshly finetuned model to segment it. You can now
-repeat this process as often as needed. Cellpose will in each iteration
+automatically use the freshly finetuned model to segment it (NOTE: in cellpose
+3 there seems to be a bug where the new model is not being used to segment
+the newly loaded image. If you notice the segmentation isn't very good, manually 
+select your newly trained model under the "other models" dropdown and run it). 
+You can now repeat this process as often as needed. Cellpose will in each iteration
 finetune the same original model, but will do so with an ever increasing
 number of user labeled masks (the ones you have created). Eventually you
 will either loose hope or find that Cellpose’s prediction become good
