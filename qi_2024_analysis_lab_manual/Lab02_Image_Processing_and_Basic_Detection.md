@@ -2,15 +2,14 @@
 
 *Lab authors: Hunter Elliott & Marcelo Cicconet* . 
 
-<small>This file last updated 2024-04-01.</small>
+<small>This file last updated 2024-04-04.</small>
 
 ---
 
 ## Learning Objectives
 
-- [ ] Experimenting with filtering
-
-- [ ] Detecting edges and ridges
+- Experimenting with filtering
+- Detecting edges and ridges
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 

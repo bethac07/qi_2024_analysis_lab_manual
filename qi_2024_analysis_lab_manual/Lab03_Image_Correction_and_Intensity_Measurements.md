@@ -1,16 +1,14 @@
 # Image Correction and Intensity Measurements
 
-<small>This file last updated 2024-04-01.</small>
+<small>This file last updated 2024-04-04.</small>
 
 ---
 
 ## Learning Objectives
 
-- [ ] Prepare correction images
-
-- [ ] Apply corrections to image data
-
-- [ ] Measure intensities with and without corrections
+- Prepare correction images
+- Apply corrections to image data
+- Measure intensities with and without corrections
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs) 
 
