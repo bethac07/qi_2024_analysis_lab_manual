@@ -430,16 +430,17 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="deep-learning-for-microscopy-image-analysis">
 <h1>Deep Learning for Microscopy Image Analysis<a class="headerlink" href="#deep-learning-for-microscopy-image-analysis" title="Link to this heading">#</a></h1>
 <p><em>Lab authors: Damian Dalle Nogare and Florian Jug</em> .</p>
-<p><small>This file last updated 2024-04-01.</small></p>
+<p><small>This file last updated 2024-04-04.</small></p>
 <hr class="docutils" />
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Appreciate how Neural Networks are trained</p></li>
+<li><p>Segmentation with Cellpose</p></li>
 <li><p>Learn how to get to and use Google Colab</p></li>
 <li><p>Denoising with Noise2Void in “Zero”</p></li>
-<li><p>Segmentation with StarDist in “Zero”</p></li>
-<li><p>Segmentation with Cellpose</p></li>
+<li><p>Bonus: Use Noise2Void in Fiji</p></li>
+<li><p>Bonus: Segmentation with StarDist in “Zero”</p></li>
 </ul>
 <p>Lab Data: <a class="reference external" href="https://bit.ly/3uEFiKg"><u>https://bit.ly/3uEFiKg</u></a></p>
 </section>
@@ -580,8 +581,11 @@ console (where you started cellpose from). What is going on here? Remember
 back the lecture when we discussed training steps and epochs.
 <img alt="_images/cellpose_training_output.png" src="_images/cellpose_training_output.png" /></p>
 <p>Once done, Cellpose will open the next image in the folder and
-automatically use the freshly finetuned model to segment it. You can now
-repeat this process as often as needed. Cellpose will in each iteration
+automatically use the freshly finetuned model to segment it (NOTE: in cellpose
+3 there seems to be a bug where the new model is not being used to segment
+the newly loaded image. If you notice the segmentation isn’t very good, manually
+select your newly trained model under the “other models” dropdown and run it).
+You can now repeat this process as often as needed. Cellpose will in each iteration
 finetune the same original model, but will do so with an ever increasing
 number of user labeled masks (the ones you have created). Eventually you
 will either loose hope or find that Cellpose’s prediction become good

@@ -2,19 +2,16 @@
 
 *Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug* . 
 
-<small>This file last updated 2024-04-01.</small>
+<small>This file last updated 2024-04-04.</small>
 
 ---
 
 ## Learning Objectives
 
-- [ ] Visualizing 3D data
-
-- [ ] Basic segmentation on 3D images
-
-- [ ] Image registration for 3D reconstruction
-
-- [ ] Machine learning segmentation in 3D
+- Visualizing 3D data
+- Basic segmentation on 3D images
+- Image registration for 3D reconstruction
+- Machine learning segmentation in 3D
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 

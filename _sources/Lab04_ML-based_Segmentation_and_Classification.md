@@ -2,7 +2,7 @@
 
 *Lab authors: Damian Dalle Nogare and Florian Jug* . 
 
-<small>This file last updated 2024-04-01.</small>
+<small>This file last updated 2024-04-04.</small>
 
 ---
 
@@ -10,11 +10,9 @@
 
 ### Learning Objectives
 
-- [ ] Train a pixel classifier to segment images
-
-- [ ] Learn to use ilastik
-
-- [ ] Experiment with how features and data affect performance
+- Train a pixel classifier to segment ima
+- Learn to use ilas
+- Experiment with how features and data affect performance
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
