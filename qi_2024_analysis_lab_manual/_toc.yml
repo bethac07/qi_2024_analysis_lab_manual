@@ -7,7 +7,6 @@ parts:
 - caption: 
   maxdepth: 4
   chapters:
-  - file: Lab01_Estimating_SNR_and_Resolution_and_basic_image_processing.md
   - file: Lab02_Image_Processing_and_Basic_Detection.md
   - file: Lab03_Image_Correction_and_Intensity_Measurements.md
   - file: Lab04_ML-based_Segmentation_and_Classification.md
@@ -16,6 +15,5 @@ parts:
   - file: Lab07_Image_Time_Series_Analysis.md
 - caption:  Additional Resources
   chapters:
-  - file: links
   - file: bibliography
   - file: genindex
