@@ -6,13 +6,14 @@
 
 ---
 
-## Learning Objectives - TODO
+## Learning Objectives
 
 - Experimenting with filtering
-- 
-- Bonus Detecting edges and ridges
+- Get experience with CellProfiler (add cite)
+- Bonus: Detecting edges and ridges
+- Bonus: Using encapsulated segmentation modules in CellProfiler
 
-Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
+Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs)
 
 ---
 
