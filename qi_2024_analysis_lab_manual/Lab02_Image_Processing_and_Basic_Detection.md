@@ -6,10 +6,11 @@
 
 ---
 
-## Learning Objectives
+## Learning Objectives - TODO
 
 - Experimenting with filtering
-- Detecting edges and ridges
+- 
+- Bonus Detecting edges and ridges
 
 Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 
@@ -20,12 +21,13 @@ Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
 *The goal here is to detect at least some of the edges between the cells
 using what you've learned about derivative filters.*
 
+### Edge detection in Fiji
+
 ```{note} 
 You will need to have the FeatureJ plugin installed for these exercises. If it's not, check the first analysis lab handout for instructions on how to do it. |
 ```
 
-
-- Open the Neurons/4_9_13_AVG_Aligned_Stack.tif image
+- Open the `Neurons/4_9_13_AVG_Aligned_Stack`.tif image
 
   - Why will thresholding not work on this image?
 
@@ -73,9 +75,26 @@ You will need to have the FeatureJ plugin installed for these exercises. If it's
   - Look at your result. Overlay it on the original image. Where did
     your edge detector succeed? Where did it fail?
 
----
+### Edge detection in CellProfiler
 
-## **Steerable Filtering and Ridge Detection**
+#### LoG filtering
+- Open CellProfiler and load the same image (`Neurons/4_9_13_AVG_Aligned_Stack`) in the Images panel (where it says **Drop files and folders here**)
+- Load the `edge_detection_neurons.cppipe` pipeline file onto the left side pipeline panel (where it says **Drop a pipeline file here**)
+- Enter test mode by hitting the `Start Test Mode` button  <img src="images/lab02/StartTestMode.png" height="30px" />
+- Execute the `EnhanceEdges` module by hitting the `Step` button  <img src="images/lab02/Step.png" height="30px" />
+- How does the LoG filter look? What happens when you change the Gaussian diameter size?
+
+#### Canny edge detection
+- Change to performing Canny edge finding by changing the selected method in `Select an edge finding method`
+- Execute the module by pressing `Step` - what happens? 
+- Play with manually setting your own thresholds by setting the automatic thresholding settings to `No` - are you able to find good values?
+  - You may find your values are approximately a factor of ~250 off from the values you were using in Fiji - can you hypothesize what might be happening here?
+
+
+---
+## **Bonus Exercises - Filtering**
+
+### **Steerable Filtering and Ridge Detection**
 
 *In this section, you will segment microtubules by using filters to
 accentuate “ridge-like” structures in the image.*
@@ -84,7 +103,7 @@ accentuate “ridge-like” structures in the image.*
 For this exercise, you'll need a plug-in (SteerableJ) that runs on an older version of ImageJ. Please launch ImageJ_SteerableJ_Win/ImageJ.exe (or ImageJ_SteerableJ_Mac/ImajeJ.app if you're on a Mac), available with the data for this lab. Or you can follow these instructions: [<u>http://bigwww.epfl.ch/demo/steerable/download.html</u>](http://bigwww.epfl.ch/demo/steerable/download.html) 
 ```
 
-### **Basic thresholding**
+#### **Basic thresholding**
 
 *First, try segmenting the microtubules with simple thresholding (for
 comparison to steerable filters)*
@@ -101,7 +120,7 @@ comparison to steerable filters)*
   \> Threshold…). Is there a threshold that will accurately segment the
   microtubules?
 
-### **Steerable Filtering**
+#### **Steerable Filtering**
 
 - Re-load the image in ImageJ
 
@@ -143,7 +162,7 @@ comparison to steerable filters)*
 
 {cite:t}`1307008`
 
-## **Bonus Exercises:**
+### **Bonus Exercises: Filtering in harder data**
 
 - Use what you’ve learned to attempt to outline the cell *and* its
   nucleus in the image `Cells/Nadia 20131122_RhoAMEFs_18kPa_001_w477_t01.tif`
