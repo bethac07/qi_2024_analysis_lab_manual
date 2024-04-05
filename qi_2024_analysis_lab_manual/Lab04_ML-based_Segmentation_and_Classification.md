@@ -18,7 +18,7 @@ Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs
 
 ---
 
-### Training a Random Forest Pixel Classifier in ilastik
+### Training a Random Forest Pixel Classifier in ilastik{cite}`Berg2019-no`
 
 - Welcome to the world of software with good documentation and
   tutorials! Take a deep breath and really soak it in, then check out

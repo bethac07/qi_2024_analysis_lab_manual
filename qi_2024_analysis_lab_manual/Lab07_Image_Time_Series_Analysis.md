@@ -12,7 +12,7 @@
 
 - (Semi-)automated Tracking with Mastodon in Fiji
 - Using Trackmate from within Mastodon
-- Tracking with ilastik
+- Tracking with ilastik{cite}`Berg2019-no`
 - Bonus: exporting from ilastik, editing in Mastodon - note from Beth - this isn't there
 
 ---
@@ -116,7 +116,7 @@ Be prepared to show the coolest thing you found out tomorrow morning
     - Shift + ctrl + mouse wheel (on windows) is zooming in and out.
 
     - Spend some additional time to internalize some more shortcuts:  
-      [<u>https://imagej.net/BigDataViewer#Basic_Navigation</u>](https://imagej.net/BigDataViewer#Basic_Navigation)
+      [<u>https://imagej.net/BigDataViewer{cite}`Pietzsch2015-pf`#Basic_Navigation</u>](https://imagej.net/BigDataViewer#Basic_Navigation)
 
 #### Step 2: Manually track some cells
 
