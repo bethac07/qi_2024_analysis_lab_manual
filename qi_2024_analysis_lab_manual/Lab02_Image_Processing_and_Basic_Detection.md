@@ -1,4 +1,4 @@
-# Image Processing and Basic Detection
+# Image Processing and Basic Segmentation
 
 *Lab authors: Hunter Elliott, Marcelo Cicconet, & Beth Cimini* . 
 
@@ -75,6 +75,8 @@ You will need to have the FeatureJ plugin installed for these exercises. If it's
   - Look at your result. Overlay it on the original image. Where did
     your edge detector succeed? Where did it fail?
 
+---
+
 ### Edge detection in CellProfiler
 
 #### LoG filtering
@@ -88,8 +90,13 @@ You will need to have the FeatureJ plugin installed for these exercises. If it's
 - Change to performing Canny edge finding by changing the selected method in `Select an edge finding method`
 - Execute the module by pressing `Step` - what happens? 
 - Play with manually setting your own thresholds by setting the automatic thresholding settings to `No` - are you able to find good values?
-  - You may find your values are approximately a factor of ~250 off from the values you were using in Fiji - can you hypothesize what might be happening here?
+```{note}
+  You may find your values are approximately a factor of ~250 off from the values you were using in Fiji - can you hypothesize what might be happening here?
+```
 
+---
+
+## **Basic Segmentation**
 
 ---
 ## **Bonus Exercises - Filtering**
@@ -119,6 +126,8 @@ comparison to steerable filters)*
 - Threshold the image. You can test this out manually (Image \> Adjust
   \> Threshold…). Is there a threshold that will accurately segment the
   microtubules?
+
+---
 
 #### **Steerable Filtering**
 
@@ -174,3 +183,21 @@ comparison to steerable filters)*
   avoiding both the large mass of continuous red fluorescence near the
   injection site, and the autofluorescence of the cell bodies in green.
   (You will not need the blue DNA channel)
+
+
+## **Bonus Exercises - Segmentation**
+
+### Encapsulating all of segmentation into one module
+
+- At the end of your segmentation piepeline, you'll see two modules that are there but inactive - they have an empty checkbox <img src="images/lab02/InactivatedModule.png" height="20px" /> . Click this box to enable the `IdentifyPrimaryObjects` module - it should now look like this: <img src="images/lab02/Check.png" height="20px" />
+- Run the IdentifyPrimaryObjects module - how does it do at identifying your nuclei directly from the DNA image?
+- Under the hood, IdentifyPrimaryObjects is doing all the steps we previously did, plus some filtering out of objects based on criteria you set (like whether they touch the edge). Can you `Identify` (😉) which setting corresponds to each of our previous steps?
+```{hint}
+Two of the steps are combined in a single setting!
+```
+
+### Another round of seeded watershed
+
+- After you've enabled IdentifyPrimaryObjects, you can also enable IdentifySecondaryObjects, which is designed to take an initial, smaller, internal object (nearly always a nucleus) and build a larger object around it (nearly always a cell). Enable and run this module.
+- What settings correspond to our segmentation steps, as in IdentifyPrimary?
+- Are there any settings that are new? Click the help button (<img src="images/lab02/Info.png" height="25px" />) to learn about what these do and how they work!
