@@ -1,8 +1,8 @@
 # Image Processing and Basic Detection
 
-*Lab authors: Hunter Elliott & Marcelo Cicconet* . 
+*Lab authors: Hunter Elliott, Marcelo Cicconet, & Beth Cimini* . 
 
-<small>This file last updated 2024-04-04.</small>
+<small>This file last updated 2024-04-05.</small>
 
 ---
 
