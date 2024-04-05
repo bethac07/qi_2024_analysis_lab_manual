@@ -14,7 +14,7 @@
 - Learn to use ilas
 - Experiment with how features and data affect performance
 
-Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
+Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs)
 
 ---
 
@@ -90,7 +90,7 @@ There is a train and a test stack. Why is that?
 
 - [ ] Feature-based cell classification
 
-Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
+Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs)
 
 ### Segment Nuclei for Feature Extraction
 

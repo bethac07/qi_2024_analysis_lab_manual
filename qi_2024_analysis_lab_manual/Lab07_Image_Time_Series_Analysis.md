@@ -228,7 +228,7 @@ There is much more interesting stuff to explore. Here some inspiration:
 - Apply and scrutinize photobleach correction
 - Double-normalized FRAP analysis
 
-Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
+Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs)
 
 ---
 
