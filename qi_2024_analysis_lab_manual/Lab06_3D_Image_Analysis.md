@@ -13,7 +13,7 @@
 - Image registration for 3D reconstruction
 - Machine learning segmentation in 3D
 
-Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs)
+Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs)
 
 ---
 
