@@ -1,8 +1,8 @@
 # 3D Image Analysis
 
-*Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug* . 
+*Lab authors: Hunter Elliott, Damian Dalle Nogare, Florian Jug, and Beth Cimini* . 
 
-<small>This file last updated 2024-04-04.</small>
+<small>This file last updated 2024-04-05.</small>
 
 ---
 
