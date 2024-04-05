@@ -42,6 +42,7 @@ jobs:
         run: |
           jupyter-book build qi_2024_analysis_lab_manual
           sed -i 's/<a class="skip-link" href="#main-content">Skip to main content<\/a>/ /' */_build/**/*.html
+          sed -i 's/<a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content<\/a>/ /' */_build/**/*.html
 
       # Upload the book's HTML as an artifact
       - name: Upload artifact
