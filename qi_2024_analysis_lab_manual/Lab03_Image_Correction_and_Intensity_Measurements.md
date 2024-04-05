@@ -12,7 +12,7 @@
 - Apply corrections to image data
 - Measure intensities with and without corrections
 
-Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs) 
+Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs) 
 
 ---
 
