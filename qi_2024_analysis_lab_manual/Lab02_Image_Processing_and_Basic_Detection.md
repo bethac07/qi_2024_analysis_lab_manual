@@ -99,10 +99,12 @@ You will need to have the FeatureJ plugin installed for these exercises. If it's
 
 ## **Basic Segmentation**
 
+### 
+
 ---
 ## **Bonus Exercises - Filtering**
 
-### **Steerable Filtering and Ridge Detection**
+### Steerable Filtering and Ridge Detection
 
 *In this section, you will segment microtubules by using filters to
 accentuate “ridge-like” structures in the image.*
@@ -111,7 +113,7 @@ accentuate “ridge-like” structures in the image.*
 For this exercise, you'll need a plug-in (SteerableJ) that runs on an older version of ImageJ. Please launch ImageJ_SteerableJ_Win/ImageJ.exe (or ImageJ_SteerableJ_Mac/ImajeJ.app if you're on a Mac), available with the data for this lab. Or you can follow these instructions: [<u>http://bigwww.epfl.ch/demo/steerable/download.html</u>](http://bigwww.epfl.ch/demo/steerable/download.html) 
 ```
 
-#### **Basic thresholding**
+#### Basic thresholding
 
 *First, try segmenting the microtubules with simple thresholding (for
 comparison to steerable filters)*
@@ -130,7 +132,7 @@ comparison to steerable filters)*
 
 ---
 
-#### **Steerable Filtering**
+#### Steerable Filtering
 
 - Re-load the image in ImageJ
 
@@ -172,7 +174,7 @@ comparison to steerable filters)*
 
 {cite:t}`1307008`
 
-### **Bonus Exercises: Filtering in harder data**
+### Bonus Exercises: Filtering in harder data
 
 - Use what you’ve learned to attempt to outline the cell *and* its
   nucleus in the image `Cells/Nadia 20131122_RhoAMEFs_18kPa_001_w477_t01.tif`
