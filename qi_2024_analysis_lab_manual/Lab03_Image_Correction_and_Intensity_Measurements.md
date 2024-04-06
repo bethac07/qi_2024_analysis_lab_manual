@@ -355,9 +355,14 @@ This kind of averaging-based FFC correction is only appropriate when **ALL** of 
 
 - Drag and drop the `BBBC022_20585_AE` folder of images into the Images module.
 - Drag and drop pipeline 1 (`01_FFC.cppipe`) into the pipeline panel
-- Set where you want the output to be saved by clicking the 
+- Set where you want the output FFC images to be saved by clicking the `OutputSettings` button  <img src="images/lab03/OutputSettings.png" height="30px" />
+- Hit `Analyze Images` <img src="images/lab03/AnalyzeImages.png" height="30px" /> to have CellProfiler create FFC images for each of the 5 channels on 240 images of each.
 - Optional - open a second copy of CellProfiler so you can explore the pipeline while it runs. 
-  - You can see here that we're subtracting an "offset", but since in this case we don't know what it is, we just set it to zero. But this is where you could put a measured dark offset if adapting this pipeline for your own use in the future.
+  - You can see here that we're subtracting an "offset", but since in this case we don't know what it is, we just set it to zero. But this is where you could put a measured offset if adapting this pipeline for your own use in the future. Remember to scale it 0-1 based on your bit depth!
+
+```{note}
+CellProfiler saves FFC images as numpy array (`.npy`) files, which will not play nicely with ImageJ. But you can inspect what they look like in the next step.
+```
 
 ### Pipeline 2 - Create a background subtraction image for each channel (wait time after of about 5-10 minutes during run)
 
