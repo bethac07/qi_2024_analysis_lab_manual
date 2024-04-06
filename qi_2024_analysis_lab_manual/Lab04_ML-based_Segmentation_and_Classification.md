@@ -10,15 +10,15 @@
 
 ### Learning Objectives
 
-- Train a pixel classifier to segment ima
-- Learn to use ilas
+- Train a pixel classifier to segment images
+- Learn to use ilastik {cite}`Berg2019-no`
 - Experiment with how features and data affect performance
 
 Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs)
 
 ---
 
-### Training a Random Forest Pixel Classifier in ilastik{cite}`Berg2019-no`
+### Training a Random Forest Pixel Classifier in ilastik
 
 - Welcome to the world of software with good documentation and
   tutorials! Take a deep breath and really soak it in, then check out
