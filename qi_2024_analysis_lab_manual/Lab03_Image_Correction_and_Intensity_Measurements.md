@@ -348,7 +348,7 @@ Since we don't have dark images, we have to calculate our flatfield correction f
 ```{important}
 This kind of averaging-based FFC correction is only appropriate when **ALL** of the following conditions are met; if not, do not attempt!
  - You have a large number of images in each channel (hundreds or thousands)
- - Your intensity is reasonably similar across most fields of view
+ - Your intensity is reasonably similar across most fields of view (this means this workflow is prone to problems when, ie, only one in ten cells is bright and the rest are dim)
  - Objects are randomly placed throughout your image (this means this is not appropriate when doing microscopy workflows that start with a low mag scan for objects of interest and then goes back and images each at high mag)
  - Objects are common enough, and your number of images is large enough, such that across all fields of view, each pixel is inside a bright object at least several times
 ```
@@ -357,7 +357,8 @@ This kind of averaging-based FFC correction is only appropriate when **ALL** of 
 - Drag and drop pipeline 1 (`01_FFC.cppipe`) into the pipeline panel
 - Set where you want the output FFC images to be saved by clicking the `OutputSettings` button  <img src="images/lab03/OutputSettings.png" height="30px" />
 - Hit `Analyze Images` <img src="images/lab03/AnalyzeImages.png" height="30px" /> to have CellProfiler create FFC images for each of the 5 channels on 240 images of each.
-- Optional - open a second copy of CellProfiler so you can explore the pipeline while it runs. 
+- Optional - explore the pipeline while it runs.
+  - It's fine to do it in the same copy that's running, but you can open a second copy if you're worried. 
   - You can see here that we're subtracting an "offset", but since in this case we don't know what it is, we just set it to zero. But this is where you could put a measured offset if adapting this pipeline for your own use in the future. Remember to scale it 0-1 based on your bit depth!
 
 ```{note}
@@ -366,10 +367,16 @@ CellProfiler saves FFC images as numpy array (`.npy`) files, which will not play
 
 ### Pipeline 2 - Create a background subtraction image for each channel (wait time after of about 5-10 minutes during run)
 
+Next, we will create a background subtraction image, again based on averaging all images in the set. This will help us approximate (though not truly _measure_) the (offset + background) level in this image. As above, this approach is only appropriate because we have many images, in which our objects are randomly distributed.
+
 ```{admonition} Question for you
 What kinds of things will this kind of background subtraction help correct for? What kinds of things will it not help correct for?
 ```
 
+- Drag in the `02_BackSub.cppipe` pipeline file to the pipeline panel. It's fine to do this with a pipeline already in there.
+- Return to the Images module, and drag in your newly calculated `.npy` flatfield images. If you don't have the raw images loaded in still, drag them in as well.
+  - Optional - double click on one or more of the `.npy` files to open them up in CellProfiler's image viewer. What do you notice? (You can also do this after you hit analyze)
+- Hit `Analyze Images` <img src="images/lab03/AnalyzeImages.png" height="30px" /> to have CellProfiler create FFC images for each of the 5 channels on 240 images of each.
 
 ### Pipeline 3 - Apply your corrections and then perform some segmentations and measurements
 
