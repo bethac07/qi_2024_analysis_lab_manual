@@ -1,12 +1,8 @@
 # Image Correction and Intensity Measurements
 
-<small>This file last updated 2024-04-04.</small>
+*Lab authors: Hunter Elliott, Marcelo Cicconet, & Beth Cimini* . 
 
-```
-Notes from the spreadsheet on what we might want to update:
-
-Possibly add: CellProfiler, BigStitcher
-```
+<small>This file last updated 2024-04-06.</small>
 
 ---
 
@@ -16,7 +12,8 @@ Possibly add: CellProfiler, BigStitcher
 - Apply corrections to image data
 - Measure intensities with and without corrections
 
-Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs) 
+Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs) 
+
 
 ---
 
