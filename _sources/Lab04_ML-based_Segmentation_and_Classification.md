@@ -4,6 +4,12 @@
 
 <small>This file last updated 2024-04-04.</small>
 
+```
+Notes from the spreadsheet on what we might want to update:
+
+Would be nice to add CellProfiler {Beth's current notes - I don't see how really? Other than with plugins? Will need to install Docker for that if we do it, should just be a bonus exercise}
+```
+
 ---
 
 ## **Segmentation** 
