@@ -21,7 +21,7 @@ Lab Data: [<u>https://bit.ly/3uEFiKg</u>](https://bit.ly/3uEFiKg)
 
 Neural networks can do useful things. Their deployment within
 user-friendly tools is, unfortunately, lacking behind. Hence, methods we
-would like to apply to our data are not available in Fiji or ilastik
+would like to apply to our data are not available in Fiji or ilastik{cite}`Berg2019-no`
 quite yet. The latest methods can only be used by the ones “brave”
 enough to expose themselves to some amount of computer source code...
 
@@ -263,7 +263,7 @@ it:
 
 ## **Exercise 4: First steps with ZeroCostDL4Mic**
 
-ZeroCostDL4Mic is a collection of (hopefully) self-explanatory Jupyter
+ZeroCostDL4Mic{cite}`Von_Chamier2021-ux` is a collection of (hopefully) self-explanatory Jupyter
 Notebooks for Google Colab. They are meant to quickly get you started on
 learning how to use deep-learning methods specifically created for
 microscopy image analysis.
