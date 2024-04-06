@@ -9,7 +9,7 @@
 ## Learning Objectives
 
 - Experimenting with filtering
-- Get experience with CellProfiler (add cite)
+- Get experience with CellProfiler{cite}`Stirling2021-sg`
 - Bonus: Detecting edges and ridges
 - Bonus: Using encapsulated segmentation modules in CellProfiler
 
