@@ -263,7 +263,7 @@ it:
 
 ## **Exercise 4: First steps with ZeroCostDL4Mic**
 
-ZeroCostDL4Mic is a collection of (hopefully) self-explanatory Jupyter
+ZeroCostDL4Mic{cite}`Von_Chamier2021-ux` is a collection of (hopefully) self-explanatory Jupyter
 Notebooks for Google Colab. They are meant to quickly get you started on
 learning how to use deep-learning methods specifically created for
 microscopy image analysis.
