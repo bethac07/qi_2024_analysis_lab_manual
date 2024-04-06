@@ -2,6 +2,12 @@
 
 <small>This file last updated 2024-04-04.</small>
 
+```
+Notes from the spreadsheet on what we might want to update:
+
+Possibly add: CellProfiler, BigStitcher
+```
+
 ---
 
 ## Learning Objectives

@@ -4,6 +4,13 @@
 
 <small>This file last updated 2024-04-04.</small>
 
+```
+Notes from the spreadsheet on what we might want to update:
+
+Add for watershed: Napari in a notebook, CellProfiler 
+For 3D pixel classification, considering adding napari to ilastik and Labkit
+```
+
 ---
 
 ## Learning Objectives

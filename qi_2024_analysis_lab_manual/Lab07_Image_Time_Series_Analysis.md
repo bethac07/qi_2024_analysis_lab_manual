@@ -4,6 +4,12 @@
 
 <small>This file last updated 2024-04-04.</small>
 
+```
+Notes from the spreadsheet on what we might want to update:
+
+Maybe add some BTrack stuff - (Alan says there's a good notebook), and/or UlTrac and/or TracX
+```
+
 ---
 
 ## **Part 1: Tracking**
