@@ -90,11 +90,9 @@ There is a train and a test stack. Why is that?
 
 ### Learning Objectives
 
-- [ ] Segment cells
-
-- [ ] Extract features from cells
-
-- [ ] Feature-based cell classification
+- Segment cells
+- Extract features from cells
+- Feature-based cell classification
 
 Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs)
 
