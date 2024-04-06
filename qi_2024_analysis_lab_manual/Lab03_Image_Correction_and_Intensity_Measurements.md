@@ -301,7 +301,7 @@ These images have already had offset, background and flat-field corrections appl
         completely due to bleedthrough / crosstalk. There may be some
         residual intensity - can you think of why this might be?
 
-## **\[Bonus\] ImageJ Macros**
+## **Bonus Exercises - ImageJ Macros**
 
 - Pick the most painful or annoying analysis task from the labs so far,
   or a new one you want to try. Go to Plugins \> Macros \> Record
@@ -318,3 +318,56 @@ These images have already had offset, background and flat-field corrections appl
 
 - Save your macro for future use. You can re-open it by simply dragging
   it onto the Fiji toolbar.
+
+## **Bonus Exercises - CellProfiler Background Subtraction and Flatfield Correction (computationally rescuing old data)**
+
+```{note}
+This exercise contains several "do this and then wait for 5-10 minutes" steps, so you may feel free to do other bonus exercises (like working on macro writing, or a bonus you didn't yet attempt from previous labs) while you wait.
+```
+
+As you may have intuited after using it, CellProfiler was originally designed for high-content, high-throughput screens (though it certainly can work on single images). Proper image correction is harder and in practice sometimes somewhat different in this context, but still important! {cite}`Singh2014-yh`
+
+We've provided you some images {cite}`Gustafsdottir2013-ng` from the Broad Bioimage Benchmark Collection {cite}`Ljosa2012-bf` that have been treated with a set of organelle dyes collectively called Cell Painting. This assay will be discussed later in the course during Beth's seminar. 
+
+Unfortunately, since these images are 10-15 years old, if measured offsets and images to help us calibrate the microscope were made at the time, they're long since lost. But we can still do _some_ background corrections to help us be more confident interpreting _some_ measurements. 
+
+````{admonition} Question for you
+What do you think is an example of a measurement that we can be pretty confident in our ability to measure, even without these corrections? What do you think is an example of a measurement we should be more cautious in interpreting?
+
+```{dropdown} Some possible answers
+There are a lot of potentially correct answers here, but cell area should probably be reasonably safe (though there might be tiny differences in exactly where your threshold boundary is drawn). It probably _isn't_ a good idea to deeply interpret small changes in correlation values between channels (it rarely is anyway, but especially here!)
+```
+````
+
+CellProfiler has no ability to "loop" over the same set of images multiple times (to first create a flatfield correction, and then a local background image, and then analysis), so we will need to run 3 separate pipelines, one for each step.
+
+### Pipeline 1 - Create a flatfield correction image for each channel (wait time of about 5-10 minutes during run)
+
+Since we don't have dark images, we have to calculate our flatfield correction from the actual data itself. We do this by averaging all the images together - under certain conditions (see below), this will allow us to approximate the same kind of flatfield correction we'd more typically take at the microscope before collecting data.
+
+```{important}
+This kind of averaging-based FFC correction is only appropriate when **ALL** of the following conditions are met; if not, do not attempt!
+ - You have a large number of images in each channel (hundreds or thousands)
+ - Your intensity is reasonably similar across most fields of view
+ - Objects are randomly placed throughout your image (this means this is not appropriate when doing microscopy workflows that start with a low mag scan for objects of interest and then goes back and images each at high mag)
+ - Objects are common enough, and your number of images is large enough, such that across all fields of view, each pixel is inside a bright object at least several times
+```
+
+- Drag and drop the `BBBC022_20585_AE` folder of images into the Images module.
+- Drag and drop pipeline 1 (`01_FFC.cppipe`) into the pipeline panel
+- Set where you want the output to be saved by clicking the 
+- Optional - open a second copy of CellProfiler so you can explore the pipeline while it runs. 
+  - You can see here that we're subtracting an "offset", but since in this case we don't know what it is, we just set it to zero. But this is where you could put a measured dark offset if adapting this pipeline for your own use in the future.
+
+### Pipeline 2 - Create a background subtraction image for each channel (wait time after of about 5-10 minutes during run)
+
+```{admonition} Question for you
+What kinds of things will this kind of background subtraction help correct for? What kinds of things will it not help correct for?
+```
+
+
+### Pipeline 3 - Apply your corrections and then perform some segmentations and measurements
+
+```{tip}
+Want to learn more about segmenting these images? Visit tutorials.cellprofiler.org and check out the Beginner Segmentation and Advanced Segmentation modules, both of which use this image set!
+```
