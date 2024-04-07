@@ -125,6 +125,14 @@ Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs
 
 ---
 
+```{tip}
+Did you know that there are ilastik image reading and model running plugins for both [Fiji](https://www.ilastik.org/documentation/fiji_export/plugin) and [CellProfiler](https://plugins.cellprofiler.org/supported_plugins.html)? They can be helpful for complex workflows.
+
+Once you've trained an ilastik classifier, you can also export the images in ilastik's  [batch processor](https://www.ilastik.org/documentation/basics/batch) for your records and/or to interface with downstream programs. See [this tutorial](https://tutorials.cellprofiler.org/#pixel-based-classification) for an example of an ilastik-to-CellProfiler workflow.
+```
+
+---
+
 ##  **Bonus Exercises - Play with Labkit (pixel classification in Fiji)**
 
 - You find Labkit on an update site called “Labkit”. Ask us if you have
@@ -146,9 +154,3 @@ Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs
   that you *can’t* solve with ilastik? If you don’t have time to
   actually try it, can you think about what sort of problem might be
   unsolvable by any pixel classification approach?
-
-```{tip}
-Did you know that there are ilastik image reading and model running plugins for both [Fiji](https://www.ilastik.org/documentation/fiji_export/plugin) and [CellProfiler](https://plugins.cellprofiler.org/supported_plugins.html)? The can be helpful for complex workflows.
-
-Once you've trained an ilastik classifier, you can also export the images in ilastik's  [batch processor](https://www.ilastik.org/documentation/basics/batch) for your records and/or to interface with downstream programs. See [this tutorial](https://tutorials.cellprofiler.org/#pixel-based-classification) for an example of an ilastik-to-CellProfiler workflow.
-```
