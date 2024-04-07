@@ -411,7 +411,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-registration-transform-between-two-image-channels"><strong>Calculate a registration transform between two image channels</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-the-registration-transform-to-align-two-image-channels"><strong>Apply the registration transform to align two image channels</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-bleedthrough-coefficient"><strong>Calculate bleedthrough coefficient</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-imagej-macros"><strong>[Bonus] ImageJ Macros</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises-imagej-macros"><strong>Bonus Exercises - ImageJ Macros</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises-cellprofiler-background-subtraction-and-flatfield-correction-computationally-rescuing-old-data"><strong>Bonus Exercises - CellProfiler Background Subtraction and Flatfield Correction (computationally rescuing old data)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-1-create-a-flatfield-correction-image-for-each-channel-wait-time-of-about-5-10-minutes-during-run">Pipeline 1 - Create a flatfield correction image for each channel (wait time of about 5-10 minutes during run)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-2-create-a-background-subtraction-image-for-each-channel-wait-time-after-of-about-5-10-minutes-during-run">Pipeline 2 - Create a background subtraction image for each channel (wait time after of about 5-10 minutes during run)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-3-apply-your-corrections-and-then-perform-some-segmentations-and-measurements">Pipeline 3 - Apply your corrections and then perform some segmentations and measurements</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -425,12 +431,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="image-correction-and-intensity-measurements">
 <h1>Image Correction and Intensity Measurements<a class="headerlink" href="#image-correction-and-intensity-measurements" title="Link to this heading">#</a></h1>
-<p><small>This file last updated 2024-04-04.</small></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Notes</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">spreadsheet</span> <span class="n">on</span> <span class="n">what</span> <span class="n">we</span> <span class="n">might</span> <span class="n">want</span> <span class="n">to</span> <span class="n">update</span><span class="p">:</span>
-
-<span class="n">Possibly</span> <span class="n">add</span><span class="p">:</span> <span class="n">CellProfiler</span><span class="p">,</span> <span class="n">BigStitcher</span>
-</pre></div>
-</div>
+<p><em>Lab authors: Hunter Elliott, Marcelo Cicconet, &amp; Beth Cimini</em> .</p>
+<p><small>This file last updated 2024-04-06.</small></p>
 <hr class="docutils" />
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
@@ -439,7 +441,7 @@ document.write(`
 <li><p>Apply corrections to image data</p></li>
 <li><p>Measure intensities with and without corrections</p></li>
 </ul>
-<p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
+<p>Lab Data: <a class="reference external" href="https://tinyurl.com/qi2024labs"><u>https://tinyurl.com/qi2024labs</u></a></p>
 </section>
 <hr class="docutils" />
 <section id="preparing-your-image-corrections">
@@ -697,8 +699,8 @@ residual intensity - can you think of why this might be?</p>
 </li>
 </ol>
 </section>
-<section id="bonus-imagej-macros">
-<h2><strong>[Bonus] ImageJ Macros</strong><a class="headerlink" href="#bonus-imagej-macros" title="Link to this heading">#</a></h2>
+<section id="bonus-exercises-imagej-macros">
+<h2><strong>Bonus Exercises - ImageJ Macros</strong><a class="headerlink" href="#bonus-exercises-imagej-macros" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Pick the most painful or annoying analysis task from the labs so far,
 or a new one you want to try. Go to Plugins &gt; Macros &gt; Record</p></li>
@@ -711,6 +713,94 @@ commands. How could you adjust your analysis by editing this?</p></li>
 <li><p>Save your macro for future use. You can re-open it by simply dragging
 it onto the Fiji toolbar.</p></li>
 </ul>
+</section>
+<section id="bonus-exercises-cellprofiler-background-subtraction-and-flatfield-correction-computationally-rescuing-old-data">
+<h2><strong>Bonus Exercises - CellProfiler Background Subtraction and Flatfield Correction (computationally rescuing old data)</strong><a class="headerlink" href="#bonus-exercises-cellprofiler-background-subtraction-and-flatfield-correction-computationally-rescuing-old-data" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This exercise contains several “do this and then wait for 5-10 minutes” steps, so you may feel free to do other bonus exercises (like working on macro writing, or a bonus you didn’t yet attempt from previous labs) while you wait.</p>
+</div>
+<p>As you may have intuited after using it, CellProfiler was originally designed for high-content, high-throughput screens (though it certainly can work on single images). Proper image correction is harder and in practice sometimes somewhat different in this context, but still important! <span id="id1">[<a class="reference internal" href="bibliography.html#id17" title="S Singh, M-A Bray, T R Jones, and A E Carpenter. Pipeline for illumination correction of images for high-throughput microscopy. J. Microsc., 256(3):231–236, December 2014.">1</a>]</span></p>
+<p>We’ve provided you some images <span id="id2">[<a class="reference internal" href="bibliography.html#id18" title="Sigrun M Gustafsdottir, Vebjorn Ljosa, Katherine L Sokolnicki, J Anthony Wilson, Deepika Walpita, Melissa M Kemp, Kathleen Petri Seiler, Hyman A Carrel, Todd R Golub, Stuart L Schreiber, Paul A Clemons, Anne E Carpenter, and Alykhan F Shamji. Multiplex cytological profiling assay to measure diverse cellular states. PLoS One, 8(12):e80999, December 2013.">2</a>]</span> from the Broad Bioimage Benchmark Collection <span id="id3">[<a class="reference internal" href="bibliography.html#id19" title="Vebjorn Ljosa, Katherine L Sokolnicki, and Anne E Carpenter. Annotated high-throughput microscopy image sets for validation. Nat. Methods, 9(7):637, June 2012.">3</a>]</span> that have been treated with a set of organelle dyes collectively called Cell Painting. This assay will be discussed later in the course during Beth’s seminar.</p>
+<p>Unfortunately, since these images are 10-15 years old, if measured offsets and images to help us calibrate the microscope were made at the time, they’re long since lost. But we can still do <em>some</em> background corrections to help us be more confident interpreting <em>some</em> measurements.</p>
+<div class="admonition-question-for-you admonition">
+<p class="admonition-title">Question for you</p>
+<p>What do you think is an example of a measurement that we can be pretty confident in our ability to measure, even without these corrections? What do you think is an example of a measurement we should be more cautious in interpreting?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Some possible answers<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">There are a lot of potentially correct answers here, but cell area should probably be reasonably safe (though there might be tiny differences in exactly where your threshold boundary is drawn). It probably <em>isn’t</em> a good idea to deeply interpret small changes in correlation values between channels (it rarely is anyway, but especially here!)</p>
+</div>
+</details></div>
+<p>CellProfiler has no ability to “loop” over the same set of images multiple times (to first create a flatfield correction, and then a local background image, and then analysis), so we will need to run 3 separate pipelines, one for each step.</p>
+<section id="pipeline-1-create-a-flatfield-correction-image-for-each-channel-wait-time-of-about-5-10-minutes-during-run">
+<h3>Pipeline 1 - Create a flatfield correction image for each channel (wait time of about 5-10 minutes during run)<a class="headerlink" href="#pipeline-1-create-a-flatfield-correction-image-for-each-channel-wait-time-of-about-5-10-minutes-during-run" title="Link to this heading">#</a></h3>
+<p>Since we don’t have dark images, we have to calculate our flatfield correction from the actual data itself. We do this by averaging all the images together - under certain conditions (see below), this will allow us to approximate the same kind of flatfield correction we’d more typically take at the microscope before collecting data.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This kind of averaging-based FFC correction is only appropriate when <strong>ALL</strong> of the following conditions are met; if not, do not attempt!</p>
+<ul class="simple">
+<li><p>You have a large number of images in each channel (hundreds or thousands)</p></li>
+<li><p>Your intensity is reasonably similar across most fields of view (this means this workflow is prone to problems when, ie, only one in ten cells is bright and the rest are dim)</p></li>
+<li><p>Objects are randomly placed throughout your image (this means this is not appropriate when doing microscopy workflows that start with a low mag scan for objects of interest and then goes back and images each at high mag)</p></li>
+<li><p>Objects are common enough, and your number of images is large enough, such that across all fields of view, each pixel is inside a bright object at least several times</p></li>
+</ul>
+</div>
+<ul class="simple">
+<li><p>Drag and drop the <code class="docutils literal notranslate"><span class="pre">BBBC022_20585_AE</span></code> folder of images into the Images module.</p></li>
+<li><p>Drag and drop pipeline 1 (<code class="docutils literal notranslate"><span class="pre">01_FFC.cppipe</span></code>) into the pipeline panel</p></li>
+<li><p>Set where you want the output FFC images to be saved by clicking the <code class="docutils literal notranslate"><span class="pre">OutputSettings</span></code> button  <a class="reference internal" href="_images/OutputSettings.png"><img alt="_images/OutputSettings.png" src="_images/OutputSettings.png" style="height: 30px;" /></a></p></li>
+<li><p>Hit <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">Images</span></code> <a class="reference internal" href="_images/AnalyzeImages.png"><img alt="_images/AnalyzeImages.png" src="_images/AnalyzeImages.png" style="height: 30px;" /></a> to have CellProfiler create FFC images for each of the 5 channels on 240 images of each.</p></li>
+<li><p>Optional - explore the pipeline while it runs.</p>
+<ul>
+<li><p>It’s fine to do it in the same copy that’s running, but you can open a second copy if you’re worried.</p></li>
+<li><p>You can see here that we’re subtracting an “offset”, but since in this case we don’t know what it is, we just set it to zero. But this is where you could put a measured offset if adapting this pipeline for your own use in the future. Remember to scale it 0-1 based on your bit depth!</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CellProfiler saves FFC images as numpy array (<code class="docutils literal notranslate"><span class="pre">.npy</span></code>) files, which will not play nicely with ImageJ. But you can inspect what they look like in the next step.</p>
+</div>
+</section>
+<section id="pipeline-2-create-a-background-subtraction-image-for-each-channel-wait-time-after-of-about-5-10-minutes-during-run">
+<h3>Pipeline 2 - Create a background subtraction image for each channel (wait time after of about 5-10 minutes during run)<a class="headerlink" href="#pipeline-2-create-a-background-subtraction-image-for-each-channel-wait-time-after-of-about-5-10-minutes-during-run" title="Link to this heading">#</a></h3>
+<p>Next, we will create a background subtraction image, again based on averaging all images in the set. This will help us approximate (though not truly <em>measure</em>) the (offset + background) level in this image. As above, this approach is only appropriate because we have many images, in which our objects are randomly distributed.</p>
+<div class="admonition-question-for-you admonition">
+<p class="admonition-title">Question for you</p>
+<p>What kinds of things will this kind of background subtraction help correct for? What kinds of things will it not help correct for?</p>
+</div>
+<ul class="simple">
+<li><p>Drag in the <code class="docutils literal notranslate"><span class="pre">02_BackSub.cppipe</span></code> pipeline file to the pipeline panel. It’s fine to do this with a pipeline already in there.</p></li>
+<li><p>Return to the Images module, and drag in your newly calculated <code class="docutils literal notranslate"><span class="pre">.npy</span></code> flatfield images. If you don’t have the raw images loaded in still, drag them in as well.</p>
+<ul>
+<li><p>Optional - double click on one or more of the <code class="docutils literal notranslate"><span class="pre">.npy</span></code> files to open them up in CellProfiler’s image viewer. What do you notice? (You can also do this after you hit analyze)</p></li>
+</ul>
+</li>
+<li><p>Hit <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">Images</span></code> <a class="reference internal" href="_images/AnalyzeImages.png"><img alt="_images/AnalyzeImages.png" src="_images/AnalyzeImages.png" style="height: 30px;" /></a> to have CellProfiler create FFC images for each of the 5 channels on 240 images of each.</p></li>
+<li><p>Optional - once the pipeline is done, load the tiff images produced into ImageJ/Fiji. What do you notice? What are their histograms? What happens if you use Fiji’s “Set” function to set all images to have a histogram of ie 100-300?</p></li>
+</ul>
+</section>
+<section id="pipeline-3-apply-your-corrections-and-then-perform-some-segmentations-and-measurements">
+<h3>Pipeline 3 - Apply your corrections and then perform some segmentations and measurements<a class="headerlink" href="#pipeline-3-apply-your-corrections-and-then-perform-some-segmentations-and-measurements" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Optional-optional - load your new round of correction images into CellProfiler (along with the first round and the raw images), load the <code class="docutils literal notranslate"><span class="pre">03_analysis_time.cppipe</span></code> pipeline, and start analyzing!</p></li>
+<li><p>What do you notice about the segmentation if you switch back and forth between the corrected images (<code class="docutils literal notranslate"><span class="pre">Hoechst</span></code> for nuclei, and <code class="docutils literal notranslate"><span class="pre">Ph_golgi</span></code> for cells, and the uncorrected images <code class="docutils literal notranslate"><span class="pre">OrigHoechst</span></code> and <code class="docutils literal notranslate"><span class="pre">Orig_Ph_golgi</span></code>)?</p>
+<ul>
+<li><p>Especially, do you notice anything in the top right of the image?</p></li>
+</ul>
+</li>
+</ul>
+<p>You can also assess how the correction affects smaller objects such as the mitochondria and nucleoli by changing whether corrected or uncorrected images are used on these.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Want to learn more about segmenting these images? Visit <a class="reference external" href="http://tutorials.cellprofiler.org">tutorials.cellprofiler.org</a> and check out the Beginner Segmentation and Advanced Segmentation modules, both of which use this image set!</p>
+</div>
+</section>
 </section>
 </section>
 
@@ -789,7 +879,13 @@ it onto the Fiji toolbar.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-registration-transform-between-two-image-channels"><strong>Calculate a registration transform between two image channels</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-the-registration-transform-to-align-two-image-channels"><strong>Apply the registration transform to align two image channels</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-bleedthrough-coefficient"><strong>Calculate bleedthrough coefficient</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-imagej-macros"><strong>[Bonus] ImageJ Macros</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises-imagej-macros"><strong>Bonus Exercises - ImageJ Macros</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises-cellprofiler-background-subtraction-and-flatfield-correction-computationally-rescuing-old-data"><strong>Bonus Exercises - CellProfiler Background Subtraction and Flatfield Correction (computationally rescuing old data)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-1-create-a-flatfield-correction-image-for-each-channel-wait-time-of-about-5-10-minutes-during-run">Pipeline 1 - Create a flatfield correction image for each channel (wait time of about 5-10 minutes during run)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-2-create-a-background-subtraction-image-for-each-channel-wait-time-after-of-about-5-10-minutes-during-run">Pipeline 2 - Create a background subtraction image for each channel (wait time after of about 5-10 minutes during run)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-3-apply-your-corrections-and-then-perform-some-segmentations-and-measurements">Pipeline 3 - Apply your corrections and then perform some segmentations and measurements</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
