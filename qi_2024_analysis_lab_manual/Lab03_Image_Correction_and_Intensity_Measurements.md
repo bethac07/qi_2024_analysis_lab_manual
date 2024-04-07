@@ -343,7 +343,7 @@ CellProfiler has no ability to "loop" over the same set of images multiple times
 
 ### Pipeline 1 - Create a flatfield correction image for each channel (wait time of about 5-10 minutes during run)
 
-Since we don't have dark images, we have to calculate our flatfield correction from the actual data itself. We do this by averaging all the images together - under certain conditions (see below), this will allow us to approximate the same kind of flatfield correction we'd more typically take at the microscope before collecting data.
+Since we don't have flatfield images, we have to calculate our flatfield correction from the actual data itself. We do this by averaging all the images together - under certain conditions (see below), this will allow us to approximate the same kind of flatfield correction we'd more typically take at the microscope before collecting data.
 
 ```{important}
 This kind of averaging-based FFC correction is only appropriate when **ALL** of the following conditions are met; if not, do not attempt!
