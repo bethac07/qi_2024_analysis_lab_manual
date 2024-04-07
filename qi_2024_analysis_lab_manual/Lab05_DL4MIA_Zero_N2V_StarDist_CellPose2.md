@@ -9,9 +9,9 @@
 ## Learning Objectives
 
 - Appreciate how Neural Networks are trained
-- Segmentation with Cellpose
+- Segmentation with Cellpose{cite}`Stringer2024-gd`
 - Learn how to get to and use Google Colab
-- Denoising with Noise2Void in “Zero”
+- Denoising with Noise2Void{cite}`Krull2019-al` in “Zero”
 - Bonus: Try in-browser classification with Piximi
 - Bonus: Use Noise2Void in Fiji
 - Bonus: Segmentation with StarDist in “Zero”
@@ -221,10 +221,21 @@ Try some other restoration modes. Try using some custom filters and see if you c
 segmentation. What might be useful for denoising this image?
 
 
-```{tip}
-Add notes/links about using Cellpose in BAND and in CellProfiler - both currently on Cellpose 2
+````{tip}
+Want to use Cellpose when you get home, but having trouble with the conda installation? You have (at least) a couple of potential options!
 
+```{note}
+As of April of 2024, both of these are still using Cellpose 2, which does have human-in-the-loop retraining but not denoising or image restoration
 ```
+
+- EMBL has the Bioimage ANalysis Desktop (BAND) program, which allows you to check out virtual machines in the cloud. You simply visit a website, tell them the resources you need, and get a machine with [>20 helpful image analysis tools pre-installed](https://band.embl.de/#/eosc-landingpage). 
+  - Upsides: No installation, everything is correctly configured and ready to go, simulataneous access to lots of tools at once, you can ask for machines with GPUs
+  - Downsides: They have limited capacity and sometimes machines aren't available due to EMBL courses. You have to upload your data to their servers, and download your results from them. 
+- Cellpose can be used with CellProfiler, both in Python if you have both programs `pip` or `conda` installed, but [CellProfiler also offers a way to use a pre-built version using Docker](https://plugins.cellprofiler.org/using_plugins.html?installing-plugins-with-dependencies-using-cellprofiler-from-source#using-docker-to-bypass-installation-requirements) {cite}`Weisbart2023-kc`
+  - Upsides: You can use Cellpose models without ever touching your terminal, and while keeping your data local - you only need to install CellProfiler and Docker `.app` or `.exe` files from their respective websites, download [the plugin](https://github.com/CellProfiler/CellProfiler-plugins/blob/master/active_plugins/runcellpose.py), and then point CellProfiler at the location of the downloaded file. 
+  - Downsides: this only lets you run pre-trained Cellpose models, not train your own. Running Cellpose in CellProfiler via Docker is also MUCH slower than running it when installed via Python (though it will mostly be compute time, rather than human time, once you're in analysis mode and running all your images unsupervised). You're limited to the hardware you have locally.
+
+````
 
 ## **Exercise 3: First steps with Google Colab (don’t waste too much time here…)**
 
