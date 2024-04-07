@@ -377,8 +377,16 @@ What kinds of things will this kind of background subtraction help correct for? 
 - Return to the Images module, and drag in your newly calculated `.npy` flatfield images. If you don't have the raw images loaded in still, drag them in as well.
   - Optional - double click on one or more of the `.npy` files to open them up in CellProfiler's image viewer. What do you notice? (You can also do this after you hit analyze)
 - Hit `Analyze Images` <img src="images/lab03/AnalyzeImages.png" height="30px" /> to have CellProfiler create FFC images for each of the 5 channels on 240 images of each.
+- Optional - once the pipeline is done, load the tiff images produced into ImageJ/Fiji. What do you notice? What are their histograms? What happens if you use Fiji's "Set" function to set all images to have a histogram of ie 100-300?
 
 ### Pipeline 3 - Apply your corrections and then perform some segmentations and measurements
+
+- Optional-optional - load your new round of correction images into CellProfiler (along with the first round and the raw images), load the `03_analysis_time.cppipe` pipeline, and start analyzing! 
+
+- What do you notice about the segmentation if you switch back and forth between the corrected images (`Hoechst` for nuclei, and `Ph_golgi` for cells, and the uncorrected images `OrigHoechst` and `Orig_Ph_golgi`)?
+  - Especially, do you notice anything in the top right of the image?
+
+You can also assess how the correction affects smaller objects such as the mitochondria and nucleoli by changing whether corrected or uncorrected images are used on these.
 
 ```{tip}
 Want to learn more about segmenting these images? Visit tutorials.cellprofiler.org and check out the Beginner Segmentation and Advanced Segmentation modules, both of which use this image set!
