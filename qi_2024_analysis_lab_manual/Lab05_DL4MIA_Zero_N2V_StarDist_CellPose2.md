@@ -1,14 +1,8 @@
 # Deep Learning for Microscopy Image Analysis
 
-*Lab authors: Damian Dalle Nogare and Florian Jug* . 
+*Lab authors: Damian Dalle Nogare, Florian Jug, and Beth Cimini* . 
 
-<small>This file last updated 2024-04-04.</small>
-
-```
-Notes from the spreadsheet on what we might want to update:
-
-Think about adding some/all of - BioimageIO, Piximi, Accessing Cellpose via BAND
-```
+<small>This file last updated 2024-04-07.</small>
 
 ---
 
@@ -18,6 +12,7 @@ Think about adding some/all of - BioimageIO, Piximi, Accessing Cellpose via BAND
 - Segmentation with Cellpose
 - Learn how to get to and use Google Colab
 - Denoising with Noise2Void in “Zero”
+- Bonus: Try in-browser classification with Piximi
 - Bonus: Use Noise2Void in Fiji
 - Bonus: Segmentation with StarDist in “Zero”
 
@@ -226,6 +221,11 @@ Try some other restoration modes. Try using some custom filters and see if you c
 segmentation. What might be useful for denoising this image?
 
 
+```{tip}
+Add notes/links about using Cellpose in BAND and in CellProfiler - both currently on Cellpose 2
+
+```
+
 ## **Exercise 3: First steps with Google Colab (don’t waste too much time here…)**
 
 The following steps should get you started in no time:
@@ -348,6 +348,7 @@ more results to look at…
         of epochs. Collab will work while you have fun on your free
         evening… 🙂
 
+## **Bonus Exercise: Classifying images in the browser in Piximi**
 
 ## **Bonus Exercise: Use Fiji’s Noise2Void Plugin**
 
@@ -386,8 +387,6 @@ to install it first.
     Be sure to set the axes correctly. On the same stack, this will require you to add a third dimension which contains multiple time points. What should we use as the third axis and why is it 'B' when you use the same stack you used for training?
     ```
     
-
-
 ## **Bonus Exercise: Image Segmentation with StarDist (in “Zero”)**
 
 Now that you have experienced how to use ZeroCostDL4Mic Collab
@@ -408,3 +407,6 @@ Reduce the number of epochs to some small number to save yourself long waiting t
 Later today, when you are done with the exercises, you might want to re-run your favorite notebook with the suggested number of epochs.
 Collab will work while you have fun on your free evening… 🙂
 
+```{admonition} Super excited about deep learning now and want to know where to find the latest models?
+Give a pointer and brief explanation of bioimageio
+```
