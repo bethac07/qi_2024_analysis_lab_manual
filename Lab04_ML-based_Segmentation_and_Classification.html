@@ -410,9 +410,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifying-mitotic-and-interphase-cells">Classifying Mitotic and Interphase Cells</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-play-with-labkit-pixel-classification-in-fiji"><strong>[Bonus] Play with Labkit (pixel classification in Fiji)</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-challenging-segmentations"><strong>[Bonus] Challenging Segmentations</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-breaking-it"><strong>[Bonus] Breaking it</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises-play-with-labkit-pixel-classification-in-fiji"><strong>Bonus Exercises - Play with Labkit (pixel classification in Fiji)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises-challenging-segmentations"><strong>Bonus Exercises - Challenging Segmentations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises-breaking-it"><strong>Bonus Exercises - Breaking it</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -427,12 +427,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="segmentation-and-pixel-classification">
 <h1>Segmentation and Pixel Classification<a class="headerlink" href="#segmentation-and-pixel-classification" title="Link to this heading">#</a></h1>
 <p><em>Lab authors: Damian Dalle Nogare and Florian Jug</em> .</p>
-<p><small>This file last updated 2024-04-04.</small></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Notes from the spreadsheet on what we might want to update:
-
-Would be nice to add CellProfiler {Beth&#39;s current notes - I don&#39;t see how really? Other than with plugins? Will need to install Docker for that if we do it, should just be a bonus exercise}
-</pre></div>
-</div>
+<p><small>This file last updated 2024-04-07.</small></p>
 <hr class="docutils" />
 <section id="segmentation">
 <h2><strong>Segmentation</strong><a class="headerlink" href="#segmentation" title="Link to this heading">#</a></h2>
@@ -549,29 +544,37 @@ performance on new data?</p></li>
 </ul>
 </section>
 </section>
-<section id="bonus-play-with-labkit-pixel-classification-in-fiji">
-<h2><strong>[Bonus] Play with Labkit (pixel classification in Fiji)</strong><a class="headerlink" href="#bonus-play-with-labkit-pixel-classification-in-fiji" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="bonus-exercises-play-with-labkit-pixel-classification-in-fiji">
+<h2><strong>Bonus Exercises - Play with Labkit (pixel classification in Fiji)</strong><a class="headerlink" href="#bonus-exercises-play-with-labkit-pixel-classification-in-fiji" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>You find Labkit on an update site called “Labkit”. Ask us if you have
-trouble installing it.</p></li>
+trouble installing it. Try it with the same training data and see how it performs!</p></li>
 </ul>
 </section>
-<section id="bonus-challenging-segmentations">
-<h2><strong>[Bonus] Challenging Segmentations</strong><a class="headerlink" href="#bonus-challenging-segmentations" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="bonus-exercises-challenging-segmentations">
+<h2><strong>Bonus Exercises - Challenging Segmentations</strong><a class="headerlink" href="#bonus-exercises-challenging-segmentations" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Pick the hardest image you’ve seen in the course and try to segment it
 using the ilastik RF pixel classifier. Can you crack it? Can you
 understand why or why not?</p></li>
 </ul>
 </section>
-<section id="bonus-breaking-it">
-<h2><strong>[Bonus] Breaking it</strong><a class="headerlink" href="#bonus-breaking-it" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="bonus-exercises-breaking-it">
+<h2><strong>Bonus Exercises - Breaking it</strong><a class="headerlink" href="#bonus-exercises-breaking-it" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Can you find an image segmentation or object classification problem
 that you <em>can’t</em> solve with ilastik? If you don’t have time to
 actually try it, can you think about what sort of problem might be
 unsolvable by any pixel classification approach?</p></li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Did you know that there are ilastik image reading and model running plugins for both <a class="reference external" href="https://www.ilastik.org/documentation/fiji_export/plugin">Fiji</a> and <a class="reference external" href="https://plugins.cellprofiler.org/supported_plugins.html">CellProfiler</a>? The can be helpful for complex workflows.</p>
+<p>Once you’ve trained an ilastik classifier, you can also export the images in ilastik’s  <a class="reference external" href="https://www.ilastik.org/documentation/basics/batch">batch processor</a> for your records and/or to interface with downstream programs. See <a class="reference external" href="https://tutorials.cellprofiler.org/#pixel-based-classification">this tutorial</a> for an example of an ilastik-to-CellProfiler workflow.</p>
+</div>
 </section>
 </section>
 
@@ -650,9 +653,9 @@ unsolvable by any pixel classification approach?</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifying-mitotic-and-interphase-cells">Classifying Mitotic and Interphase Cells</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-play-with-labkit-pixel-classification-in-fiji"><strong>[Bonus] Play with Labkit (pixel classification in Fiji)</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-challenging-segmentations"><strong>[Bonus] Challenging Segmentations</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-breaking-it"><strong>[Bonus] Breaking it</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises-play-with-labkit-pixel-classification-in-fiji"><strong>Bonus Exercises - Play with Labkit (pixel classification in Fiji)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises-challenging-segmentations"><strong>Bonus Exercises - Challenging Segmentations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercises-breaking-it"><strong>Bonus Exercises - Breaking it</strong></a></li>
 </ul>
   </nav></div>
 
