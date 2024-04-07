@@ -419,5 +419,5 @@ Later today, when you are done with the exercises, you might want to re-run your
 Collab will work while you have fun on your free evening… 🙂
 
 ```{admonition} Super excited about deep learning now and want to know where to find the latest models?
-Give a pointer and brief explanation of bioimageio
+The [Bioimage Model Zoo](https://bioimage.io/) {cite}`Ouyang2022-fm` contains a number of deep learning models, applications, and example data sets you can use on your own data or to train your own network. 
 ```
