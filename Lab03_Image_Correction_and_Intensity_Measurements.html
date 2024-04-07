@@ -61,8 +61,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Lab03_Image_Correction_and_Intensity_Measurements';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Segmentation and Pixel Classification" href="Lab04_ML-based_Segmentation_and_Classification.html" />
-    <link rel="prev" title="Welcome to QI 2024" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -177,8 +177,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Image Correction and Intensity Measurements</a></li>
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Lab04_ML-based_Segmentation_and_Classification.html">Segmentation and Pixel Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.html">Deep Learning for Microscopy Image Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lab06_3D_Image_Analysis.html">3D Image Analysis</a></li>
@@ -720,8 +719,8 @@ it onto the Fiji toolbar.</p></li>
 <p class="admonition-title">Note</p>
 <p>This exercise contains several “do this and then wait for 5-10 minutes” steps, so you may feel free to do other bonus exercises (like working on macro writing, or a bonus you didn’t yet attempt from previous labs) while you wait.</p>
 </div>
-<p>As you may have intuited after using it, CellProfiler was originally designed for high-content, high-throughput screens (though it certainly can work on single images). Proper image correction is harder and in practice sometimes somewhat different in this context, but still important! <span id="id1">[<a class="reference internal" href="bibliography.html#id17" title="S Singh, M-A Bray, T R Jones, and A E Carpenter. Pipeline for illumination correction of images for high-throughput microscopy. J. Microsc., 256(3):231–236, December 2014.">1</a>]</span></p>
-<p>We’ve provided you some images <span id="id2">[<a class="reference internal" href="bibliography.html#id18" title="Sigrun M Gustafsdottir, Vebjorn Ljosa, Katherine L Sokolnicki, J Anthony Wilson, Deepika Walpita, Melissa M Kemp, Kathleen Petri Seiler, Hyman A Carrel, Todd R Golub, Stuart L Schreiber, Paul A Clemons, Anne E Carpenter, and Alykhan F Shamji. Multiplex cytological profiling assay to measure diverse cellular states. PLoS One, 8(12):e80999, December 2013.">2</a>]</span> from the Broad Bioimage Benchmark Collection <span id="id3">[<a class="reference internal" href="bibliography.html#id19" title="Vebjorn Ljosa, Katherine L Sokolnicki, and Anne E Carpenter. Annotated high-throughput microscopy image sets for validation. Nat. Methods, 9(7):637, June 2012.">3</a>]</span> that have been treated with a set of organelle dyes collectively called Cell Painting. This assay will be discussed later in the course during Beth’s seminar.</p>
+<p>As you may have intuited after using it, CellProfiler was originally designed for high-content, high-throughput screens (though it certainly can work on single images). Proper image correction is harder and in practice sometimes somewhat different in this context, but still important! <span id="id1">[<a class="reference internal" href="bibliography.html#id17" title="S Singh, M-A Bray, T R Jones, and A E Carpenter. Pipeline for illumination correction of images for high-throughput microscopy. J. Microsc., 256(3):231–236, December 2014.">7</a>]</span></p>
+<p>We’ve provided you some images <span id="id2">[<a class="reference internal" href="bibliography.html#id18" title="Sigrun M Gustafsdottir, Vebjorn Ljosa, Katherine L Sokolnicki, J Anthony Wilson, Deepika Walpita, Melissa M Kemp, Kathleen Petri Seiler, Hyman A Carrel, Todd R Golub, Stuart L Schreiber, Paul A Clemons, Anne E Carpenter, and Alykhan F Shamji. Multiplex cytological profiling assay to measure diverse cellular states. PLoS One, 8(12):e80999, December 2013.">8</a>]</span> from the Broad Bioimage Benchmark Collection <span id="id3">[<a class="reference internal" href="bibliography.html#id19" title="Vebjorn Ljosa, Katherine L Sokolnicki, and Anne E Carpenter. Annotated high-throughput microscopy image sets for validation. Nat. Methods, 9(7):637, June 2012.">9</a>]</span> that have been treated with a set of organelle dyes collectively called Cell Painting. This assay will be discussed later in the course during Beth’s seminar.</p>
 <p>Unfortunately, since these images are 10-15 years old, if measured offsets and images to help us calibrate the microscope were made at the time, they’re long since lost. But we can still do <em>some</em> background corrections to help us be more confident interpreting <em>some</em> measurements.</p>
 <div class="admonition-question-for-you admonition">
 <p class="admonition-title">Question for you</p>
@@ -834,24 +833,6 @@ Some possible answers<div class="sd-summary-down docutils">
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="intro.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to QI 2024</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="Lab04_ML-based_Segmentation_and_Classification.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Segmentation and Pixel Classification</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
