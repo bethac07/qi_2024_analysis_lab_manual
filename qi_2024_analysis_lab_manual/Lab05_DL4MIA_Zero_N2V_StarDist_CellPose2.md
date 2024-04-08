@@ -374,23 +374,52 @@ Piximi is designed for biologists but can be used on non-biological images as we
 <img src="images/lab05/piximi_open.png" height="180px" />
 - Select MNIST
 <img src="images/lab05/piximi_mnist.png" height="180px" />
-- Scroll through the images - you'll see that most are categorized as a particular digit, but about 60 have been intentionally left un-categorized for testing purposes
+- Scroll through the images - you'll see that most are categorized as a particular digit, but about 60 have been intentionally left un-categorized for testing purposes.
+  - Are there any categorizations you aren't sure about or disagree with?
+- Tell Piximi you want to fit a classifier for these images
+
 <img src="images/lab05/piximi_fit.png" height="180px" />
-<img src="images/lab05/piximi_fit_classifer.png" height="40px" />
+
+- You will now see Piximi's training dialog; you can choose to tune some of the hyperparameters before training (though we've chosen here reasonable defaults that should work well). Otherwise, hit <img src="images/lab05/piximi_fit_classifer.png" height="40px" /> to train.
+- After an initialization step, you will see a performance chart that looks like the below, as well as a loss graph. You can keep hitting `Fit Classifier` to keep adding more epochs of training.
+<img src="images/lab05/piximi_training_performance.png" height="180px" />
+  - Are you overfitting? How can you tell?
 
 #### Evaluate your classifier
+
+Once you're satisified with your training (either because it's great or because you're satisfied that it has plateued), close the training dialog. Hit the `Evaluate Model` button to check your confusion matrix. 
+
+<img src="images/lab05/piximi_evaluate.png" height="90px" />
+
 <img src="images/lab05/piximi_confusion.png" height="180px" />
 
+```{admonition} Questions for you
+What patterns of mistakes do you notice? Are they the kinds of mistakes you would expect?
+```
+
+A confusion matrix helps you figure out patterns of mistakes, but it can only tell you about the performance of your model on data for which you've already provided the answer - it can't tell you about performance in your unlabeled data. It is _critical_ then to always apply your classifier to new, unseen data to see how it performs.
+
+```{important}
+It is quadruple-extra critical when only a small fraction of your data is labeled, which is NOT true here but is often true in biological situations and you may hope will be true in your future work (after all, if you have to hand label almost all of your data, then what's the point of training a model?)
+```
+- Hit the `Predict Model` button to apply the model to the unlabeled data
+
 <img src="images/lab05/piximi_predict.png" height="180px" />
-<img src="images/lab05/piximi_hide_labeled.png" height="40px" />
+
+- Evaluate the performance of the predictions - you may find that hitting one or both of these buttons helps you do that 
+
+<img src="images/lab05/piximi_hide_labeled.png" height="40px" /> 
+<img src="images/lab05/piximi_hide_other.png" height="90px" />
 
 #### Fix (some?) mistakes
-<img src="images/lab05/piximi_hide_other.png" height="90px" />
+
+If and when (when), you find some errors in the predictions, you can fix them by assigning them a new category.
+
 <img src="images/lab05/piximi_recategorize_errors.png" height="180px" />
 
-Depending on why you're using Piximi, you might or might not choose to fix all the wrong images here, or only some
+Depending on why you're using machine learning, you might or might choose to fix all the wrong images at this stage, or only some
 
-- Is your goal to just get the classifications right, and most of them are? 
+- Is your goal to just get the classifications right and then use them for something, and most of them are? 
   - In that case, there's no harm in just fixing the few mistakes and then moving on to other downstream quantification steps (coming soon!). 
   - If this is your goal but there are a lot of mistakes, you might not choose to fix all of them at this stage, but just fix a subset and then try to train again so you can get to a point where the errors are at a small enough level that you CAN do final data cleaning by hand
 
@@ -398,11 +427,17 @@ Depending on why you're using Piximi, you might or might not choose to fix all t
   - In that case, you might want to fix only a subset of the mistakes before retraining, so you can get a sense of if your model performance is improving.
   - If retraining, once you've done your chosen recatgorizations, clear predictions (<img src="images/lab05/piximi_clear_predictions.png" height="40px" />) and then hit fit again.
 
+  ```{important} 
+  If this is indeed your goal, you need to have some test unseen data somewhere else that you are not tuning on here! Once you've run any version of your model, at any stage, on unseen data, that data is now "seen data", and can't be used as a test set anymore. How you plan your data splits (and how much, and which, data you keep locked away as test set(s) is critical to any kind of machine learning research)
+  ```
 
 #### Save things for later
-<img src="images/lab05/piximi_save_model.png" height="180px" />
+
+Reproducible science matters! You can therefore save your Piximi project file for later, as well as save your model for later use. You might find the former handy if you want to add more data later, and/or you just want to confer with someone else (including a paper revieiwer, or future you) about how difficult data points were handled.
+
 <img src="images/lab05/piximi_save_project.png" height="180px" />
 
+<img src="images/lab05/piximi_save_model.png" height="180px" />
 
 ### Train a 3-class classification model on U2OS cells
 
