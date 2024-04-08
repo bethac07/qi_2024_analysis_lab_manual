@@ -361,6 +361,73 @@ more results to look at…
 
 ## **Bonus Exercise: Classifying images in the browser in Piximi**
 
+[Piximi](piximi.app) {cite}`Goodman2021-xo` is a web app currently in development for training and running deep learning models in your web browser. Under most circumstances (with Cellpose as the major exception), all compute happens locally - you load your images into your web browser, but they are NOT sent to the internet, they stay locally on your machine. While this has some disadvantages (namely, that you're limited to the resources on your own machine), this means you get the benefit of web applications (namely, no need to install anything) but don't have to worry about upload times or where in the cloud your data is stored.
+
+Piximi will eventually include 3 major functionalities - Segmentation and Object Detection, Classification, and Measurement. In order to train deep learning models for object detection and segmentation, it also includes an annotation tool. As of April 2024, you can train your own classification models, annotate images, and run pre-trained object detection and/or segmentation models that we provide; we expect measurements to come out by end of Q2 2024 and hope to provide trainable segmentation by the end of 2024. You can keep visiting piximi.app to see what's available!
+
+### Train a 10-class classification model using MNIST
+
+Piximi is designed for biologists but can be used on non-biological images as well. Here, we'll use 1,000 handwritten digits from the classic [MNIST dataset](https://en.wikipedia.org/wiki/MNIST_database) {cite}`726791` , which consists of cropped images of digits from old census data and high school students.
+
+#### Train a classifier
+- Tell Piximi you want to open an example project
+<img src="images/lab05/piximi_open.png" height="180px" />
+- Select MNIST
+<img src="images/lab05/piximi_mnist.png" height="180px" />
+- Scroll through the images - you'll see that most are categorized as a particular digit, but about 60 have been intentionally left un-categorized for testing purposes
+<img src="images/lab05/piximi_fit.png" height="180px" />
+<img src="images/lab05/piximi_fit_classifer.png" height="40px" />
+
+#### Evaluate your classifier
+<img src="images/lab05/piximi_confusion.png" height="180px" />
+
+<img src="images/lab05/piximi_predict.png" height="180px" />
+<img src="images/lab05/piximi_hide_labeled.png" height="40px" />
+
+#### Fix (some?) mistakes
+<img src="images/lab05/piximi_hide_other.png" height="90px" />
+<img src="images/lab05/piximi_recategorize_errors.png" height="180px" />
+
+Depending on why you're using Piximi, you might or might not choose to fix all the wrong images here, or only some
+
+- Is your goal to just get the classifications right, and most of them are? 
+  - In that case, there's no harm in just fixing the few mistakes and then moving on to other downstream quantification steps (coming soon!). 
+  - If this is your goal but there are a lot of mistakes, you might not choose to fix all of them at this stage, but just fix a subset and then try to train again so you can get to a point where the errors are at a small enough level that you CAN do final data cleaning by hand
+
+- Is your goal to create a robust, reusable classifier to use on other sets or in other contexts? 
+  - In that case, you might want to fix only a subset of the mistakes before retraining, so you can get a sense of if your model performance is improving.
+  - If retraining, once you've done your chosen recatgorizations, clear predictions (<img src="images/lab05/piximi_clear_predictions.png" height="40px" />) and then hit fit again.
+
+
+#### Save things for later
+<img src="images/lab05/piximi_save_model.png" height="180px" />
+<img src="images/lab05/piximi_save_project.png" height="180px" />
+
+
+### Train a 3-class classification model on U2OS cells
+
+```{note}
+Sometimes this data set takes a long time to load, sometimes it doesn't! We're not sure why. Feel free to skip it if it's taking a long time and being annoying.
+```
+
+This data set is in some ways more challenging, but also shows a more biologically relevant classification secenario, alongside the ability to do more human-in-the-loop retraining since, unlike MNIST, the majority of the data is NOT already categorized for you.
+
+- Refresh Piximi, and then load the U2OS-cells cytoplasm crops dataset
+
+<img src="images/lab05/piximi_bbbc013.png" height="180px" />
+
+```{admonition} Optional: fix how the images look
+You need not do this, since it can be a bit slow, but it is necessary if you want to assess the performance of the no-GFP class (and will make things much easier if you are red-green colorblind).
+
+Piximi's current defaults are to load two-channel images as red and green, and to rescale each image min-max individually. While we work to fix those bugs, here's how you can manually set the colors to something better (and more uniform)
+- Hit Ctl+A to select all cells
+- Hit "Annotate" to open the annotation viewer
+<img src="images/lab05/piximi_annotate.png" height="180px" />
+- Open the channel adjustment bar on the right (which is the three circles), and change color mapping to better lookup tables and values. Hit "Apply to all images open in the annotator" when you're done (and then wait a couple of minutes)
+<img src="images/lab05/piximi_channels.png" height="180px" />
+```
+- Use human-in-the-loop classification to train a high-performing 3 class classifier. How high can you get the evaluation metrics? How many rounds and how many corrected classifications does it take you to get there?
+
 ## **Bonus Exercise: Use Fiji’s Noise2Void Plugin**
 
 In this exercise you will use a Noise2Void plugin in Fiji. You will have
