@@ -342,8 +342,7 @@ more results to look at…
 2.  Copy the data to any sensible place on your Google Drive.  
     (*Why? Data on Google Drive can be read easily and FAST by Collab…*)
 
-3.  Start the Noise2Void Colab Notebook from Zero (likely you did that
-    already in the last exercise, didn’t you?).
+3.  Unfortunately, there is a bug in the published version of N2V in ZeroCost. [Here](https://colab.research.google.com/drive/1xkV3-ENSXW_xcv3FqysODL_p6EEe7_0P?usp=sharing) you will find a copy of the notebook where we have fixed the bug. Be sure to make your own copy of this notebook in your drive ("File" -> "Save a copy in Drive") before you start
 
 4.  Go through the notebook. The first time around this will take a
     while and be confusing at times. Plow through it, you will soon be
