@@ -7,7 +7,6 @@ parts:
 - caption: 
   maxdepth: 4
   chapters:
-  - file: Lab04_ML-based_Segmentation_and_Classification.md
   - file: Lab05_DL4MIA_Zero_N2V_StarDist_CellPose2.md
   - file: Lab06_3D_Image_Analysis.md
   - file: Lab07_Image_Time_Series_Analysis.md
