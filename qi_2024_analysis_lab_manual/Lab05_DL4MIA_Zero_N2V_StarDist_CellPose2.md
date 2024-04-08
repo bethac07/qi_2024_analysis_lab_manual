@@ -21,9 +21,9 @@ Lab Data: [<u>https://bit.ly/3uEFiKg</u>](https://bit.ly/3uEFiKg)
 ## **Overview**
 
 Neural networks can do useful things. Their deployment within
-user-friendly tools is, unfortunately, lacking behind. Hence, methods we
-would like to apply to our data are not available in Fiji or ilastik{cite}`Berg2019-no`
-quite yet. The latest methods can only be used by the ones “brave”
+user-friendly tools is, unfortunately, lagging behind. Hence, methods we
+would like to apply to our data are not always available in Fiji or ilastik{cite}`Berg2019-no`
+quite yet (or only with a fair amount of command line work and difficulty). The latest methods can only be used by the ones “brave”
 enough to expose themselves to some amount of computer source code...
 
 Today we will all be brave! 😊
@@ -371,7 +371,9 @@ Piximi is designed for biologists but can be used on non-biological images as we
 
 #### Train a classifier
 - Tell Piximi you want to open an example project
+
 <img src="images/lab05/piximi_open.png" height="180px" />
+
 - Select MNIST
 <img src="images/lab05/piximi_mnist.png" height="180px" />
 - Scroll through the images - you'll see that most are categorized as a particular digit, but about 60 have been intentionally left un-categorized for testing purposes.
@@ -387,7 +389,7 @@ Piximi is designed for biologists but can be used on non-biological images as we
 
 #### Evaluate your classifier
 
-Once you're satisified with your training (either because it's great or because you're satisfied that it has plateued), close the training dialog. Hit the `Evaluate Model` button to check your confusion matrix. 
+Once you're satisfied with your training (either because it's great or because you're satisfied that it has plateaued), close the training dialog. Hit the `Evaluate Model` button to check your confusion matrix. 
 
 <img src="images/lab05/piximi_evaluate.png" height="90px" />
 
@@ -409,6 +411,7 @@ It is quadruple-extra critical when only a small fraction of your data is labele
 - Evaluate the performance of the predictions - you may find that hitting one or both of these buttons helps you do that 
 
 <img src="images/lab05/piximi_hide_labeled.png" height="40px" /> 
+
 <img src="images/lab05/piximi_hide_other.png" height="90px" />
 
 #### Fix (some?) mistakes
@@ -417,7 +420,7 @@ If and when (when), you find some errors in the predictions, you can fix them by
 
 <img src="images/lab05/piximi_recategorize_errors.png" height="180px" />
 
-Depending on why you're using machine learning, you might or might choose to fix all the wrong images at this stage, or only some
+Depending on why you're using machine learning, you might choose to fix all the wrong images at this stage, or only some
 
 - Is your goal to just get the classifications right and then use them for something, and most of them are? 
   - In that case, there's no harm in just fixing the few mistakes and then moving on to other downstream quantification steps (coming soon!). 
@@ -425,7 +428,7 @@ Depending on why you're using machine learning, you might or might choose to fix
 
 - Is your goal to create a robust, reusable classifier to use on other sets or in other contexts? 
   - In that case, you might want to fix only a subset of the mistakes before retraining, so you can get a sense of if your model performance is improving.
-  - If retraining, once you've done your chosen recatgorizations, clear predictions (<img src="images/lab05/piximi_clear_predictions.png" height="40px" />) and then hit fit again.
+  - If retraining, once you've done your chosen recategorizations, clear predictions (<img src="images/lab05/piximi_clear_predictions.png" height="40px" />) and then hit fit again.
 
   ```{important} 
   If this is indeed your goal, you need to have some test unseen data somewhere else that you are not tuning on here! Once you've run any version of your model, at any stage, on unseen data, that data is now "seen data", and can't be used as a test set anymore. How you plan your data splits (and how much, and which, data you keep locked away as test set(s) is critical to any kind of machine learning research)
@@ -433,7 +436,7 @@ Depending on why you're using machine learning, you might or might choose to fix
 
 #### Save things for later
 
-Reproducible science matters! You can therefore save your Piximi project file for later, as well as save your model for later use. You might find the former handy if you want to add more data later, and/or you just want to confer with someone else (including a paper revieiwer, or future you) about how difficult data points were handled.
+Reproducible science matters! You can therefore save your Piximi project file for later, as well as save your model for later use. You might find the former handy if you want to add more data later, and/or you just want to confer with someone else (including a paper reviewer, or future you) about how difficult data points were handled.
 
 <img src="images/lab05/piximi_save_project.png" height="180px" />
 
@@ -445,7 +448,7 @@ Reproducible science matters! You can therefore save your Piximi project file fo
 Sometimes this data set takes a long time to load, sometimes it doesn't! We're not sure why. Feel free to skip it if it's taking a long time and being annoying.
 ```
 
-This data set is in some ways more challenging, but also shows a more biologically relevant classification secenario, alongside the ability to do more human-in-the-loop retraining since, unlike MNIST, the majority of the data is NOT already categorized for you.
+This data set is in some ways more challenging, but also shows a more biologically relevant classification scenario, alongside the ability to do more human-in-the-loop retraining since, unlike MNIST, the majority of the data is NOT already categorized for you.
 
 - Refresh Piximi, and then load the U2OS-cells cytoplasm crops dataset
 
