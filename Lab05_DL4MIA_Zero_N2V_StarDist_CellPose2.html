@@ -409,6 +409,17 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-first-steps-with-google-colab-dont-waste-too-much-time-here"><strong>Exercise 3: First steps with Google Colab (don’t waste too much time here…)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-first-steps-with-zerocostdl4mic"><strong>Exercise 4: First steps with ZeroCostDL4Mic</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-image-denoising-with-noise2void-in-zero"><strong>Exercise 5: Image Denoising with Noise2Void (in “Zero”)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-classifying-images-in-the-browser-in-piximi"><strong>Bonus Exercise: Classifying images in the browser in Piximi</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-a-10-class-classification-model-using-mnist">Train a 10-class classification model using MNIST</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#train-a-classifier">Train a classifier</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-your-classifier">Evaluate your classifier</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fix-some-mistakes">Fix (some?) mistakes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#save-things-for-later">Save things for later</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-a-3-class-classification-model-on-u2os-cells">Train a 3-class classification model on U2OS cells</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-use-fijis-noise2void-plugin"><strong>Bonus Exercise: Use Fiji’s Noise2Void Plugin</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-image-segmentation-with-stardist-in-zero"><strong>Bonus Exercise: Image Segmentation with StarDist (in “Zero”)</strong></a></li>
 </ul>
@@ -424,21 +435,17 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="deep-learning-for-microscopy-image-analysis">
 <h1>Deep Learning for Microscopy Image Analysis<a class="headerlink" href="#deep-learning-for-microscopy-image-analysis" title="Link to this heading">#</a></h1>
-<p><em>Lab authors: Damian Dalle Nogare and Florian Jug</em> .</p>
-<p><small>This file last updated 2024-04-04.</small></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Notes</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">spreadsheet</span> <span class="n">on</span> <span class="n">what</span> <span class="n">we</span> <span class="n">might</span> <span class="n">want</span> <span class="n">to</span> <span class="n">update</span><span class="p">:</span>
-
-<span class="n">Think</span> <span class="n">about</span> <span class="n">adding</span> <span class="n">some</span><span class="o">/</span><span class="nb">all</span> <span class="n">of</span> <span class="o">-</span> <span class="n">BioimageIO</span><span class="p">,</span> <span class="n">Piximi</span><span class="p">,</span> <span class="n">Accessing</span> <span class="n">Cellpose</span> <span class="n">via</span> <span class="n">BAND</span>
-</pre></div>
-</div>
+<p><em>Lab authors: Damian Dalle Nogare, Florian Jug, and Beth Cimini</em> .</p>
+<p><small>This file last updated 2024-04-07.</small></p>
 <hr class="docutils" />
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Appreciate how Neural Networks are trained</p></li>
-<li><p>Segmentation with Cellpose</p></li>
+<li><p>Segmentation with Cellpose<span id="id1">[<a class="reference internal" href="bibliography.html#id25">1</a>]</span></p></li>
 <li><p>Learn how to get to and use Google Colab</p></li>
-<li><p>Denoising with Noise2Void in “Zero”</p></li>
+<li><p>Denoising with Noise2Void<span id="id2">[<a class="reference internal" href="bibliography.html#id9" title="Alexander Krull, Tim-Oliver Buchholz, and Florian Jug. Noise2Void - learning denoising from single noisy images. In 2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2124–2132. IEEE, June 2019.">2</a>]</span> in “Zero”</p></li>
+<li><p>Bonus: Try in-browser classification with Piximi</p></li>
 <li><p>Bonus: Use Noise2Void in Fiji</p></li>
 <li><p>Bonus: Segmentation with StarDist in “Zero”</p></li>
 </ul>
@@ -447,9 +454,9 @@ document.write(`
 <section id="overview">
 <h2><strong>Overview</strong><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>Neural networks can do useful things. Their deployment within
-user-friendly tools is, unfortunately, lacking behind. Hence, methods we
-would like to apply to our data are not available in Fiji or ilastik<span id="id1">[<a class="reference internal" href="bibliography.html#id8" title="Stuart Berg, Dominik Kutra, Thorben Kroeger, Christoph N Straehle, Bernhard X Kausler, Carsten Haubold, Martin Schiegg, Janez Ales, Thorsten Beier, Markus Rudy, Kemal Eren, Jaime I Cervantes, Buote Xu, Fynn Beuttenmueller, Adrian Wolny, Chong Zhang, Ullrich Koethe, Fred A Hamprecht, and Anna Kreshuk. Ilastik: interactive machine learning for (bio)image analysis. Nat. Methods, 16(12):1226–1232, December 2019.">1</a>]</span>
-quite yet. The latest methods can only be used by the ones “brave”
+user-friendly tools is, unfortunately, lagging behind. Hence, methods we
+would like to apply to our data are not always available in Fiji or ilastik<span id="id3">[<a class="reference internal" href="bibliography.html#id8" title="Stuart Berg, Dominik Kutra, Thorben Kroeger, Christoph N Straehle, Bernhard X Kausler, Carsten Haubold, Martin Schiegg, Janez Ales, Thorsten Beier, Markus Rudy, Kemal Eren, Jaime I Cervantes, Buote Xu, Fynn Beuttenmueller, Adrian Wolny, Chong Zhang, Ullrich Koethe, Fred A Hamprecht, and Anna Kreshuk. Ilastik: interactive machine learning for (bio)image analysis. Nat. Methods, 16(12):1226–1232, December 2019.">3</a>]</span>
+quite yet (or only with a fair amount of command line work and difficulty). The latest methods can only be used by the ones “brave”
 enough to expose themselves to some amount of computer source code…</p>
 <p>Today we will all be brave! 😊</p>
 <p>I’m very much looking forward to hearing about your successes and
@@ -609,6 +616,28 @@ in cellpose.</p>
 <p>Try using the same parameters and mode to segment this image. Did it improve?</p>
 <p>Try some other restoration modes. Try using some custom filters and see if you can improve the
 segmentation. What might be useful for denoising this image?</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Want to use Cellpose when you get home, but having trouble with the conda installation? You have (at least) a couple of potential options!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As of April of 2024, both of these are still using Cellpose 2, which does have human-in-the-loop retraining but not denoising or image restoration</p>
+</div>
+<ul class="simple">
+<li><p>EMBL has the Bioimage ANalysis Desktop (BAND) program, which allows you to check out virtual machines in the cloud. You simply visit a website, tell them the resources you need, and get a machine with <a class="reference external" href="https://band.embl.de/#/eosc-landingpage">&gt;20 helpful image analysis tools pre-installed</a>.</p>
+<ul>
+<li><p>Upsides: No installation, everything is correctly configured and ready to go, simulataneous access to lots of tools at once, you can ask for machines with GPUs</p></li>
+<li><p>Downsides: They have limited capacity and sometimes machines aren’t available due to EMBL courses. You have to upload your data to their servers, and download your results from them.</p></li>
+</ul>
+</li>
+<li><p>Cellpose can be used with CellProfiler, both in Python if you have both programs <code class="docutils literal notranslate"><span class="pre">pip</span></code> or <code class="docutils literal notranslate"><span class="pre">conda</span></code> installed, but <a class="reference external" href="https://plugins.cellprofiler.org/using_plugins.html?installing-plugins-with-dependencies-using-cellprofiler-from-source#using-docker-to-bypass-installation-requirements">CellProfiler also offers a way to use a pre-built version using Docker</a> <span id="id4">[<a class="reference internal" href="bibliography.html#id24" title="Erin Weisbart, Callum Tromans-Coia, Barbara Diaz-Rohrer, David R Stirling, Fernanda Garcia-Fossa, Rebecca A Senft, Mark C Hiner, Marcelo B de Jesus, Kevin W Eliceiri, and Beth A Cimini. CellProfiler plugins - an easy image analysis platform integration for containers and python tools. J. Microsc., September 2023.">4</a>]</span></p>
+<ul>
+<li><p>Upsides: You can use Cellpose models without ever touching your terminal, and while keeping your data local - you only need to install CellProfiler and Docker <code class="docutils literal notranslate"><span class="pre">.app</span></code> or <code class="docutils literal notranslate"><span class="pre">.exe</span></code> files from their respective websites, download <a class="reference external" href="https://github.com/CellProfiler/CellProfiler-plugins/blob/master/active_plugins/runcellpose.py">the plugin</a>, and then point CellProfiler at the location of the downloaded file.</p></li>
+<li><p>Downsides: this only lets you run pre-trained Cellpose models, not train your own. Running Cellpose in CellProfiler via Docker is also MUCH slower than running it when installed via Python (though it will mostly be compute time, rather than human time, once you’re in analysis mode and running all your images unsupervised). You’re limited to the hardware you have locally.</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 </section>
 <section id="exercise-3-first-steps-with-google-colab-dont-waste-too-much-time-here">
@@ -658,7 +687,7 @@ Google Drive via…<br />
 </section>
 <section id="exercise-4-first-steps-with-zerocostdl4mic">
 <h2><strong>Exercise 4: First steps with ZeroCostDL4Mic</strong><a class="headerlink" href="#exercise-4-first-steps-with-zerocostdl4mic" title="Link to this heading">#</a></h2>
-<p>ZeroCostDL4Mic<span id="id2">[<a class="reference internal" href="bibliography.html#id10" title="Lucas von Chamier, Romain F Laine, Johanna Jukkala, Christoph Spahn, Daniel Krentzel, Elias Nehme, Martina Lerche, Sara Hernández-Pérez, Pieta K Mattila, Eleni Karinou, Séamus Holden, Ahmet Can Solak, Alexander Krull, Tim-Oliver Buchholz, Martin L Jones, Loïc A Royer, Christophe Leterrier, Yoav Shechtman, Florian Jug, Mike Heilemann, Guillaume Jacquemet, and Ricardo Henriques. Democratising deep learning for microscopy with ZeroCostDL4Mic. Nat. Commun., 12(1):2276, April 2021.">2</a>]</span> is a collection of (hopefully) self-explanatory Jupyter
+<p>ZeroCostDL4Mic<span id="id5">[<a class="reference internal" href="bibliography.html#id10" title="Lucas von Chamier, Romain F Laine, Johanna Jukkala, Christoph Spahn, Daniel Krentzel, Elias Nehme, Martina Lerche, Sara Hernández-Pérez, Pieta K Mattila, Eleni Karinou, Séamus Holden, Ahmet Can Solak, Alexander Krull, Tim-Oliver Buchholz, Martin L Jones, Loïc A Royer, Christophe Leterrier, Yoav Shechtman, Florian Jug, Mike Heilemann, Guillaume Jacquemet, and Ricardo Henriques. Democratising deep learning for microscopy with ZeroCostDL4Mic. Nat. Commun., 12(1):2276, April 2021.">5</a>]</span> is a collection of (hopefully) self-explanatory Jupyter
 Notebooks for Google Colab. They are meant to quickly get you started on
 learning how to use deep-learning methods specifically created for
 microscopy image analysis.</p>
@@ -725,6 +754,123 @@ evening… 🙂</p>
 </li>
 </ol>
 </section>
+<section id="bonus-exercise-classifying-images-in-the-browser-in-piximi">
+<h2><strong>Bonus Exercise: Classifying images in the browser in Piximi</strong><a class="headerlink" href="#bonus-exercise-classifying-images-in-the-browser-in-piximi" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="#piximi.app"><span class="xref myst">Piximi</span></a> <span id="id6">[<a class="reference internal" href="bibliography.html#id27" title="Allen Goodman, Alice Lucas, Nodar Gogoberidze, Levin Moser, David Dao, Christoph Friedrich, Lassi Paavolainen, Andréa Papaleo, David Stirling, Frances Hubis, Csaba Molnar, Pearl Ryder, Rex Wang, Jane Hung, Peter Horvath, Beth Cimini, and Anne Carpenter. Piximi - an images to discovery web platform. June 2021.">6</a>]</span> is a web app currently in development for training and running deep learning models in your web browser. Under most circumstances (with Cellpose as the major exception), all compute happens locally - you load your images into your web browser, but they are NOT sent to the internet, they stay locally on your machine. While this has some disadvantages (namely, that you’re limited to the resources on your own machine), this means you get the benefit of web applications (namely, no need to install anything) but don’t have to worry about upload times or where in the cloud your data is stored.</p>
+<p>Piximi will eventually include 3 major functionalities - Segmentation and Object Detection, Classification, and Measurement. In order to train deep learning models for object detection and segmentation, it also includes an annotation tool. As of April 2024, you can train your own classification models, annotate images, and run pre-trained object detection and/or segmentation models that we provide; we expect measurements to come out by end of Q2 2024 and hope to provide trainable segmentation by the end of 2024. You can keep visiting piximi.app to see what’s available!</p>
+<section id="train-a-10-class-classification-model-using-mnist">
+<h3>Train a 10-class classification model using MNIST<a class="headerlink" href="#train-a-10-class-classification-model-using-mnist" title="Link to this heading">#</a></h3>
+<p>Piximi is designed for biologists but can be used on non-biological images as well. Here, we’ll use 1,000 handwritten digits from the classic <a class="reference external" href="https://en.wikipedia.org/wiki/MNIST_database">MNIST dataset</a> <span id="id7">[<a class="reference internal" href="bibliography.html#id28" title="Y. Lecun, L. Bottou, Y. Bengio, and P. Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278-2324, 1998. doi:10.1109/5.726791.">7</a>]</span> , which consists of cropped images of digits from old census data and high school students.</p>
+<section id="train-a-classifier">
+<h4>Train a classifier<a class="headerlink" href="#train-a-classifier" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Tell Piximi you want to open an example project</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/piximi_open.png"><img alt="_images/piximi_open.png" src="_images/piximi_open.png" style="height: 180px;" /></a>
+<ul class="simple">
+<li><p>Select MNIST
+<a class="reference internal" href="_images/piximi_mnist.png"><img alt="_images/piximi_mnist.png" src="_images/piximi_mnist.png" style="height: 180px;" /></a></p></li>
+<li><p>Scroll through the images - you’ll see that most are categorized as a particular digit, but about 60 have been intentionally left un-categorized for testing purposes.</p>
+<ul>
+<li><p>Are there any categorizations you aren’t sure about or disagree with?</p></li>
+</ul>
+</li>
+<li><p>Tell Piximi you want to fit a classifier for these images</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/piximi_fit.png"><img alt="_images/piximi_fit.png" src="_images/piximi_fit.png" style="height: 180px;" /></a>
+<ul class="simple">
+<li><p>You will now see Piximi’s training dialog; you can choose to tune some of the hyperparameters before training (though we’ve chosen here reasonable defaults that should work well). Otherwise, hit <a class="reference internal" href="_images/piximi_fit_classifer.png"><img alt="_images/piximi_fit_classifer.png" src="_images/piximi_fit_classifer.png" style="height: 40px;" /></a> to train.</p></li>
+<li><p>After an initialization step, you will see a performance chart that looks like the below, as well as a loss graph. You can keep hitting <code class="docutils literal notranslate"><span class="pre">Fit</span> <span class="pre">Classifier</span></code> to keep adding more epochs of training.
+<a class="reference internal" href="_images/piximi_training_performance.png"><img alt="_images/piximi_training_performance.png" src="_images/piximi_training_performance.png" style="height: 180px;" /></a></p>
+<ul>
+<li><p>Are you overfitting? How can you tell?</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="evaluate-your-classifier">
+<h4>Evaluate your classifier<a class="headerlink" href="#evaluate-your-classifier" title="Link to this heading">#</a></h4>
+<p>Once you’re satisfied with your training (either because it’s great or because you’re satisfied that it has plateaued), close the training dialog. Hit the <code class="docutils literal notranslate"><span class="pre">Evaluate</span> <span class="pre">Model</span></code> button to check your confusion matrix.</p>
+<a class="reference internal image-reference" href="_images/piximi_evaluate.png"><img alt="_images/piximi_evaluate.png" src="_images/piximi_evaluate.png" style="height: 90px;" /></a>
+<a class="reference internal image-reference" href="_images/piximi_confusion.png"><img alt="_images/piximi_confusion.png" src="_images/piximi_confusion.png" style="height: 180px;" /></a>
+<div class="admonition-questions-for-you admonition">
+<p class="admonition-title">Questions for you</p>
+<p>What patterns of mistakes do you notice? Are they the kinds of mistakes you would expect?</p>
+</div>
+<p>A confusion matrix helps you figure out patterns of mistakes, but it can only tell you about the performance of your model on data for which you’ve already provided the answer - it can’t tell you about performance in your unlabeled data. It is <em>critical</em> then to always apply your classifier to new, unseen data to see how it performs.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>It is quadruple-extra critical when only a small fraction of your data is labeled, which is NOT true here but is often true in biological situations and you may hope will be true in your future work (after all, if you have to hand label almost all of your data, then what’s the point of training a model?)</p>
+</div>
+<ul class="simple">
+<li><p>Hit the <code class="docutils literal notranslate"><span class="pre">Predict</span> <span class="pre">Model</span></code> button to apply the model to the unlabeled data</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/piximi_predict.png"><img alt="_images/piximi_predict.png" src="_images/piximi_predict.png" style="height: 180px;" /></a>
+<ul class="simple">
+<li><p>Evaluate the performance of the predictions - you may find that hitting one or both of these buttons helps you do that</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/piximi_hide_labeled.png"><img alt="_images/piximi_hide_labeled.png" src="_images/piximi_hide_labeled.png" style="height: 40px;" /></a>
+<a class="reference internal image-reference" href="_images/piximi_hide_other.png"><img alt="_images/piximi_hide_other.png" src="_images/piximi_hide_other.png" style="height: 90px;" /></a>
+</section>
+<section id="fix-some-mistakes">
+<h4>Fix (some?) mistakes<a class="headerlink" href="#fix-some-mistakes" title="Link to this heading">#</a></h4>
+<p>If and when (when), you find some errors in the predictions, you can fix them by assigning them a new category.</p>
+<a class="reference internal image-reference" href="_images/piximi_recategorize_errors.png"><img alt="_images/piximi_recategorize_errors.png" src="_images/piximi_recategorize_errors.png" style="height: 180px;" /></a>
+<p>Depending on why you’re using machine learning, you might choose to fix all the wrong images at this stage, or only some</p>
+<ul>
+<li><p>Is your goal to just get the classifications right and then use them for something, and most of them are?</p>
+<ul class="simple">
+<li><p>In that case, there’s no harm in just fixing the few mistakes and then moving on to other downstream quantification steps (coming soon!).</p></li>
+<li><p>If this is your goal but there are a lot of mistakes, you might not choose to fix all of them at this stage, but just fix a subset and then try to train again so you can get to a point where the errors are at a small enough level that you CAN do final data cleaning by hand</p></li>
+</ul>
+</li>
+<li><p>Is your goal to create a robust, reusable classifier to use on other sets or in other contexts?</p>
+<ul class="simple">
+<li><p>In that case, you might want to fix only a subset of the mistakes before retraining, so you can get a sense of if your model performance is improving.</p></li>
+<li><p>If retraining, once you’ve done your chosen recategorizations, clear predictions (<a class="reference internal" href="_images/piximi_clear_predictions.png"><img alt="_images/piximi_clear_predictions.png" src="_images/piximi_clear_predictions.png" style="height: 40px;" /></a>) and then hit fit again.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If this is indeed your goal, you need to have some test unseen data somewhere else that you are not tuning on here! Once you’ve run any version of your model, at any stage, on unseen data, that data is now “seen data”, and can’t be used as a test set anymore. How you plan your data splits (and how much, and which, data you keep locked away as test set(s) is critical to any kind of machine learning research)</p>
+</div>
+</li>
+</ul>
+</section>
+<section id="save-things-for-later">
+<h4>Save things for later<a class="headerlink" href="#save-things-for-later" title="Link to this heading">#</a></h4>
+<p>Reproducible science matters! You can therefore save your Piximi project file for later, as well as save your model for later use. You might find the former handy if you want to add more data later, and/or you just want to confer with someone else (including a paper reviewer, or future you) about how difficult data points were handled.</p>
+<a class="reference internal image-reference" href="_images/piximi_save_project.png"><img alt="_images/piximi_save_project.png" src="_images/piximi_save_project.png" style="height: 180px;" /></a>
+<a class="reference internal image-reference" href="_images/piximi_save_model.png"><img alt="_images/piximi_save_model.png" src="_images/piximi_save_model.png" style="height: 180px;" /></a>
+</section>
+</section>
+<section id="train-a-3-class-classification-model-on-u2os-cells">
+<h3>Train a 3-class classification model on U2OS cells<a class="headerlink" href="#train-a-3-class-classification-model-on-u2os-cells" title="Link to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sometimes this data set takes a long time to load, sometimes it doesn’t! We’re not sure why. Feel free to skip it if it’s taking a long time and being annoying.</p>
+</div>
+<p>This data set is in some ways more challenging, but also shows a more biologically relevant classification scenario, alongside the ability to do more human-in-the-loop retraining since, unlike MNIST, the majority of the data is NOT already categorized for you.</p>
+<ul class="simple">
+<li><p>Refresh Piximi, and then load the U2OS-cells cytoplasm crops dataset</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/piximi_bbbc013.png"><img alt="_images/piximi_bbbc013.png" src="_images/piximi_bbbc013.png" style="height: 180px;" /></a>
+<div class="admonition-optional-fix-how-the-images-look admonition">
+<p class="admonition-title">Optional: fix how the images look</p>
+<p>You need not do this, since it can be a bit slow, but it is necessary if you want to assess the performance of the no-GFP class (and will make things much easier if you are red-green colorblind).</p>
+<p>Piximi’s current defaults are to load two-channel images as red and green, and to rescale each image min-max individually. While we work to fix those bugs, here’s how you can manually set the colors to something better (and more uniform)</p>
+<ul class="simple">
+<li><p>Hit Ctl+A to select all cells</p></li>
+<li><p>Hit “Annotate” to open the annotation viewer
+<a class="reference internal" href="_images/piximi_annotate.png"><img alt="_images/piximi_annotate.png" src="_images/piximi_annotate.png" style="height: 180px;" /></a></p></li>
+<li><p>Open the channel adjustment bar on the right (which is the three circles), and change color mapping to better lookup tables and values. Hit “Apply to all images open in the annotator” when you’re done (and then wait a couple of minutes)
+<a class="reference internal" href="_images/piximi_channels.png"><img alt="_images/piximi_channels.png" src="_images/piximi_channels.png" style="height: 180px;" /></a></p></li>
+</ul>
+</div>
+<ul class="simple">
+<li><p>Use human-in-the-loop classification to train a high-performing 3 class classifier. How high can you get the evaluation metrics? How many rounds and how many corrected classifications does it take you to get there?</p></li>
+</ul>
+</section>
+</section>
 <section id="bonus-exercise-use-fijis-noise2void-plugin">
 <h2><strong>Bonus Exercise: Use Fiji’s Noise2Void Plugin</strong><a class="headerlink" href="#bonus-exercise-use-fijis-noise2void-plugin" title="Link to this heading">#</a></h2>
 <p>In this exercise you will use a Noise2Void plugin in Fiji. You will have
@@ -770,6 +916,10 @@ you find most interesting in the context of your own research.</p>
 </div>
 <p>Later today, when you are done with the exercises, you might want to re-run your favorite notebook with the suggested number of epochs.
 Collab will work while you have fun on your free evening… 🙂</p>
+<div class="admonition-super-excited-about-deep-learning-now-and-want-to-know-where-to-find-the-latest-models admonition">
+<p class="admonition-title">Super excited about deep learning now and want to know where to find the latest models?</p>
+<p>The <a class="reference external" href="https://bioimage.io/">Bioimage Model Zoo</a> <span id="id8">[<a class="reference internal" href="bibliography.html#id26">8</a>]</span> contains a number of deep learning models, applications, and example data sets you can use on your own data or to train your own network.</p>
+</div>
 </section>
 </section>
 
@@ -848,6 +998,17 @@ Collab will work while you have fun on your free evening… 🙂</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-first-steps-with-google-colab-dont-waste-too-much-time-here"><strong>Exercise 3: First steps with Google Colab (don’t waste too much time here…)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-first-steps-with-zerocostdl4mic"><strong>Exercise 4: First steps with ZeroCostDL4Mic</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-image-denoising-with-noise2void-in-zero"><strong>Exercise 5: Image Denoising with Noise2Void (in “Zero”)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-classifying-images-in-the-browser-in-piximi"><strong>Bonus Exercise: Classifying images in the browser in Piximi</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-a-10-class-classification-model-using-mnist">Train a 10-class classification model using MNIST</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#train-a-classifier">Train a classifier</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-your-classifier">Evaluate your classifier</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fix-some-mistakes">Fix (some?) mistakes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#save-things-for-later">Save things for later</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-a-3-class-classification-model-on-u2os-cells">Train a 3-class classification model on U2OS cells</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-use-fijis-noise2void-plugin"><strong>Bonus Exercise: Use Fiji’s Noise2Void Plugin</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise-image-segmentation-with-stardist-in-zero"><strong>Bonus Exercise: Image Segmentation with StarDist (in “Zero”)</strong></a></li>
 </ul>

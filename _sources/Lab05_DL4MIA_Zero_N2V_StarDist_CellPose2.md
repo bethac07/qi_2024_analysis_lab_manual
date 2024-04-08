@@ -1,23 +1,18 @@
 # Deep Learning for Microscopy Image Analysis
 
-*Lab authors: Damian Dalle Nogare and Florian Jug* . 
+*Lab authors: Damian Dalle Nogare, Florian Jug, and Beth Cimini* . 
 
-<small>This file last updated 2024-04-04.</small>
-
-```
-Notes from the spreadsheet on what we might want to update:
-
-Think about adding some/all of - BioimageIO, Piximi, Accessing Cellpose via BAND
-```
+<small>This file last updated 2024-04-07.</small>
 
 ---
 
 ## Learning Objectives
 
 - Appreciate how Neural Networks are trained
-- Segmentation with Cellpose
+- Segmentation with Cellpose{cite}`Stringer2024-gd`
 - Learn how to get to and use Google Colab
-- Denoising with Noise2Void in “Zero”
+- Denoising with Noise2Void{cite}`Krull2019-al` in “Zero”
+- Bonus: Try in-browser classification with Piximi
 - Bonus: Use Noise2Void in Fiji
 - Bonus: Segmentation with StarDist in “Zero”
 
@@ -26,9 +21,9 @@ Lab Data: [<u>https://bit.ly/3uEFiKg</u>](https://bit.ly/3uEFiKg)
 ## **Overview**
 
 Neural networks can do useful things. Their deployment within
-user-friendly tools is, unfortunately, lacking behind. Hence, methods we
-would like to apply to our data are not available in Fiji or ilastik{cite}`Berg2019-no`
-quite yet. The latest methods can only be used by the ones “brave”
+user-friendly tools is, unfortunately, lagging behind. Hence, methods we
+would like to apply to our data are not always available in Fiji or ilastik{cite}`Berg2019-no`
+quite yet (or only with a fair amount of command line work and difficulty). The latest methods can only be used by the ones “brave”
 enough to expose themselves to some amount of computer source code...
 
 Today we will all be brave! 😊
@@ -226,6 +221,22 @@ Try some other restoration modes. Try using some custom filters and see if you c
 segmentation. What might be useful for denoising this image?
 
 
+````{tip}
+Want to use Cellpose when you get home, but having trouble with the conda installation? You have (at least) a couple of potential options!
+
+```{note}
+As of April of 2024, both of these are still using Cellpose 2, which does have human-in-the-loop retraining but not denoising or image restoration
+```
+
+- EMBL has the Bioimage ANalysis Desktop (BAND) program, which allows you to check out virtual machines in the cloud. You simply visit a website, tell them the resources you need, and get a machine with [>20 helpful image analysis tools pre-installed](https://band.embl.de/#/eosc-landingpage). 
+  - Upsides: No installation, everything is correctly configured and ready to go, simulataneous access to lots of tools at once, you can ask for machines with GPUs
+  - Downsides: They have limited capacity and sometimes machines aren't available due to EMBL courses. You have to upload your data to their servers, and download your results from them. 
+- Cellpose can be used with CellProfiler, both in Python if you have both programs `pip` or `conda` installed, but [CellProfiler also offers a way to use a pre-built version using Docker](https://plugins.cellprofiler.org/using_plugins.html?installing-plugins-with-dependencies-using-cellprofiler-from-source#using-docker-to-bypass-installation-requirements) {cite}`Weisbart2023-kc`
+  - Upsides: You can use Cellpose models without ever touching your terminal, and while keeping your data local - you only need to install CellProfiler and Docker `.app` or `.exe` files from their respective websites, download [the plugin](https://github.com/CellProfiler/CellProfiler-plugins/blob/master/active_plugins/runcellpose.py), and then point CellProfiler at the location of the downloaded file. 
+  - Downsides: this only lets you run pre-trained Cellpose models, not train your own. Running Cellpose in CellProfiler via Docker is also MUCH slower than running it when installed via Python (though it will mostly be compute time, rather than human time, once you're in analysis mode and running all your images unsupervised). You're limited to the hardware you have locally.
+
+````
+
 ## **Exercise 3: First steps with Google Colab (don’t waste too much time here…)**
 
 The following steps should get you started in no time:
@@ -348,6 +359,112 @@ more results to look at…
         of epochs. Collab will work while you have fun on your free
         evening… 🙂
 
+## **Bonus Exercise: Classifying images in the browser in Piximi**
+
+[Piximi](piximi.app) {cite}`Goodman2021-xo` is a web app currently in development for training and running deep learning models in your web browser. Under most circumstances (with Cellpose as the major exception), all compute happens locally - you load your images into your web browser, but they are NOT sent to the internet, they stay locally on your machine. While this has some disadvantages (namely, that you're limited to the resources on your own machine), this means you get the benefit of web applications (namely, no need to install anything) but don't have to worry about upload times or where in the cloud your data is stored.
+
+Piximi will eventually include 3 major functionalities - Segmentation and Object Detection, Classification, and Measurement. In order to train deep learning models for object detection and segmentation, it also includes an annotation tool. As of April 2024, you can train your own classification models, annotate images, and run pre-trained object detection and/or segmentation models that we provide; we expect measurements to come out by end of Q2 2024 and hope to provide trainable segmentation by the end of 2024. You can keep visiting piximi.app to see what's available!
+
+### Train a 10-class classification model using MNIST
+
+Piximi is designed for biologists but can be used on non-biological images as well. Here, we'll use 1,000 handwritten digits from the classic [MNIST dataset](https://en.wikipedia.org/wiki/MNIST_database) {cite}`726791` , which consists of cropped images of digits from old census data and high school students.
+
+#### Train a classifier
+- Tell Piximi you want to open an example project
+
+<img src="images/lab05/piximi_open.png" height="180px" />
+
+- Select MNIST
+<img src="images/lab05/piximi_mnist.png" height="180px" />
+- Scroll through the images - you'll see that most are categorized as a particular digit, but about 60 have been intentionally left un-categorized for testing purposes.
+  - Are there any categorizations you aren't sure about or disagree with?
+- Tell Piximi you want to fit a classifier for these images
+
+<img src="images/lab05/piximi_fit.png" height="180px" />
+
+- You will now see Piximi's training dialog; you can choose to tune some of the hyperparameters before training (though we've chosen here reasonable defaults that should work well). Otherwise, hit <img src="images/lab05/piximi_fit_classifer.png" height="40px" /> to train.
+- After an initialization step, you will see a performance chart that looks like the below, as well as a loss graph. You can keep hitting `Fit Classifier` to keep adding more epochs of training.
+<img src="images/lab05/piximi_training_performance.png" height="180px" />
+  - Are you overfitting? How can you tell?
+
+#### Evaluate your classifier
+
+Once you're satisfied with your training (either because it's great or because you're satisfied that it has plateaued), close the training dialog. Hit the `Evaluate Model` button to check your confusion matrix. 
+
+<img src="images/lab05/piximi_evaluate.png" height="90px" />
+
+<img src="images/lab05/piximi_confusion.png" height="180px" />
+
+```{admonition} Questions for you
+What patterns of mistakes do you notice? Are they the kinds of mistakes you would expect?
+```
+
+A confusion matrix helps you figure out patterns of mistakes, but it can only tell you about the performance of your model on data for which you've already provided the answer - it can't tell you about performance in your unlabeled data. It is _critical_ then to always apply your classifier to new, unseen data to see how it performs.
+
+```{important}
+It is quadruple-extra critical when only a small fraction of your data is labeled, which is NOT true here but is often true in biological situations and you may hope will be true in your future work (after all, if you have to hand label almost all of your data, then what's the point of training a model?)
+```
+- Hit the `Predict Model` button to apply the model to the unlabeled data
+
+<img src="images/lab05/piximi_predict.png" height="180px" />
+
+- Evaluate the performance of the predictions - you may find that hitting one or both of these buttons helps you do that 
+
+<img src="images/lab05/piximi_hide_labeled.png" height="40px" /> 
+
+<img src="images/lab05/piximi_hide_other.png" height="90px" />
+
+#### Fix (some?) mistakes
+
+If and when (when), you find some errors in the predictions, you can fix them by assigning them a new category.
+
+<img src="images/lab05/piximi_recategorize_errors.png" height="180px" />
+
+Depending on why you're using machine learning, you might choose to fix all the wrong images at this stage, or only some
+
+- Is your goal to just get the classifications right and then use them for something, and most of them are? 
+  - In that case, there's no harm in just fixing the few mistakes and then moving on to other downstream quantification steps (coming soon!). 
+  - If this is your goal but there are a lot of mistakes, you might not choose to fix all of them at this stage, but just fix a subset and then try to train again so you can get to a point where the errors are at a small enough level that you CAN do final data cleaning by hand
+
+- Is your goal to create a robust, reusable classifier to use on other sets or in other contexts? 
+  - In that case, you might want to fix only a subset of the mistakes before retraining, so you can get a sense of if your model performance is improving.
+  - If retraining, once you've done your chosen recategorizations, clear predictions (<img src="images/lab05/piximi_clear_predictions.png" height="40px" />) and then hit fit again.
+
+  ```{important} 
+  If this is indeed your goal, you need to have some test unseen data somewhere else that you are not tuning on here! Once you've run any version of your model, at any stage, on unseen data, that data is now "seen data", and can't be used as a test set anymore. How you plan your data splits (and how much, and which, data you keep locked away as test set(s) is critical to any kind of machine learning research)
+  ```
+
+#### Save things for later
+
+Reproducible science matters! You can therefore save your Piximi project file for later, as well as save your model for later use. You might find the former handy if you want to add more data later, and/or you just want to confer with someone else (including a paper reviewer, or future you) about how difficult data points were handled.
+
+<img src="images/lab05/piximi_save_project.png" height="180px" />
+
+<img src="images/lab05/piximi_save_model.png" height="180px" />
+
+### Train a 3-class classification model on U2OS cells
+
+```{note}
+Sometimes this data set takes a long time to load, sometimes it doesn't! We're not sure why. Feel free to skip it if it's taking a long time and being annoying.
+```
+
+This data set is in some ways more challenging, but also shows a more biologically relevant classification scenario, alongside the ability to do more human-in-the-loop retraining since, unlike MNIST, the majority of the data is NOT already categorized for you.
+
+- Refresh Piximi, and then load the U2OS-cells cytoplasm crops dataset
+
+<img src="images/lab05/piximi_bbbc013.png" height="180px" />
+
+```{admonition} Optional: fix how the images look
+You need not do this, since it can be a bit slow, but it is necessary if you want to assess the performance of the no-GFP class (and will make things much easier if you are red-green colorblind).
+
+Piximi's current defaults are to load two-channel images as red and green, and to rescale each image min-max individually. While we work to fix those bugs, here's how you can manually set the colors to something better (and more uniform)
+- Hit Ctl+A to select all cells
+- Hit "Annotate" to open the annotation viewer
+<img src="images/lab05/piximi_annotate.png" height="180px" />
+- Open the channel adjustment bar on the right (which is the three circles), and change color mapping to better lookup tables and values. Hit "Apply to all images open in the annotator" when you're done (and then wait a couple of minutes)
+<img src="images/lab05/piximi_channels.png" height="180px" />
+```
+- Use human-in-the-loop classification to train a high-performing 3 class classifier. How high can you get the evaluation metrics? How many rounds and how many corrected classifications does it take you to get there?
 
 ## **Bonus Exercise: Use Fiji’s Noise2Void Plugin**
 
@@ -386,8 +503,6 @@ to install it first.
     Be sure to set the axes correctly. On the same stack, this will require you to add a third dimension which contains multiple time points. What should we use as the third axis and why is it 'B' when you use the same stack you used for training?
     ```
     
-
-
 ## **Bonus Exercise: Image Segmentation with StarDist (in “Zero”)**
 
 Now that you have experienced how to use ZeroCostDL4Mic Collab
@@ -408,3 +523,6 @@ Reduce the number of epochs to some small number to save yourself long waiting t
 Later today, when you are done with the exercises, you might want to re-run your favorite notebook with the suggested number of epochs.
 Collab will work while you have fun on your free evening… 🙂
 
+```{admonition} Super excited about deep learning now and want to know where to find the latest models?
+The [Bioimage Model Zoo](https://bioimage.io/) {cite}`Ouyang2022-fm` contains a number of deep learning models, applications, and example data sets you can use on your own data or to train your own network. 
+```
