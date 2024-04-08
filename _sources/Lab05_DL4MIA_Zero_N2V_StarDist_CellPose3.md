@@ -431,7 +431,7 @@ Depending on why you're using machine learning, you might choose to fix all the 
   - If retraining, once you've done your chosen recategorizations, clear predictions (<img src="images/lab05/piximi_clear_predictions.png" height="40px" />) and then hit fit again.
 
   ```{important} 
-  If this is indeed your goal, you need to have some test unseen data somewhere else that you are not tuning on here! Once you've run any version of your model, at any stage, on unseen data, that data is now "seen data", and can't be used as a test set anymore. How you plan your data splits (and how much, and which, data you keep locked away as test set(s) is critical to any kind of machine learning research)
+  If this is indeed your goal, you need to have some test unseen data somewhere else that you are not tuning on here! Once you've run any version of your model, at any stage, on unseen data, that data is now "seen data", and can't be used as a test set anymore. How you plan your data splits (and how much, and which, data you keep locked away as test set(s)) is critical to any kind of machine learning research
   ```
 
 #### Save things for later
