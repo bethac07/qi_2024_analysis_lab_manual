@@ -2,13 +2,9 @@
 
 *Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug* . 
 
-<small>This file last updated 2024-04-04.</small>
+<small>This file last updated 2024-04-10.</small>
 
-```
-Notes from the spreadsheet on what we might want to update:
-
-Maybe add some BTrack stuff - (Alan says there's a good notebook), and/or UlTrac and/or TracX
-```
+<!-- Maybe add some UlTrac and/or TracX -->
 
 ---
 
