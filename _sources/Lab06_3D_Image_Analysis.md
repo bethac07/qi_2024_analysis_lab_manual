@@ -18,6 +18,7 @@ Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs
 ---
 
 ## **Visualizing 3D data in napari**
+
 - If not already done (on lab computers we have prepared it all), please 
   install napari by following [these instructions](https://napari.org/stable/tutorials/fundamentals/installation.html).
 
@@ -26,13 +27,20 @@ Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs
   - Type `conda activate cellpose` to activate a conda environment we have prepared for you.
   - Type `napari` and hit enter!
 
-- In napari, load the file `Drosophila_zstack-20x-medium.tif`. This is
-  a 3-channel, 3D volume.
+- Out of the box, napari doesn't like to open images in usefuls ways.
+  But behold, there is a solution.
+  You can install a plugin that allows you to open many file-types the right way. 
+  (Feel free to go on without installing this plugin and you will see what we are taling about).
+  To install the plugin go to `Plugins > Install/Unistall Plugins`, then filter for 
+  `aicsimageio`. Then click on "install" and restart napari.
+
+- In napari, load the file `Drosophila_zstack-20x-medium.tif`, a 3-channel, 3D volume. 
+  When it asks you which image loader to use, select the one we just installed.
 
 - You can now switch to the 3D viewer by clicking on the 2D/3D toggle button (second from the left).
   <img src="images/lab06/napari-viewer-buttons.png" style="width:0.7in" />
 
-- Play around a bit, rotage the volume, change a few viewing options... enjoy!
+- Play around a bit, rotate the volume, change a few viewing options... enjoy!
   <img src="images/lab06/napari-viewer-with-arrows.png" />
 
 ## **Visualizing 3D data in Fiji**
@@ -62,8 +70,9 @@ Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs
   `Plugins > BigDataViewer > open current image`. What might be the pros
   and cons of viewing images like this compared to a 3D view like in napari?
 
-- Do you see anything suspicious about the intensity values in this
-  image? If so, can you think of some possible explanations?
+  - Do you see anything suspicious about the intensity values in this
+    image when you rotate it in BDV? 
+    If so, can you think of some possible explanations for this?
 
 
 ## **3D Object Segmentation, Shape and Intensity Measurements**
@@ -121,13 +130,27 @@ Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs
   Fiji. Now go to `Process > Image Calculator`. And multiply the mask by
   the image with point sources. Save the result as "marker".
 
+  ```{hint}
+  [MorphoLibJ](https://imagej.net/plugins/morpholibj) might not be installed 
+  in your Fiji.
+  You can, and will have to, install it by activating the `IJPB-plugins` plugin site.
+  ```
+
 - **Watershed**. Now close all secondary windows and load the "surface",
   "mask", and "marker" images. Go to `Plugins > MorphoLibJ > Segmentation > Marker-Controlled Watershed`. 
   Set Input, Marker, and Mask appropriately. Check all checkboxes. 
   Click Ok.
 
-- Can you overlay the original image and watershed segmentation to
-  visualize them simultaneously in 3D?
+  - *Bonus:* Can you overlay the original image and watershed segmentation to
+    visualize them simultaneously in 3D?
+
+  ```{admonition} question
+  :class: hint
+  You had to make some decisions on parameters and if anything is off, things might
+  not turn out very convincing. How well did this work for you? 
+  Below a screenshot of one result we got... is your result comparable?
+  ```
+  <img src="images/lab06/seg_results_by_a_pro_aka_Damian.png" />
 
 - **Shape Measurements**. Select the watershed image. Go to 
   `Plugins > MorphoLibJ > Analyse > Analyze Regions 3D`. Select desired 
@@ -268,8 +291,17 @@ available [<u>here</u>](https://imagej.net/plugins/labkit/).
 
   ```{hint}
   Are there any preporcessing steps that could help to better 
-  segment this data? Try some. Maybe in Fiji.
+  segment this data? Try some. Maybe in Fiji Maybe things we did also 
+  in earlier exercises...
   ```
+  <!-- note to future us: a bit of guassian smoothing on the raw data makes CellPose perform much better. -->
+
+  ```{warning}
+  Check if the results on all focal planes works equally well.
+  In case you observe that deeper nuclei are not or less well segmented, 
+  what could the reason be and how could you fix it?
+  ```
+  <!-- note to future us: deeper focal planes are much dimmer... we can use bleach correction in Fiji to make that better... -->
 
 
 ### Stardist 3D
@@ -283,9 +315,3 @@ available [<u>here</u>](https://imagej.net/plugins/labkit/).
 - Think of something you want to segment/detect and measure in the 3D
   data you’ve acquired in the lab and go for it! Come up with a plan,
   and if you run into trouble just ask us!
-
-- Make a cool visualization to share with the class! In ClearVolume you
-  can click the “start stop recording button” to record e.g. a 3D
-  rotation and zoom of your data. Then, load the folder full of images
-  it saves back into Fiji as a stack, and go to file-\>save as-\>.avi to
-  save them as a .avi movie file.

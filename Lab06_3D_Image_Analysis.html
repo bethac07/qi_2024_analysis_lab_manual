@@ -454,11 +454,17 @@ install napari by following <a class="reference external" href="https://napari.o
 <li><p>Type <code class="docutils literal notranslate"><span class="pre">napari</span></code> and hit enter!</p></li>
 </ul>
 </li>
-<li><p>In napari, load the file <code class="docutils literal notranslate"><span class="pre">Drosophila_zstack-20x-medium.tif</span></code>. This is
-a 3-channel, 3D volume.</p></li>
+<li><p>Out of the box, napari doesn’t like to open images in usefuls ways.
+But behold, there is a solution.
+You can install a plugin that allows you to open many file-types the right way.
+(Feel free to go on without installing this plugin and you will see what we are taling about).
+To install the plugin go to <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Install/Unistall</span> <span class="pre">Plugins</span></code>, then filter for
+<code class="docutils literal notranslate"><span class="pre">aicsimageio</span></code>. Then click on “install” and restart napari.</p></li>
+<li><p>In napari, load the file <code class="docutils literal notranslate"><span class="pre">Drosophila_zstack-20x-medium.tif</span></code>, a 3-channel, 3D volume.
+When it asks you which image loader to use, select the one we just installed.</p></li>
 <li><p>You can now switch to the 3D viewer by clicking on the 2D/3D toggle button (second from the left).
 <img alt="_images/napari-viewer-buttons.png" src="_images/napari-viewer-buttons.png" /></p></li>
-<li><p>Play around a bit, rotage the volume, change a few viewing options… enjoy!
+<li><p>Play around a bit, rotate the volume, change a few viewing options… enjoy!
 <img alt="_images/napari-viewer-with-arrows.png" src="_images/napari-viewer-with-arrows.png" /></p></li>
 </ul>
 </section>
@@ -486,14 +492,18 @@ that be?</p></li>
 <li><p><strong>BigDataViewer.</strong> BDV is a “re-slicing” viewer that is included with
 Fiji and you can view your stack in it by going to
 <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">BigDataViewer</span> <span class="pre">&gt;</span> <span class="pre">open</span> <span class="pre">current</span> <span class="pre">image</span></code>. What might be the pros
-and cons of viewing images like this compared to a 3D view like in napari?</p></li>
+and cons of viewing images like this compared to a 3D view like in napari?</p>
+<ul>
 <li><p>Do you see anything suspicious about the intensity values in this
-image? If so, can you think of some possible explanations?</p></li>
+image when you rotate it in BDV?
+If so, can you think of some possible explanations for this?</p></li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="d-object-segmentation-shape-and-intensity-measurements">
 <h2><strong>3D Object Segmentation, Shape and Intensity Measurements</strong><a class="headerlink" href="#d-object-segmentation-shape-and-intensity-measurements" title="Link to this heading">#</a></h2>
-<ul class="simple">
+<ul>
 <li><p>Close all secondary Fiji windows and reload
 <code class="docutils literal notranslate"><span class="pre">Drosophila_zstack-20x-medium.tif</span></code>.</p></li>
 <li><p>Split the three channels by going to <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Color</span> <span class="pre">&gt;</span> <span class="pre">Split</span> <span class="pre">Channels</span></code>.
@@ -539,13 +549,30 @@ Select Regional Minima with Connectivity 26 and click Ok. What do you
 think? Too many point sources in the background? We can filter them
 using our previously computed mask. Load “mask” by dragging it into
 Fiji. Now go to <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Image</span> <span class="pre">Calculator</span></code>. And multiply the mask by
-the image with point sources. Save the result as “marker”.</p></li>
+the image with point sources. Save the result as “marker”.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p><a class="reference external" href="https://imagej.net/plugins/morpholibj">MorphoLibJ</a> might not be installed
+in your Fiji.
+You can, and will have to, install it by activating the <code class="docutils literal notranslate"><span class="pre">IJPB-plugins</span></code> plugin site.</p>
+</div>
+</li>
 <li><p><strong>Watershed</strong>. Now close all secondary windows and load the “surface”,
 “mask”, and “marker” images. Go to <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">MorphoLibJ</span> <span class="pre">&gt;</span> <span class="pre">Segmentation</span> <span class="pre">&gt;</span> <span class="pre">Marker-Controlled</span> <span class="pre">Watershed</span></code>.
 Set Input, Marker, and Mask appropriately. Check all checkboxes.
-Click Ok.</p></li>
-<li><p>Can you overlay the original image and watershed segmentation to
+Click Ok.</p>
+<ul class="simple">
+<li><p><em>Bonus:</em> Can you overlay the original image and watershed segmentation to
 visualize them simultaneously in 3D?</p></li>
+</ul>
+<div class="hint admonition">
+<p class="admonition-title">question</p>
+<p>You had to make some decisions on parameters and if anything is off, things might
+not turn out very convincing. How well did this work for you?
+Below a screenshot of one result we got… is your result comparable?</p>
+</div>
+<img alt="_images/seg_results_by_a_pro_aka_Damian.png" src="_images/seg_results_by_a_pro_aka_Damian.png" />
+</li>
 <li><p><strong>Shape Measurements</strong>. Select the watershed image. Go to
 <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">MorphoLibJ</span> <span class="pre">&gt;</span> <span class="pre">Analyse</span> <span class="pre">&gt;</span> <span class="pre">Analyze</span> <span class="pre">Regions</span> <span class="pre">3D</span></code>. Select desired
 shape measurements and click Ok.</p></li>
@@ -683,8 +710,17 @@ Let’s try!</p></li>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Are there any preporcessing steps that could help to better
-segment this data? Try some. Maybe in Fiji.</p>
+segment this data? Try some. Maybe in Fiji Maybe things we did also
+in earlier exercises…</p>
 </div>
+<!-- note to future us: a bit of guassian smoothing on the raw data makes CellPose perform much better. -->
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Check if the results on all focal planes works equally well.
+In case you observe that deeper nuclei are not or less well segmented,
+what could the reason be and how could you fix it?</p>
+</div>
+<!-- note to future us: deeper focal planes are much dimmer... we can use bleach correction in Fiji to make that better... -->
 </li>
 </ul>
 </section>
@@ -702,11 +738,6 @@ segment this data? Try some. Maybe in Fiji.</p>
 <li><p>Think of something you want to segment/detect and measure in the 3D
 data you’ve acquired in the lab and go for it! Come up with a plan,
 and if you run into trouble just ask us!</p></li>
-<li><p>Make a cool visualization to share with the class! In ClearVolume you
-can click the “start stop recording button” to record e.g. a 3D
-rotation and zoom of your data. Then, load the folder full of images
-it saves back into Fiji as a stack, and go to file-&gt;save as-&gt;.avi to
-save them as a .avi movie file.</p></li>
 </ul>
 </section>
 </section>
