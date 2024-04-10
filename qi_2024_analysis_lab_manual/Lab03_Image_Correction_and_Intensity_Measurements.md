@@ -1,12 +1,8 @@
 # Image Correction and Intensity Measurements
 
-<small>This file last updated 2024-04-04.</small>
+*Lab authors: Hunter Elliott, Marcelo Cicconet, & Beth Cimini* . 
 
-```
-Notes from the spreadsheet on what we might want to update:
-
-Possibly add: CellProfiler, BigStitcher
-```
+<small>This file last updated 2024-04-06.</small>
 
 ---
 
@@ -16,7 +12,8 @@ Possibly add: CellProfiler, BigStitcher
 - Apply corrections to image data
 - Measure intensities with and without corrections
 
-Lab Data: [<u>https://bit.ly/qi2023labs</u>](https://bit.ly/qi2023labs) 
+Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs) 
+
 
 ---
 
@@ -304,7 +301,7 @@ These images have already had offset, background and flat-field corrections appl
         completely due to bleedthrough / crosstalk. There may be some
         residual intensity - can you think of why this might be?
 
-## **\[Bonus\] ImageJ Macros**
+## **Bonus Exercises - ImageJ Macros**
 
 - Pick the most painful or annoying analysis task from the labs so far,
   or a new one you want to try. Go to Plugins \> Macros \> Record
@@ -321,3 +318,76 @@ These images have already had offset, background and flat-field corrections appl
 
 - Save your macro for future use. You can re-open it by simply dragging
   it onto the Fiji toolbar.
+
+## **Bonus Exercises - CellProfiler Background Subtraction and Flatfield Correction (computationally rescuing old data)**
+
+```{note}
+This exercise contains several "do this and then wait for 5-10 minutes" steps, so you may feel free to do other bonus exercises (like working on macro writing, or a bonus you didn't yet attempt from previous labs) while you wait.
+```
+
+As you may have intuited after using it, CellProfiler was originally designed for high-content, high-throughput screens (though it certainly can work on single images). Proper image correction is harder and in practice sometimes somewhat different in this context, but still important! {cite}`Singh2014-yh`
+
+We've provided you some images {cite}`Gustafsdottir2013-ng` from the Broad Bioimage Benchmark Collection {cite}`Ljosa2012-bf` that have been treated with a set of organelle dyes collectively called Cell Painting. This assay will be discussed later in the course during Beth's seminar. 
+
+Unfortunately, since these images are 10-15 years old, if measured offsets and images to help us calibrate the microscope were made at the time, they're long since lost. But we can still do _some_ background corrections to help us be more confident interpreting _some_ measurements. 
+
+````{admonition} Question for you
+What do you think is an example of a measurement that we can be pretty confident in our ability to measure, even without these corrections? What do you think is an example of a measurement we should be more cautious in interpreting?
+
+```{dropdown} Some possible answers
+There are a lot of potentially correct answers here, but cell area should probably be reasonably safe (though there might be tiny differences in exactly where your threshold boundary is drawn). It probably _isn't_ a good idea to deeply interpret small changes in correlation values between channels (it rarely is anyway, but especially here!)
+```
+````
+
+CellProfiler has no ability to "loop" over the same set of images multiple times (to first create a flatfield correction, and then a local background image, and then analysis), so we will need to run 3 separate pipelines, one for each step.
+
+### Pipeline 1 - Create a flatfield correction image for each channel (wait time of about 5-10 minutes during run)
+
+Since we don't have flatfield images, we have to calculate our flatfield correction from the actual data itself. We do this by averaging all the images together - under certain conditions (see below), this will allow us to approximate the same kind of flatfield correction we'd more typically take at the microscope before collecting data.
+
+```{important}
+This kind of averaging-based FFC correction is only appropriate when **ALL** of the following conditions are met; if not, do not attempt!
+ - You have a large number of images in each channel (hundreds or thousands)
+ - Your intensity is reasonably similar across most fields of view (this means this workflow is prone to problems when, ie, only one in ten cells is bright and the rest are dim)
+ - Objects are randomly placed throughout your image (this means this is not appropriate when doing microscopy workflows that start with a low mag scan for objects of interest and then goes back and images each at high mag)
+ - Objects are common enough, and your number of images is large enough, such that across all fields of view, each pixel is inside a bright object at least several times
+```
+
+- Drag and drop the `BBBC022_20585_AE` folder of images into the Images module.
+- Drag and drop pipeline 1 (`01_FFC.cppipe`) into the pipeline panel
+- Set where you want the output FFC images to be saved by clicking the `OutputSettings` button  <img src="images/lab03/OutputSettings.png" height="30px" />
+- Hit `Analyze Images` <img src="images/lab03/AnalyzeImages.png" height="30px" /> to have CellProfiler create FFC images for each of the 5 channels on 240 images of each.
+- Optional - explore the pipeline while it runs.
+  - It's fine to do it in the same copy that's running, but you can open a second copy if you're worried. 
+  - You can see here that we're subtracting an "offset", but since in this case we don't know what it is, we just set it to zero. But this is where you could put a measured offset if adapting this pipeline for your own use in the future. Remember to scale it 0-1 based on your bit depth!
+
+```{note}
+CellProfiler saves FFC images as numpy array (`.npy`) files, which will not play nicely with ImageJ. But you can inspect what they look like in the next step.
+```
+
+### Pipeline 2 - Create a background subtraction image for each channel (wait time after of about 5-10 minutes during run)
+
+Next, we will create a background subtraction image, again based on averaging all images in the set. This will help us approximate (though not truly _measure_) the (offset + background) level in this image. As above, this approach is only appropriate because we have many images, in which our objects are randomly distributed.
+
+```{admonition} Question for you
+What kinds of things will this kind of background subtraction help correct for? What kinds of things will it not help correct for?
+```
+
+- Drag in the `02_BackSub.cppipe` pipeline file to the pipeline panel. It's fine to do this with a pipeline already in there.
+- Return to the Images module, and drag in your newly calculated `.npy` flatfield images. If you don't have the raw images loaded in still, drag them in as well.
+  - Optional - double click on one or more of the `.npy` files to open them up in CellProfiler's image viewer. What do you notice? (You can also do this after you hit analyze)
+- Hit `Analyze Images` <img src="images/lab03/AnalyzeImages.png" height="30px" /> to have CellProfiler create FFC images for each of the 5 channels on 240 images of each.
+- Optional - once the pipeline is done, load the tiff images produced into ImageJ/Fiji. What do you notice? What are their histograms? What happens if you use Fiji's "Set" function to set all images to have a histogram of ie 100-300?
+
+### Pipeline 3 - Apply your corrections and then perform some segmentations and measurements
+
+- Optional-optional - load your new round of correction images into CellProfiler (along with the first round and the raw images), load the `03_analysis_time.cppipe` pipeline, and start analyzing! 
+
+- What do you notice about the segmentation if you switch back and forth between the corrected images (`Hoechst` for nuclei, and `Ph_golgi` for cells, and the uncorrected images `OrigHoechst` and `Orig_Ph_golgi`)?
+  - Especially, do you notice anything in the top right of the image?
+
+You can also assess how the correction affects smaller objects such as the mitochondria and nucleoli by changing whether corrected or uncorrected images are used on these.
+
+```{tip}
+Want to learn more about segmenting these images? Visit tutorials.cellprofiler.org and check out the Beginner Segmentation and Advanced Segmentation modules, both of which use this image set!
+```

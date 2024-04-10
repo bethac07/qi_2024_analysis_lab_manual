@@ -2,13 +2,7 @@
 
 *Lab authors: Damian Dalle Nogare and Florian Jug* . 
 
-<small>This file last updated 2024-04-04.</small>
-
-```
-Notes from the spreadsheet on what we might want to update:
-
-Would be nice to add CellProfiler {Beth's current notes - I don't see how really? Other than with plugins? Will need to install Docker for that if we do it, should just be a bonus exercise}
-```
+<small>This file last updated 2024-04-07.</small>
 
 ---
 
@@ -129,18 +123,32 @@ Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs
   different image time series? If not, what might improve its
   performance on new data?
 
-##  **\[Bonus\] Play with Labkit (pixel classification in Fiji)**
+---
+
+```{tip}
+Did you know that there are ilastik image reading and model running plugins for both [Fiji](https://www.ilastik.org/documentation/fiji_export/plugin) and [CellProfiler](https://plugins.cellprofiler.org/supported_plugins.html)? They can be helpful for complex workflows.
+
+Once you've trained an ilastik classifier, you can also export the images in ilastik's  [batch processor](https://www.ilastik.org/documentation/basics/batch) for your records and/or to interface with downstream programs. See [this tutorial](https://tutorials.cellprofiler.org/#pixel-based-classification) for an example of an ilastik-to-CellProfiler workflow.
+```
+
+---
+
+##  **Bonus Exercises - Play with Labkit (pixel classification in Fiji)**
 
 - You find Labkit on an update site called “Labkit”. Ask us if you have
-  trouble installing it.
+  trouble installing it. Try it with the same training data and see how it performs!
 
-## **\[Bonus\] Challenging Segmentations**
+---
+
+## **Bonus Exercises - Challenging Segmentations**
 
 - Pick the hardest image you’ve seen in the course and try to segment it
   using the ilastik RF pixel classifier. Can you crack it? Can you
   understand why or why not?
 
-## **\[Bonus\] Breaking it**
+---
+
+## **Bonus Exercises - Breaking it**
 
 - Can you find an image segmentation or object classification problem
   that you *can’t* solve with ilastik? If you don’t have time to
