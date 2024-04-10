@@ -398,17 +398,23 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization"><strong>Visualization</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-3d-data-in-napari"><strong>Visualizing 3D data in napari</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-3d-data-in-fiji"><strong>Visualizing 3D data in Fiji</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-object-segmentation-shape-and-intensity-measurements"><strong>3D Object Segmentation, Shape and Intensity Measurements</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-crop"><strong>3D Crop</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registration-for-3d-volume-reconstruction"><strong>Registration for 3D Volume Reconstruction</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-pixel-classifier-choose-your-own-adventure"><strong>3D Pixel Classifier Choose-your-own-adventure</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labkit">Labkit</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ilastik">ilastik</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-aftermath">The Aftermath</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-happy-with-these-results">Are we happy with these results?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus"><strong>Bonus</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-instance-segmentation">3D instance segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">CellPose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist-3d">Stardist 3D</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise"><strong>Bonus Exercise</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -423,118 +429,129 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="d-image-analysis">
 <h1>3D Image Analysis<a class="headerlink" href="#d-image-analysis" title="Link to this heading">#</a></h1>
 <p><em>Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug</em> .</p>
-<p><small>This file last updated 2024-04-04.</small></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Notes</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">spreadsheet</span> <span class="n">on</span> <span class="n">what</span> <span class="n">we</span> <span class="n">might</span> <span class="n">want</span> <span class="n">to</span> <span class="n">update</span><span class="p">:</span>
-
-<span class="n">Add</span> <span class="k">for</span> <span class="n">watershed</span><span class="p">:</span> <span class="n">Napari</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">notebook</span><span class="p">,</span> <span class="n">CellProfiler</span> 
-<span class="n">For</span> <span class="mi">3</span><span class="n">D</span> <span class="n">pixel</span> <span class="n">classification</span><span class="p">,</span> <span class="n">considering</span> <span class="n">adding</span> <span class="n">napari</span> <span class="n">to</span> <span class="n">ilastik</span> <span class="ow">and</span> <span class="n">Labkit</span>
-</pre></div>
-</div>
+<p><small>This file last updated 2024-04-10.</small></p>
 <hr class="docutils" />
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Visualizing 3D data</p></li>
+<li><p>Visualizing 3D data in Fiji and napari</p></li>
 <li><p>Basic segmentation on 3D images</p></li>
 <li><p>Image registration for 3D reconstruction</p></li>
-<li><p>Machine learning segmentation in 3D</p></li>
+<li><p>Some ways to segment in 3D</p></li>
 </ul>
-<p>Lab Data: <a class="reference external" href="https://bit.ly/qi2023labs"><u>https://bit.ly/qi2023labs</u></a></p>
+<p>Lab Data: <a class="reference external" href="https://tinyurl.com/qi2024labs"><u>https://tinyurl.com/qi2024labs</u></a></p>
 </section>
 <hr class="docutils" />
-<section id="visualization">
-<h2><strong>Visualization</strong><a class="headerlink" href="#visualization" title="Link to this heading">#</a></h2>
+<section id="visualizing-3d-data-in-napari">
+<h2><strong>Visualizing 3D data in napari</strong><a class="headerlink" href="#visualizing-3d-data-in-napari" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>If not already done (on lab computers we have prepared it all), please
+install napari by following <a class="reference external" href="https://napari.org/stable/tutorials/fundamentals/installation.html">these instructions</a>.</p></li>
+<li><p>Sadly, there are many ways to start napari (<a class="reference external" href="https://napari.org/stable/tutorials/fundamentals/getting_started.html">see here</a>). On our lab machines this means to:</p>
+<ul>
+<li><p>Open an Anaconda prompt.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">cellpose</span></code> to activate a conda environment we have prepared for you.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">napari</span></code> and hit enter!</p></li>
+</ul>
+</li>
+<li><p>In napari, load the file <code class="docutils literal notranslate"><span class="pre">Drosophila_zstack-20x-medium.tif</span></code>. This is
+a 3-channel, 3D volume.</p></li>
+<li><p>You can now switch to the 3D viewer by clicking on the 2D/3D toggle button (second from the left).
+<img alt="_images/napari-viewer-buttons.png" src="_images/napari-viewer-buttons.png" /></p></li>
+<li><p>Play around a bit, rotage the volume, change a few viewing options… enjoy!
+<img alt="_images/napari-viewer-with-arrows.png" src="_images/napari-viewer-with-arrows.png" /></p></li>
+</ul>
+</section>
+<section id="visualizing-3d-data-in-fiji">
+<h2><strong>Visualizing 3D data in Fiji</strong><a class="headerlink" href="#visualizing-3d-data-in-fiji" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Open Fiji</p></li>
-<li><p>Load <code class="docutils literal notranslate"><span class="pre">Drosophila_zstack-20x-medium_H103486</span></code> (if you’re on a slow
-machine, load <code class="docutils literal notranslate"><span class="pre">Drosophila_zstack-20x-default_H103492</span></code> instead). This is
+<li><p>Load <code class="docutils literal notranslate"><span class="pre">Drosophila_zstack-20x-medium.tif</span></code>. As before, this is
 a 3-channel, 3D volume. The default visualization shows one z-plane
 and one channel at a time. There are a few other ways to visualize 3D
 data, some of which are listed below. Try them out, and see what are
 their advantages and disadvantages.</p></li>
-<li><p><strong>Orthogonal Views</strong>. Go to Image &gt; Stacks &gt; Orthogonal Views. What
+<li><p><strong>Orthogonal Views</strong>. Go to <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Stacks</span> <span class="pre">&gt;</span> <span class="pre">Orthogonal</span> <span class="pre">Views</span></code>. What
 are we seeing here? Can you understand what each window shows you? In
 which view is easiest to see the separation between nuclei? Why might
 that be?</p></li>
-<li><p><strong>Clear Volume</strong>. <em>(If the plugin is not installed, you should enable
-the proper update site “ClearVolume”, update, and restart Fiji.)</em>
-Close the 3D Viewer. Go to Plugins &gt; Clear Volume(at the bottom of
-the list) &gt; Open in Clear Volume. Play around with the interface. In
-particular, change the values of VoxelDimension.X/Y/Z at the top right
-to see what happens.</p></li>
-<li><p><strong>BigDataViewer.</strong> This is a “re slicing” viewer that is included with
+</ul>
+<!-- - **Clear Volume**. *(If the plugin is not installed, you should enable
+  the proper update site “ClearVolume”, update, and restart Fiji.)*
+  Close the 3D Viewer. Go to Plugins \> Clear Volume(at the bottom of
+  the list) \> Open in Clear Volume. Play around with the interface. In
+  particular, change the values of VoxelDimension.X/Y/Z at the top right
+  to see what happens. -->
+<ul class="simple">
+<li><p><strong>BigDataViewer.</strong> BDV is a “re-slicing” viewer that is included with
 Fiji and you can view your stack in it by going to
-Plugins-&gt;BigDataViewer-&gt;open current image. What might be the pros
-and cons of viewing images like this compared to in a 3D projection
-like in ClearVolume?</p></li>
+<code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">BigDataViewer</span> <span class="pre">&gt;</span> <span class="pre">open</span> <span class="pre">current</span> <span class="pre">image</span></code>. What might be the pros
+and cons of viewing images like this compared to a 3D view like in napari?</p></li>
 <li><p>Do you see anything suspicious about the intensity values in this
-image? If so can you think of some possible explanations?</p></li>
+image? If so, can you think of some possible explanations?</p></li>
 </ul>
 </section>
 <section id="d-object-segmentation-shape-and-intensity-measurements">
 <h2><strong>3D Object Segmentation, Shape and Intensity Measurements</strong><a class="headerlink" href="#d-object-segmentation-shape-and-intensity-measurements" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Close all secondary Fiji windows and reload
-<code class="docutils literal notranslate"><span class="pre">Drosophila_zstack-20x-medium_H103486</span></code> (or
-<code class="docutils literal notranslate"><span class="pre">Drosophila_zstack-20x-default_H103492</span></code> if you’re on a slow machine).</p></li>
-<li><p>Split the three channels by going to Image &gt; Color &gt; Split Channels.
+<code class="docutils literal notranslate"><span class="pre">Drosophila_zstack-20x-medium.tif</span></code>.</p></li>
+<li><p>Split the three channels by going to <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Color</span> <span class="pre">&gt;</span> <span class="pre">Split</span> <span class="pre">Channels</span></code>.
 Close all but the second channel, which corresponds to nuclei. We are
 going to segment these nuclei via 3D marker-controlled watershed. As
 in 2D, we’ll need 3 “images”: marker, watershed surface, and mask.
 Typically we use nuclei as markers to segment cells, but here we will
 get all three images from the same source. Change the image type to
-32-bit (Image &gt; Type &gt; 32-bit). Create 3 copies of the stack (via
-Image &gt; Duplicate), naming them “surface”, “mask”, and “marker”.
-(Make sure the “duplicate stack” option is checked.)</p></li>
+32-bit (<code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Type</span> <span class="pre">&gt;</span> <span class="pre">32-bit</span></code>). Create 3 copies of the stack (via
+<code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Duplicate</span></code>), naming them “surface”, “mask”, and “marker”.
+(Make sure the “<em>duplicate stack</em>” option is checked.)</p></li>
 <li><p><strong>Watershed surface</strong>. Select the “surface” image. We can use the
 inverted nuclei channel as watershed surface (remember the watershed
 algorithm floods a surface from dark to bright areas). To make the
 segmentation smoother, however, we need to blur the image a bit. This
-is done via Process &gt; Filters &gt; Gaussian Blur 3D. Notice that now
+is done via <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span> <span class="pre">&gt;</span> <span class="pre">Gaussian</span> <span class="pre">Blur</span> <span class="pre">3D</span></code>. Notice that now
 there are 3 sigmas to set, one for each dimension, and that they are
 in ‘voxel’ units, not microns. Should the 3 sigmas be the same? To
-answer this, go to Image &gt; Properties and check the voxel size in
-x,y, and z. Now go to Process &gt; Filters &gt; Gaussian Blur 3D. Choose
+answer this, go to <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Properties</span></code> and check the voxel size in
+x,y, and z. Now go to <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span> <span class="pre">&gt;</span> <span class="pre">Gaussian</span> <span class="pre">Blur</span> <span class="pre">3D</span></code>. Choose
 an appropriate sigma, and apply the filter. Visualize the result in
 3D. Try other sigmas (appropriately scaled) if necessary. Now invert
-the image: Edit &gt; Invert. This is the watershed surface. To clean up
-your workspace, save it (File &gt; Save as &gt; Tiff) and close it.</p></li>
+the image: <code class="docutils literal notranslate"><span class="pre">Edit</span> <span class="pre">&gt;</span> <span class="pre">Invert</span></code>. This is the watershed surface. To clean up
+your workspace, save it (<code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">Save</span> <span class="pre">as</span> <span class="pre">&gt;</span> <span class="pre">Tiff</span></code>) and close it.</p></li>
 <li><p><strong>Mask</strong>. This will restrict the area into which the watershed regions
 will grow. It can be obtained by thresholding a blurred version of the
 nuclei image, where the sigmas are a bit larger than the ones used
-above. Select the “mask” image. Apply a 3D gaussian filter (Process &gt;
-Filters &gt; Gaussian Blur 3D), with sigma a bit larger (say 50%) than
-the one used above. Threshold the result (Image &gt; Adjust &gt;
-Threshold). Choose a threshold such that the resulting mask contains
+above. Select the “mask” image. Apply a 3D gaussian filter (<code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Filters</span> <span class="pre">&gt;</span> <span class="pre">Gaussian</span> <span class="pre">Blur</span> <span class="pre">3D</span></code>), with sigma a bit larger (say 50%) than
+the one used above. Threshold the result (<code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Adjust</span> <span class="pre">&gt;</span> <span class="pre">Threshold</span></code>). Choose a threshold such that the resulting mask contains
 all the nuclei, then click Apply. If prompted, click Convert to Mask.
-To clean up your workspace, save the result (File &gt; Save as &gt; Tiff)
+To clean up your workspace, save the result (<code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">Save</span> <span class="pre">as</span> <span class="pre">&gt;</span> <span class="pre">Tiff</span></code>)
 and close it.</p></li>
 <li><p><strong>Marker</strong>. To find markers, we will treat the nuclei as “point
 sources”, and detect them by finding local maxima in the Laplacian of
 Gaussian image. Select the “marker” image. We now compute the proper
 sigma to locate the nuclei. We want to detect nuclei, so what should
-we measure to determine this sigma? Now go to Plugins &gt; FeatureJ &gt;
-FeatureJ Laplacian, adjust the smoothing scale (don’t forget about the
+we measure to determine this sigma? Now go to <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">FeatureJ</span> <span class="pre">&gt;</span> <span class="pre">FeatureJ</span> <span class="pre">Laplacian</span></code>,
+adjust the smoothing scale (don’t forget about the
 voxel calibration!), and click OK. Candidates for markers are the
 local minima in the resulting filtered image. To find them, go to
-Plugins &gt; MorphoLibJ &gt; Minima and Maxima &gt; Regional Min &amp; Max 3D.
+<code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">MorphoLibJ</span> <span class="pre">&gt;</span> <span class="pre">Minima</span> <span class="pre">and</span> <span class="pre">Maxima</span> <span class="pre">&gt;</span> <span class="pre">Regional</span> <span class="pre">Min</span> <span class="pre">&amp;</span> <span class="pre">Max</span> <span class="pre">3D</span></code>.
 Select Regional Minima with Connectivity 26 and click Ok. What do you
 think? Too many point sources in the background? We can filter them
 using our previously computed mask. Load “mask” by dragging it into
-Fiji. Now go to Process &gt; Image Calculator. And multiply the mask by
+Fiji. Now go to <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Image</span> <span class="pre">Calculator</span></code>. And multiply the mask by
 the image with point sources. Save the result as “marker”.</p></li>
 <li><p><strong>Watershed</strong>. Now close all secondary windows and load the “surface”,
-“mask”, and “marker” images. Go to Plugins &gt; MorphoLibJ &gt;
-Segmentation &gt; Marker-Controlled Watershed. Set Input, Marker, and
-Mask appropriately. Check all checkboxes. Click Ok.</p></li>
+“mask”, and “marker” images. Go to <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">MorphoLibJ</span> <span class="pre">&gt;</span> <span class="pre">Segmentation</span> <span class="pre">&gt;</span> <span class="pre">Marker-Controlled</span> <span class="pre">Watershed</span></code>.
+Set Input, Marker, and Mask appropriately. Check all checkboxes.
+Click Ok.</p></li>
 <li><p>Can you overlay the original image and watershed segmentation to
 visualize them simultaneously in 3D?</p></li>
-<li><p><strong>Shape Measurements</strong>. Select the watershed image. Go to Plugins &gt;
-MorphoLibJ &gt; Analyse &gt; Analyze Regions 3D. Select desired shape
-measurements and click Ok.</p></li>
-<li><p><strong>Intensity Measurements</strong>. Go to Plugins &gt; MorphoLibJ &gt; Analyze &gt;
-Intensity Measurements 2D/3D. Which image should you set as Input?
-Which as Labels? Check the desired measurements and click Ok.</p></li>
+<li><p><strong>Shape Measurements</strong>. Select the watershed image. Go to
+<code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">MorphoLibJ</span> <span class="pre">&gt;</span> <span class="pre">Analyse</span> <span class="pre">&gt;</span> <span class="pre">Analyze</span> <span class="pre">Regions</span> <span class="pre">3D</span></code>. Select desired
+shape measurements and click Ok.</p></li>
+<li><p><strong>Intensity Measurements</strong>. Go to <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">MorphoLibJ</span> <span class="pre">&gt;</span> <span class="pre">Analyze</span> <span class="pre">&gt;</span> <span class="pre">Intensity</span> <span class="pre">Measurements</span> <span class="pre">2D/3D</span></code>.
+Which image should you set as Input? Which as Labels? Check the
+desired measurements and click Ok.</p></li>
 </ul>
 </section>
 <section id="d-crop">
@@ -542,53 +559,59 @@ Which as Labels? Check the desired measurements and click Ok.</p></li>
 <ul class="simple">
 <li><p>This is useful if the data size is big and you want to rapidly test
 your analysis options before applying them to the larger set.</p></li>
-<li><p>Re-open the image you’ve been working with. Go to Image &gt; Color &gt;
-Split Channels. Select channel 2. Go to Plugins &gt; Stacks &gt; Crop
-(3D). Check “Three pane view” and uncheck “Change origin”. Click Ok.
+<li><p>Re-open the image you’ve been working with. Go to
+<code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Color</span> <span class="pre">&gt;</span> <span class="pre">Split</span> <span class="pre">Channels</span></code>. Select channel 2.
+Go to <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Stacks</span> <span class="pre">&gt;</span> <span class="pre">Crop</span> <span class="pre">(3D)</span></code>.
+Check “Three pane view” and uncheck “Change origin”. Click Ok.
 In the Crop Options window, check all options under “Also crop these
 images”. Set the bounding boxes as desired and click Crop.</p></li>
-<li><p>Merge the resulting channels (Image &gt; Color &gt; Merge Channels), and
+<li><p>Merge the resulting channels (<code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Color</span> <span class="pre">&gt;</span> <span class="pre">Merge</span> <span class="pre">Channels</span></code>), and
 visualize the result in 3D if interested.</p></li>
 </ul>
 </section>
 <section id="registration-for-3d-volume-reconstruction">
 <h2><strong>Registration for 3D Volume Reconstruction</strong><a class="headerlink" href="#registration-for-3d-volume-reconstruction" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Open the “mouse_brain_sections_downsampled32x_arpy.ome.tif” stack.
+<ul>
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">mouse_brain_sections_downsampled32x_arpy.ome.tif</span></code> stack.
 You’ve seen a single tissue section from this brain before, but now
 we’re going to try to visualize the entire brain.</p></li>
-<li><p>Visualize this stack in ClearVolume. This should look like most of a
-mouse brain - why does it appear “squished”? Look at the voxel
-dimensions - the actual voxel sizes in this image are (x,y,z) =
-(10.5,10.5,40) microns - correct them. Now does the aspect ratio look
-more appropriate? Remember the discussion of voxel size calibration.</p></li>
+<li><p>Visualize this stack in in some way. This should look like most of a
+mouse brain but likely appears “squished”. Why? Look at the voxel
+dimensions - the actual voxel size in this image is (x,y,z) =
+(10.5,10.5,40) microns - adjust the voxel size (find out how if you
+don’t know) and try again!
+Remember the discussion of voxel size calibration.</p></li>
 <li><p>Notice the misalignment between the tissue sections - this gives the
 brain a rough outline. You can also see this by scrolling through the
 image stack with the ImageJ viewer. We can fix this!</p></li>
-<li><p>Close ClearVolume, then duplicate the original image stack. We will
+<li><p>Duplicate the original image stack. We will
 apply a stack registration to this duplicated stack. The plugin we
 will utilize will use the currently selected slice in the currently
 selected stack as a reference to register all the other slices, so
 scroll to a slice you think would serve as a good reference. Then, go
-to Plugins &gt; Registration &gt; StackReg (if StackReg is not installed,
+to <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Registration</span> <span class="pre">&gt;</span> <span class="pre">StackReg</span></code> (if StackReg is not installed,
 add ‘BIG-EPFL’ to the list of update sites, then update and restart
-Fiji). What kind of transform do you think is best to align all these
+Fiji).
+What kind of transform do you think is best to align all these
 slices? Select it and then click OK. Be patient - it will take some
-time to finish. <em>Note:</em> If you ever have to register multi-channel
-images, there is a plugin called “HyperStackReg” you can install from
-the “HyperStackReg” update site!</p></li>
-<li><p>Now visualize the registered stack in ClearVolume and compare it to
-the original. Does it look better? What might be necessary to further
-improve the registration?</p></li>
+time to finish.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you ever have to register multi-channel images, there is a plugin
+called “HyperStackReg”. You can <a class="reference external" href="https://github.com/ved-sharma/HyperStackReg">find it here</a>
+and the installation instructions are on that page as well.</p>
+</div>
+</li>
+<li><p>Now visualize the registered stack and compare it to the original.
+Does it look better? What might be necessary to further improve the
+registration?</p></li>
 </ul>
 </section>
 <section id="d-pixel-classifier-choose-your-own-adventure">
 <h2><strong>3D Pixel Classifier Choose-your-own-adventure</strong><a class="headerlink" href="#d-pixel-classifier-choose-your-own-adventure" title="Link to this heading">#</a></h2>
 <p>The goal here is to use machine learning to attempt to segment closely
-spaced nuclei. You have two options for how to proceed. Ilastik will be
-familiar, but Labkit will let you work in Fiji (and, spoiler alert, it
-may also save you time in the tracking lab later on!). If you have time,
-try both!</p>
+spaced nuclei. You have two options for how to proceed. For example, ilastik
+or Labkit. If you have time, try both!</p>
 <section id="labkit">
 <h3>Labkit<a class="headerlink" href="#labkit" title="Link to this heading">#</a></h3>
 <p>Labkit can also perform 3D segmentation with a random forest pixel
@@ -598,14 +621,15 @@ used earlier, more info <a class="reference external" href="https://imagej.net/p
 and can handle very large datasets. There is more info on Labkit
 available <a class="reference external" href="https://imagej.net/plugins/labkit/"><u>here</u></a>.</p>
 <ul class="simple">
-<li><p>Go to Help -&gt; Update and add the “Labkit” update site, and restart
-Fiji</p></li>
-<li><p>Open drosophilus_floriansus.tif and then go to Plugins -&gt; Labkit -&gt;
-Open current image. You can access more options for viewing the data
+<li><p>This step is not needed on the course computers, but on a new machine,
+you can install Labkit by going to <code class="docutils literal notranslate"><span class="pre">Help</span> <span class="pre">&gt;</span> <span class="pre">Update</span></code> and add the “Labkit”
+update site, and restart Fiji.</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">drosophilus_floriansus.tif</span></code> and then go to <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Labkit</span> <span class="pre">&gt;</span> <span class="pre">Open</span> <span class="pre">current</span> <span class="pre">image</span></code>.
+You can access more options for viewing the data
 by clicking “settings” in the upper left corner.</p></li>
 <li><p>After you’ve annotated a few areas of foreground and background, in
 the lower left “Segmentation” box you’ll need to select the pixel
-classifier and click the ▶ button to train the model and see the
+classifier and click the <code class="docutils literal notranslate"><span class="pre">▶</span></code> button to train the model and see the
 current result.</p></li>
 <li><p>To handle large datasets, the dataset is broken up into blocks and
 Labkit only makes predictions on the currently visible blocks. When
@@ -617,23 +641,20 @@ save the result.</p></li>
 </section>
 <section id="ilastik">
 <h3>ilastik<a class="headerlink" href="#ilastik" title="Link to this heading">#</a></h3>
-<p>You can use Machine Learning to create a surface for watershed
-segmentation, by training a model to highlight the regions you want to
-segment.</p>
 <ul class="simple">
-<li><p>Open drosophilus_floriansus.tif. If you want to keep things simple you
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">drosophilus_floriansus.tif</span></code>. If you want to keep things simple you
 can select a few crops in a small area containing a few dozen nuclei.
-Export the image to .tiff using File-&gt;Save as-&gt;.tiff</p></li>
+Export the image to .tiff using <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">Save</span> <span class="pre">as</span> <span class="pre">&gt;</span> <span class="pre">.tiff</span></code>.</p></li>
 <li><p>Create a new pixel classification project in ilastik and load in the
 .tiff stack. Train a model that highlights the nuclei. What classes
 should you label? What output of the model should you use as watershed
 surface?</p></li>
-<li><p>When you’re done, try loading the result into Fiji and viewing it in
-3D using your favorite 3D viewer from earlier in the lab!</p></li>
+<li><p>When you’re done, try loading the result into Fiji or napari and look
+at the result!</p></li>
 </ul>
 </section>
-<section id="the-aftermath">
-<h3>The Aftermath<a class="headerlink" href="#the-aftermath" title="Link to this heading">#</a></h3>
+<section id="are-we-happy-with-these-results">
+<h3>Are we happy with these results?<a class="headerlink" href="#are-we-happy-with-these-results" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Are your nuclei all perfectly separated? If not, what method have you
 learned that might help you split them? What output of the model would
@@ -647,8 +668,36 @@ with your favorite 3D visualization tool from earlier in the lab.</p></li>
 </ul>
 </section>
 </section>
-<section id="bonus">
-<h2><strong>Bonus</strong><a class="headerlink" href="#bonus" title="Link to this heading">#</a></h2>
+<section id="d-instance-segmentation">
+<h2>3D instance segmentation<a class="headerlink" href="#d-instance-segmentation" title="Link to this heading">#</a></h2>
+<section id="cellpose">
+<h3>CellPose<a class="headerlink" href="#cellpose" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>We have seen that CellPose can segment 3D data by segmenting orthogonal
+2D slides and merging them into a consensus 3D segmentation. Interesting!
+Let’s try!</p></li>
+<li><p>Open a Anaconda prompt and activate the CellPose environment by typing
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">cellpose</span></code>.</p></li>
+<li><p>Start CellPose by typing <code class="docutils literal notranslate"><span class="pre">cellpose</span></code>.</p></li>
+<li><p>Figure out the rest… 😉</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Are there any preporcessing steps that could help to better
+segment this data? Try some. Maybe in Fiji.</p>
+</div>
+</li>
+</ul>
+</section>
+<section id="stardist-3d">
+<h3>Stardist 3D<a class="headerlink" href="#stardist-3d" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>If you have time and feel adventureous, why not trying to segment
+<code class="docutils literal notranslate"><span class="pre">drosophilus_floriansus.tif</span></code> using <a class="reference external" href="https://colab.research.google.com/github/HenriquesLab/ZeroCostDL4Mic/blob/master/Colab_notebooks/StarDist_3D_ZeroCostDL4Mic.ipynb">3D Stardist from Zero</a>?</p></li>
+</ul>
+</section>
+</section>
+<section id="bonus-exercise">
+<h2><strong>Bonus Exercise</strong><a class="headerlink" href="#bonus-exercise" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Think of something you want to segment/detect and measure in the 3D
 data you’ve acquired in the lab and go for it! Come up with a plan,
@@ -727,17 +776,23 @@ save them as a .avi movie file.</p></li>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization"><strong>Visualization</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-3d-data-in-napari"><strong>Visualizing 3D data in napari</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-3d-data-in-fiji"><strong>Visualizing 3D data in Fiji</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-object-segmentation-shape-and-intensity-measurements"><strong>3D Object Segmentation, Shape and Intensity Measurements</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-crop"><strong>3D Crop</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registration-for-3d-volume-reconstruction"><strong>Registration for 3D Volume Reconstruction</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-pixel-classifier-choose-your-own-adventure"><strong>3D Pixel Classifier Choose-your-own-adventure</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labkit">Labkit</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ilastik">ilastik</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-aftermath">The Aftermath</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-happy-with-these-results">Are we happy with these results?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus"><strong>Bonus</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-instance-segmentation">3D instance segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">CellPose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist-3d">Stardist 3D</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-exercise"><strong>Bonus Exercise</strong></a></li>
 </ul>
   </nav></div>
 
