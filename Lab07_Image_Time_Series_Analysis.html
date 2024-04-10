@@ -396,8 +396,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-tracking"><strong>Part 1: Tracking</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-photobleaching"><strong>Part 1: Photobleaching</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bleach-correction">Bleach Correction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frap">FRAP</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-tracking"><strong>Part 2: Tracking</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Learning Objectives</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-data-we-need">Get the data we need</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semi-automated-tracking-in-mastodon">(Semi-)automated Tracking in Mastodon</a><ul class="nav section-nav flex-column">
@@ -407,13 +413,8 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-automatic-tracking-using-the-trackmate-plugin">Step 4: Automatic tracking using the TrackMate plugin</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-in-ilastik">Tracking in Ilastik</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-photobleaching"><strong>Part 2: Photobleaching</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Learning Objectives</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bleach-correction">Bleach Correction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frap">FRAP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-in-ilastik">Tracking in ilastik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-with-btrack-in-napari">Tracking with btrack in napari</a></li>
 </ul>
 </li>
 </ul>
@@ -430,21 +431,112 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="image-time-series-analysis">
 <h1>Image Time Series Analysis<a class="headerlink" href="#image-time-series-analysis" title="Link to this heading">#</a></h1>
 <p><em>Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug</em> .</p>
-<p><small>This file last updated 2024-04-04.</small></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Notes</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">spreadsheet</span> <span class="n">on</span> <span class="n">what</span> <span class="n">we</span> <span class="n">might</span> <span class="n">want</span> <span class="n">to</span> <span class="n">update</span><span class="p">:</span>
-
-<span class="n">Maybe</span> <span class="n">add</span> <span class="n">some</span> <span class="n">BTrack</span> <span class="n">stuff</span> <span class="o">-</span> <span class="p">(</span><span class="n">Alan</span> <span class="n">says</span> <span class="n">there</span><span class="s1">&#39;s a good notebook), and/or UlTrac and/or TracX</span>
-</pre></div>
-</div>
+<p><small>This file last updated 2024-04-10.</small></p>
+<!-- Maybe add some UlTrac and/or TracX -->
 <hr class="docutils" />
-<section id="part-1-tracking">
-<h2><strong>Part 1: Tracking</strong><a class="headerlink" href="#part-1-tracking" title="Link to this heading">#</a></h2>
+<section id="part-1-photobleaching">
+<h2><strong>Part 1: Photobleaching</strong><a class="headerlink" href="#part-1-photobleaching" title="Link to this heading">#</a></h2>
 <section id="learning-objectives">
 <h3>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Apply and scrutinize photobleach correction</p></li>
+<li><p>Double-normalized FRAP analysis</p></li>
+</ul>
+<p>Lab Data: <a class="reference external" href="https://tinyurl.com/qi2024labs"><u>https://tinyurl.com/qi2024labs</u></a></p>
+</section>
+<hr class="docutils" />
+<section id="bleach-correction">
+<h3>Bleach Correction<a class="headerlink" href="#bleach-correction" title="Link to this heading">#</a></h3>
+<p>In this portion of the lab, you will compensate for photobleaching by
+fitting an exponential model to the decaying fluorescence intensity, and
+then correcting for this decay.</p>
+<p>Load the data:</p>
+<ul class="simple">
+<li><p>Go to folder BleachCorrection</p></li>
+<li><p>Load TRITC into Fiji by dragging the folder into the Fiji window
+(click yes when asked to open as a stack, but leave the checkboxes
+unchecked).</p></li>
+</ul>
+<p>Apply Fiji’s built-in photobleach correction plugin</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Adjust</span> <span class="pre">&gt;</span> <span class="pre">Bleach</span> <span class="pre">Correction</span></code></p></li>
+<li><p>Correction Method: Exponential Fit. Press OK.</p></li>
+<li><p>This plugin outputs a corrected image as well the fitted exponential
+decay. Since you have not selected an ROI it is using the average
+intensity in the entire image to perform the correction. Have a look
+at the corrected image: does it look like what you would expect?</p></li>
+<li><p>You can select a region and measure its intensity over time by drawing
+an ROI and then going to <code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Stacks</span> <span class="pre">&gt;</span> <span class="pre">Plot</span> <span class="pre">Z</span> <span class="pre">Axis</span> <span class="pre">Profile</span></code> (since
+there’s no Z axis this will actually plot a profile over time). Make a
+measurement like this of the center of a nucleus as well as the
+background. What do you see?</p></li>
+<li><p>Now, re-load the original dataset and select an ROI of a nucleus. Be
+sure it stays on the nucleus during the entire time series! Now
+perform the photobleach correction again. What do you see now? Why is
+this? What is the “right” way to photobleach correct these images?</p></li>
+<li><p>Make a note of the decay rate (parameter ‘b’) from the exponential
+fit.</p></li>
+<li><p>Repeat for the FITC channel. Which image is bleaching faster?</p></li>
+<li><p>How well does the correction work on the FITC channel? Do we need to
+select an ROI here? Why or why not?</p></li>
+<li><p>We now have approximately the same average intensity at the end of the
+FITC time series. Is the SNR the same at the beginning and end? Does
+the photobleach correction affect the SNR?</p></li>
+</ul>
+</section>
+<section id="frap">
+<h3>FRAP<a class="headerlink" href="#frap" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Load the data: FRAP/33108 SU295 try1.tif (Or use your own if you
+prefer)</p></li>
+<li><p>Create an ROI over the square bleached region. Add it to the ROI
+Manager (press ‘t’).</p></li>
+<li><p>Plot the intensity in this region over time
+(<code class="docutils literal notranslate"><span class="pre">Image</span> <span class="pre">&gt;</span> <span class="pre">Stacks</span> <span class="pre">&gt;</span> <span class="pre">Plot</span> <span class="pre">Z-axis</span> <span class="pre">Profile</span></code>)</p></li>
+<li><p>Does the intensity recover to a stable value?</p></li>
+<li><p>Could we use a photobleaching correction like in the previous
+exercise? Why or why not?</p></li>
+</ul>
+<p>Now we will run a FRAP plugin. This is going to apply a similar analysis
+that you did above: photobleach correction, and then exponential
+fitting, but it will do it using a double-normalization approach. You
+can find this plugin by going to
+<a class="reference external" href="https://bit.ly/3xdsQUR"><u>https://bit.ly/3xdsQUR</u></a>, or we’ve
+provided a copy in the lab data folder. Then, unzip the plugin and copy
+it to the “plugins” folder inside the folder Fiji is installed in, then
+restart Fiji.</p>
+<ul class="simple">
+<li><p>First, perform a <em>uniform</em> background subtraction on your images by
+measuring the mean intensity in a region of the background and then
+going to <code class="docutils literal notranslate"><span class="pre">Process</span> <span class="pre">&gt;</span> <span class="pre">Math</span> <span class="pre">&gt;</span> <span class="pre">Subtract</span></code>. Why do we want to do a uniform
+subtraction rather than e.g. a rolling ball?</p></li>
+<li><p>You will need to have two ROIs in the ROI Manager. One for the square
+bleached region, and a second ROI for the whole cell (including the
+frapped region). If you can’t include the whole cell, just include a
+large region of the same cell which includes the frapped region. When
+might this non-whole-cell ROI be OK? When might it be problematic?</p></li>
+<li><p>Launch the FRAP Profiler plugin (<code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">FRAP</span> <span class="pre">Profiler</span> <span class="pre">v2</span></code>).</p></li>
+<li><p>Enter the correct time interval, so that your recovery rate is in the
+correct units.</p></li>
+<li><p>Run first with a single exponential. Compare the fitted curve to the
+raw data in the figure that is created (in the procFRAP and normFRAP
+windows). (Ideally we would compare this quantitatively but the plugin
+doesn’t support this :( )</p></li>
+<li><p>Re-run the plugin with double exponential. Is the fit better? A double
+exponential models a two step process, e.g., fast but weak association
+of the molecule of interest, followed by slower stronger association.</p></li>
+<li><p>What is the % mobile?</p></li>
+</ul>
+</section>
+</section>
+<section id="part-2-tracking">
+<h2><strong>Part 2: Tracking</strong><a class="headerlink" href="#part-2-tracking" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Learning Objectives<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
 <li><p>(Semi-)automated Tracking with Mastodon in Fiji</p></li>
-<li><p>Using Trackmate<span id="id1">[<a class="reference internal" href="bibliography.html#id7" title="Jean-Yves Tinevez, Nick Perry, Johannes Schindelin, Genevieve M Hoopes, Gregory D Reynolds, Emmanuel Laplantine, Sebastian Y Bednarek, Spencer L Shorte, and Kevin W Eliceiri. TrackMate: an open and extensible platform for single-particle tracking. Methods, 115:80–90, February 2017.">1</a>]</span> from within Mastodon</p></li>
-<li><p>Tracking with ilastik<span id="id2">[<a class="reference internal" href="bibliography.html#id8" title="Stuart Berg, Dominik Kutra, Thorben Kroeger, Christoph N Straehle, Bernhard X Kausler, Carsten Haubold, Martin Schiegg, Janez Ales, Thorsten Beier, Markus Rudy, Kemal Eren, Jaime I Cervantes, Buote Xu, Fynn Beuttenmueller, Adrian Wolny, Chong Zhang, Ullrich Koethe, Fred A Hamprecht, and Anna Kreshuk. Ilastik: interactive machine learning for (bio)image analysis. Nat. Methods, 16(12):1226–1232, December 2019.">2</a>]</span></p></li>
+<li><p>Using Trackmate<span id="id2">[<a class="reference internal" href="bibliography.html#id7" title="Jean-Yves Tinevez, Nick Perry, Johannes Schindelin, Genevieve M Hoopes, Gregory D Reynolds, Emmanuel Laplantine, Sebastian Y Bednarek, Spencer L Shorte, and Kevin W Eliceiri. TrackMate: an open and extensible platform for single-particle tracking. Methods, 115:80–90, February 2017.">1</a>]</span> from within Mastodon</p></li>
+<li><p>Tracking with ilastik<span id="id3">[<a class="reference internal" href="bibliography.html#id8" title="Stuart Berg, Dominik Kutra, Thorben Kroeger, Christoph N Straehle, Bernhard X Kausler, Carsten Haubold, Martin Schiegg, Janez Ales, Thorsten Beier, Markus Rudy, Kemal Eren, Jaime I Cervantes, Buote Xu, Fynn Beuttenmueller, Adrian Wolny, Chong Zhang, Ullrich Koethe, Fred A Hamprecht, and Anna Kreshuk. Ilastik: interactive machine learning for (bio)image analysis. Nat. Methods, 16(12):1226–1232, December 2019.">2</a>]</span></p></li>
 <li><p>Bonus: exporting from ilastik, editing in Mastodon - note from Beth - this isn’t there</p></li>
 </ul>
 </section>
@@ -462,7 +554,7 @@ about <em><strong>ilastik</strong></em>. Mastodon is a Fiji plugin designed to d
 truly huge time-lapses, which makes it an exquisitely valuable choice
 for many tracking projects.</p>
 <p>We know ilastik already from other exercises, but today we will explore
-some of ilastik’s tracking features. The automated tracking in Ilastik is
+some of ilastik’s tracking features. The automated tracking in ilastik is
 quite involved. Some key ideas we discussed in the lecture.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -498,15 +590,15 @@ Be prepared to show the coolest thing you found out tomorrow morning
 <h4>Step 1: Start a Mastodon project from a single tiff File<a class="headerlink" href="#step-1-start-a-mastodon-project-from-a-single-tiff-file" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Put the file ‘drosophila.tif’ in some folder. Link to download this
-file can be found further up in Exercise 0.</p></li>
-<li><p>In Fiji do: Help &gt; Update &gt; Manage update sites</p>
+file can be found further up.</p></li>
+<li><p>In Fiji do: <code class="docutils literal notranslate"><span class="pre">Help</span> <span class="pre">&gt;</span> <span class="pre">Update</span> <span class="pre">&gt;</span> <span class="pre">Manage</span> <span class="pre">update</span> <span class="pre">sites</span></code></p>
 <ul class="simple">
 <li><p>Check boxes next to “Mastodon”.</p></li>
-<li><p>Close &gt; Apply changes &gt; restart Fiji</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Close</span> <span class="pre">&gt;</span> <span class="pre">Apply</span> <span class="pre">changes</span></code> and restart Fiji</p></li>
 </ul>
 </li>
 <li><p>Open ‘drosophila.tif’ in Fiji.</p></li>
-<li><p>In Fiji, start Mastodon: Plugins &gt; Mastodon</p></li>
+<li><p>In Fiji, start Mastodon by <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Mastodon</span></code></p></li>
 <li><p>In Mastodon, start a new project by clicking “new Mastodon project”.</p>
 <ul class="simple">
 <li><p>Click on “use an image open in ImageJ” and select the drosophila
@@ -593,10 +685,10 @@ show and compare found ways to track fast and efficiently…)</p></li>
 <section id="step-4-automatic-tracking-using-the-trackmate-plugin">
 <h4>Step 4: Automatic tracking using the TrackMate plugin<a class="headerlink" href="#step-4-automatic-tracking-using-the-trackmate-plugin" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p>Use (in Mastodon, <strong>not</strong> Fiji): Plugins &gt; Tracking &gt; Detection…
+<li><p>Use (in Mastodon, <strong>not</strong> Fiji): <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Tracking</span> <span class="pre">&gt;</span> <span class="pre">Detection…</span></code>
 and detect cells in some part of the volume (the ROI-box to select a
 part can also be using from within BDV).</p></li>
-<li><p>Then use: Plugins &gt; Tracking &gt; Linking… and link those detections
+<li><p>Then use: <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Tracking</span> <span class="pre">&gt;</span> <span class="pre">Linking…</span></code> and link those detections
 to each other. This will not lead to perfect results. Don’t worry
 about that!</p></li>
 <li><p>Play with options, check if you can improve results somehow.</p></li>
@@ -604,7 +696,7 @@ about that!</p></li>
 </section>
 </section>
 <section id="tracking-in-ilastik">
-<h3>Tracking in Ilastik<a class="headerlink" href="#tracking-in-ilastik" title="Link to this heading">#</a></h3>
+<h3>Tracking in ilastik<a class="headerlink" href="#tracking-in-ilastik" title="Link to this heading">#</a></h3>
 <p>Please go to
 <a class="reference external" href="https://ilastik.github.io/documentation/tracking/tracking"><u>https://ilastik.github.io/documentation/tracking/tracking</u></a>
 and follow the instructions on this page.</p>
@@ -644,100 +736,51 @@ speed this up? (Ask the online manual…)</p></li>
 </li>
 </ol>
 </section>
-</section>
-<section id="part-2-photobleaching">
-<h2><strong>Part 2: Photobleaching</strong><a class="headerlink" href="#part-2-photobleaching" title="Link to this heading">#</a></h2>
-<section id="id3">
-<h3>Learning Objectives<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="tracking-with-btrack-in-napari">
+<h3>Tracking with btrack in napari<a class="headerlink" href="#tracking-with-btrack-in-napari" title="Link to this heading">#</a></h3>
+<p>In napari, there is a quite capable plugin for object tracking called <code class="docutils literal notranslate"><span class="pre">btrack</span></code>.
+Let us install it and then use it.</p>
+<p><strong>Installation of btrack and napari from scratch</strong></p>
 <ul class="simple">
-<li><p>Apply and scrutinize photobleach correction</p></li>
-<li><p>Double-normalized FRAP analysis</p></li>
+<li><p>Open a Anaconda Prompt and install all we need by executing…</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">-n</span> <span class="pre">btrack</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">btrack</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">pip</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">btrack[napari]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span> <span class="pre">napari[all]</span></code></p></li>
 </ul>
-<p>Lab Data: <a class="reference external" href="https://tinyurl.com/qi2024labs"><u>https://tinyurl.com/qi2024labs</u></a></p>
-</section>
-<hr class="docutils" />
-<section id="bleach-correction">
-<h3>Bleach Correction<a class="headerlink" href="#bleach-correction" title="Link to this heading">#</a></h3>
-<p>In this portion of the lab, you will compensate for photobleaching by
-fitting an exponential model to the decaying fluorescence intensity, and
-then correcting for this decay.</p>
-<p>Load the data:</p>
-<ul class="simple">
-<li><p>Go to folder BleachCorrection</p></li>
-<li><p>Load TRITC into Fiji by dragging the folder into the Fiji window
-(click yes when asked to open as a stack, but leave the checkboxes
-unchecked).</p></li>
+</li>
 </ul>
-<p>Apply Fiji’s built-in photobleach correction plugin</p>
-<ul class="simple">
-<li><p>Image &gt; Adjust &gt; Bleach Correction</p></li>
-<li><p>Correction Method: Exponential Fit. Press OK.</p></li>
-<li><p>This plugin outputs a corrected image as well the fitted exponential
-decay. Since you have not selected an ROI it is using the average
-intensity in the entire image to perform the correction. Have a look
-at the corrected image: does it look like what you would expect?</p></li>
-<li><p>You can select a region and measure its intensity over time by drawing
-an ROI and then going to Image-&gt;Stacks-&gt;Plot Z Axis Profile (since
-there’s no Z axis this will actually plot a profile over time). Make a
-measurement like this of the center of a nucleus as well as the
-background. What do you see?</p></li>
-<li><p>Now, re-load the original dataset and select an ROI of a nucleus. Be
-sure it stays on the nucleus during the entire time series! Now
-perform the photobleach correction again. What do you see now? Why is
-this? What is the “right” way to photobleach correct these images?</p></li>
-<li><p>Make a note of the decay rate (parameter ‘b’) from the exponential
-fit.</p></li>
-<li><p>Repeat for the FITC channel. Which image is bleaching faster?</p></li>
-<li><p>How well does the correction work on the FITC channel? Do we need to
-select an ROI here? Why or why not?</p></li>
-<li><p>We now have approximately the same average intensity at the end of the
-FITC time series. Is the SNR the same at the beginning and end? Does
-the photobleach correction affect the SNR?</p></li>
+<p><strong>Using btrack to track objects we segmented</strong></p>
+<ul>
+<li><p>Next, we need a dataset to track. Actually, we need not only a dataset, we need
+data that is segmented. Since we learned about segmentation before, here we will
+simply use one of the btrack example datasets.
+You can find a file called <code class="docutils literal notranslate"><span class="pre">segmented_nuclei.tif</span></code> it in the folder <code class="docutils literal notranslate"><span class="pre">btrack_masks</span></code>.</p></li>
+<li><p>Start btrack by starting napari (execute <code class="docutils literal notranslate"><span class="pre">napari</span></code> from within the <em>btrack</em> conda
+environment we installed above).</p></li>
+<li><p>Start btrack via <code class="docutils literal notranslate"><span class="pre">Plugins</span> <span class="pre">&gt;</span> <span class="pre">Track</span> <span class="pre">(btrack)</span></code>.</p></li>
+<li><p>Drag and drop the masks file into napari.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>napari does not recognize this tiff file as labels. You must manually convert
+to labels by right clicking on the layer and select <code class="docutils literal notranslate"><span class="pre">Convert</span> <span class="pre">to</span> <span class="pre">labels</span></code>.</p>
+</div>
+</li>
+<li><p>In the btrack side-bar, select the segmentation masks in the freshly coverted labels
+layer and click on <code class="docutils literal notranslate"><span class="pre">Track</span></code>.</p></li>
+<li><p>Since this is one of the canned examples of btrack, the result is naturally quite good.
+If you have any labels for any other dataset - try it!</p></li>
+<li><p>The real work starts now: after objects are tracked, how would we continue analyzing
+these tracks?</p></li>
 </ul>
-</section>
-<section id="frap">
-<h3>FRAP<a class="headerlink" href="#frap" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Load the data: FRAP/33108 SU295 try1.tif (Or use your own if you
-prefer)</p></li>
-<li><p>Create an ROI over the square bleached region. Add it to the ROI
-Manager (press ‘t’).</p></li>
-<li><p>Plot the intensity in this region over time (Image &gt; Stacks &gt; Plot
-Z-axis Profile)</p></li>
-<li><p>Does the intensity recover to a stable value?</p></li>
-<li><p>Could we use a photobleaching correction like in the previous
-exercise? Why or why not?</p></li>
-</ul>
-<p>Now we will run a FRAP plugin. This is going to apply a similar analysis
-that you did above: photobleach correction, and then exponential
-fitting, but it will do it using a double-normalization approach. You
-can find this plugin by going to
-<a class="reference external" href="https://bit.ly/3xdsQUR"><u>https://bit.ly/3xdsQUR</u></a>, or we’ve
-provided a copy in the lab data folder. Then, unzip the plugin and copy
-it to the “plugins” folder inside the folder Fiji is installed in, then
-restart Fiji.</p>
-<ul class="simple">
-<li><p>First, perform a <em>uniform</em> background subtraction on your images by
-measuring the mean intensity in a region of the background and then
-going to Process &gt; Math &gt; Subtract. Why do we want to do a uniform
-subtraction rather than e.g. a rolling ball?</p></li>
-<li><p>You will need to have two ROIs in the ROI Manager. One for the square
-bleached region, and a second ROI for the whole cell (including the
-frapped region). If you can’t include the whole cell, just include a
-large region of the same cell which includes the frapped region. When
-might this non-whole-cell ROI be OK? When might it be problematic?</p></li>
-<li><p>Launch the FRAP Profiler plugin (Plugins &gt; FRAP Profiler v2).</p></li>
-<li><p>Enter the correct time interval, so that your recovery rate is in the
-correct units.</p></li>
-<li><p>Run first with a single exponential. Compare the fitted curve to the
-raw data in the figure that is created (in the procFRAP and normFRAP
-windows). (Ideally we would compare this quantitatively but the plugin
-doesn’t support this :( )</p></li>
-<li><p>Re-run the plugin with double exponential. Is the fit better? A double
-exponential models a two step process, e.g., fast but weak association
-of the molecule of interest, followed by slower stronger association.</p></li>
-<li><p>What is the % mobile?</p></li>
-</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Tracking in napari is a thing. Kind of.
+If you want to learn more about it, maybe this is a good place to start:
+<a class="reference external" href="https://focalplane.biologists.com/2023/06/01/tracking-in-napari/">https://focalplane.biologists.com/2023/06/01/tracking-in-napari/</a></p>
+</div>
 </section>
 </section>
 </section>
@@ -806,8 +849,14 @@ of the molecule of interest, followed by slower stronger association.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-tracking"><strong>Part 1: Tracking</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-photobleaching"><strong>Part 1: Photobleaching</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bleach-correction">Bleach Correction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frap">FRAP</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-tracking"><strong>Part 2: Tracking</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Learning Objectives</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-data-we-need">Get the data we need</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semi-automated-tracking-in-mastodon">(Semi-)automated Tracking in Mastodon</a><ul class="nav section-nav flex-column">
@@ -817,13 +866,8 @@ of the molecule of interest, followed by slower stronger association.</p></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-automatic-tracking-using-the-trackmate-plugin">Step 4: Automatic tracking using the TrackMate plugin</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-in-ilastik">Tracking in Ilastik</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-photobleaching"><strong>Part 2: Photobleaching</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Learning Objectives</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bleach-correction">Bleach Correction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frap">FRAP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-in-ilastik">Tracking in ilastik</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-with-btrack-in-napari">Tracking with btrack in napari</a></li>
 </ul>
 </li>
 </ul>

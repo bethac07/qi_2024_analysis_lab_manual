@@ -2,17 +2,125 @@
 
 *Lab authors: Hunter Elliott, Damian Dalle Nogare and Florian Jug* . 
 
-<small>This file last updated 2024-04-04.</small>
+<small>This file last updated 2024-04-10.</small>
 
-```
-Notes from the spreadsheet on what we might want to update:
-
-Maybe add some BTrack stuff - (Alan says there's a good notebook), and/or UlTrac and/or TracX
-```
+<!-- Maybe add some UlTrac and/or TracX -->
 
 ---
 
-## **Part 1: Tracking**
+## **Part 1: Photobleaching**
+
+### Learning Objectives
+
+- Apply and scrutinize photobleach correction
+- Double-normalized FRAP analysis
+
+Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs)
+
+---
+
+### Bleach Correction
+
+In this portion of the lab, you will compensate for photobleaching by
+fitting an exponential model to the decaying fluorescence intensity, and
+then correcting for this decay.
+
+Load the data:
+
+- Go to folder BleachCorrection
+
+- Load TRITC into Fiji by dragging the folder into the Fiji window
+  (click yes when asked to open as a stack, but leave the checkboxes
+  unchecked).
+
+Apply Fiji's built-in photobleach correction plugin
+
+- `Image > Adjust > Bleach Correction`
+
+- Correction Method: Exponential Fit. Press OK.
+
+- This plugin outputs a corrected image as well the fitted exponential
+  decay. Since you have not selected an ROI it is using the average
+  intensity in the entire image to perform the correction. Have a look
+  at the corrected image: does it look like what you would expect?
+
+- You can select a region and measure its intensity over time by drawing
+  an ROI and then going to `Image > Stacks > Plot Z Axis Profile` (since
+  there’s no Z axis this will actually plot a profile over time). Make a
+  measurement like this of the center of a nucleus as well as the
+  background. What do you see?
+
+- Now, re-load the original dataset and select an ROI of a nucleus. Be
+  sure it stays on the nucleus during the entire time series! Now
+  perform the photobleach correction again. What do you see now? Why is
+  this? What is the “right” way to photobleach correct these images?
+
+- Make a note of the decay rate (parameter 'b') from the exponential
+  fit.
+
+- Repeat for the FITC channel. Which image is bleaching faster?
+
+- How well does the correction work on the FITC channel? Do we need to
+  select an ROI here? Why or why not?
+
+- We now have approximately the same average intensity at the end of the
+  FITC time series. Is the SNR the same at the beginning and end? Does
+  the photobleach correction affect the SNR?
+
+### FRAP
+
+- Load the data: FRAP/33108 SU295 try1.tif (Or use your own if you
+  prefer)
+
+- Create an ROI over the square bleached region. Add it to the ROI
+  Manager (press ‘t’).
+
+- Plot the intensity in this region over time 
+  (`Image > Stacks > Plot Z-axis Profile`)
+
+- Does the intensity recover to a stable value?
+
+- Could we use a photobleaching correction like in the previous
+  exercise? Why or why not?
+
+Now we will run a FRAP plugin. This is going to apply a similar analysis
+that you did above: photobleach correction, and then exponential
+fitting, but it will do it using a double-normalization approach. You
+can find this plugin by going to
+[<u>https://bit.ly/3xdsQUR</u>](https://bit.ly/3xdsQUR), or we’ve
+provided a copy in the lab data folder. Then, unzip the plugin and copy
+it to the “plugins” folder inside the folder Fiji is installed in, then
+restart Fiji.
+
+- First, perform a *uniform* background subtraction on your images by
+  measuring the mean intensity in a region of the background and then
+  going to `Process > Math > Subtract`. Why do we want to do a uniform
+  subtraction rather than e.g. a rolling ball?
+
+- You will need to have two ROIs in the ROI Manager. One for the square
+  bleached region, and a second ROI for the whole cell (including the
+  frapped region). If you can’t include the whole cell, just include a
+  large region of the same cell which includes the frapped region. When
+  might this non-whole-cell ROI be OK? When might it be problematic?
+
+- Launch the FRAP Profiler plugin (`Plugins > FRAP Profiler v2`).
+
+- Enter the correct time interval, so that your recovery rate is in the
+  correct units.
+
+- Run first with a single exponential. Compare the fitted curve to the
+  raw data in the figure that is created (in the procFRAP and normFRAP
+  windows). (Ideally we would compare this quantitatively but the plugin
+  doesn’t support this :( )
+
+- Re-run the plugin with double exponential. Is the fit better? A double
+  exponential models a two step process, e.g., fast but weak association
+  of the molecule of interest, followed by slower stronger association.
+
+- What is the % mobile?
+
+
+## **Part 2: Tracking**
 
 ### Learning Objectives
 
@@ -39,7 +147,7 @@ truly huge time-lapses, which makes it an exquisitely valuable choice
 for many tracking projects.
 
 We know ilastik already from other exercises, but today we will explore
-some of ilastik’s tracking features. The automated tracking in Ilastik is
+some of ilastik’s tracking features. The automated tracking in ilastik is
 quite involved. Some key ideas we discussed in the lecture.
 
 ```{note}
@@ -76,17 +184,17 @@ Be prepared to show the coolest thing you found out tomorrow morning
 #### Step 1: Start a Mastodon project from a single tiff File
 
 1.  Put the file ‘drosophila.tif’ in some folder. Link to download this
-    file can be found further up in Exercise 0.
+    file can be found further up.
 
-2.  In Fiji do: Help \> Update \> Manage update sites
+2.  In Fiji do: `Help > Update > Manage update sites`
 
     - Check boxes next to “Mastodon”.
 
-    - Close \> Apply changes \> restart Fiji
+    - `Close > Apply changes` and restart Fiji
 
 3.  Open ‘drosophila.tif’ in Fiji.
 
-4.  In Fiji, start Mastodon: Plugins \> Mastodon
+4.  In Fiji, start Mastodon by `Plugins > Mastodon`
 
 5.  In Mastodon, start a new project by clicking “new Mastodon project”.
 
@@ -172,17 +280,17 @@ Be prepared to show the coolest thing you found out tomorrow morning
 
 #### Step 4: Automatic tracking using the TrackMate plugin
 
-1.  Use (in Mastodon, **not** Fiji): Plugins \> Tracking \> Detection…
+1.  Use (in Mastodon, **not** Fiji): `Plugins > Tracking > Detection…`
     and detect cells in some part of the volume (the ROI-box to select a
     part can also be using from within BDV).
 
-2.  Then use: Plugins \> Tracking \> Linking… and link those detections
+2.  Then use: `Plugins > Tracking > Linking…` and link those detections
     to each other. This will not lead to perfect results. Don’t worry
     about that!
 
 3.  Play with options, check if you can improve results somehow.
 
-### Tracking in Ilastik
+### Tracking in ilastik
 
 Please go to
 [<u>https://ilastik.github.io/documentation/tracking/tracking</u>](https://ilastik.github.io/documentation/tracking/tracking)
@@ -225,115 +333,41 @@ There is much more interesting stuff to explore. Here some inspiration:
         speed this up? (Ask the online manual…)
 
 
+### Tracking with btrack in napari
 
+In napari, there is a quite capable plugin for object tracking called `btrack`.
+Let us install it and then use it.
 
-## **Part 2: Photobleaching**
+**Installation of btrack and napari from scratch**
+- Open a Anaconda Prompt and install all we need by executing...
+  - `conda create -n btrack`
+  - `conda activate btrack`
+  - `conda install pip`
+  - `pip install btrack[napari]`
+  - `pip install -U napari[all]`
 
-### Learning Objectives
+**Using btrack to track objects we segmented**
+- Next, we need a dataset to track. Actually, we need not only a dataset, we need
+  data that is segmented. Since we learned about segmentation before, here we will
+  simply use one of the btrack example datasets. 
+  You can find a file called `segmented_nuclei.tif` it in the folder `btrack_masks`.
+- Start btrack by starting napari (execute `napari` from within the *btrack* conda 
+  environment we installed above).
+- Start btrack via `Plugins > Track (btrack)`.
+- Drag and drop the masks file into napari.
+  ```{warning}
+  napari does not recognize this tiff file as labels. You must manually convert 
+  to labels by right clicking on the layer and select `Convert to labels`.
+  ```
+- In the btrack side-bar, select the segmentation masks in the freshly coverted labels 
+  layer and click on `Track`.
+- Since this is one of the canned examples of btrack, the result is naturally quite good.
+  If you have any labels for any other dataset - try it!
+- The real work starts now: after objects are tracked, how would we continue analyzing 
+  these tracks?
 
-- Apply and scrutinize photobleach correction
-- Double-normalized FRAP analysis
-
-Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs)
-
----
-
-### Bleach Correction
-
-In this portion of the lab, you will compensate for photobleaching by
-fitting an exponential model to the decaying fluorescence intensity, and
-then correcting for this decay.
-
-Load the data:
-
-- Go to folder BleachCorrection
-
-- Load TRITC into Fiji by dragging the folder into the Fiji window
-  (click yes when asked to open as a stack, but leave the checkboxes
-  unchecked).
-
-Apply Fiji's built-in photobleach correction plugin
-
-- Image \> Adjust \> Bleach Correction
-
-- Correction Method: Exponential Fit. Press OK.
-
-- This plugin outputs a corrected image as well the fitted exponential
-  decay. Since you have not selected an ROI it is using the average
-  intensity in the entire image to perform the correction. Have a look
-  at the corrected image: does it look like what you would expect?
-
-- You can select a region and measure its intensity over time by drawing
-  an ROI and then going to Image-\>Stacks-\>Plot Z Axis Profile (since
-  there’s no Z axis this will actually plot a profile over time). Make a
-  measurement like this of the center of a nucleus as well as the
-  background. What do you see?
-
-- Now, re-load the original dataset and select an ROI of a nucleus. Be
-  sure it stays on the nucleus during the entire time series! Now
-  perform the photobleach correction again. What do you see now? Why is
-  this? What is the “right” way to photobleach correct these images?
-
-- Make a note of the decay rate (parameter 'b') from the exponential
-  fit.
-
-- Repeat for the FITC channel. Which image is bleaching faster?
-
-- How well does the correction work on the FITC channel? Do we need to
-  select an ROI here? Why or why not?
-
-- We now have approximately the same average intensity at the end of the
-  FITC time series. Is the SNR the same at the beginning and end? Does
-  the photobleach correction affect the SNR?
-
-### FRAP
-
-- Load the data: FRAP/33108 SU295 try1.tif (Or use your own if you
-  prefer)
-
-- Create an ROI over the square bleached region. Add it to the ROI
-  Manager (press ‘t’).
-
-- Plot the intensity in this region over time (Image \> Stacks \> Plot
-  Z-axis Profile)
-
-- Does the intensity recover to a stable value?
-
-- Could we use a photobleaching correction like in the previous
-  exercise? Why or why not?
-
-Now we will run a FRAP plugin. This is going to apply a similar analysis
-that you did above: photobleach correction, and then exponential
-fitting, but it will do it using a double-normalization approach. You
-can find this plugin by going to
-[<u>https://bit.ly/3xdsQUR</u>](https://bit.ly/3xdsQUR), or we’ve
-provided a copy in the lab data folder. Then, unzip the plugin and copy
-it to the “plugins” folder inside the folder Fiji is installed in, then
-restart Fiji.
-
-- First, perform a *uniform* background subtraction on your images by
-  measuring the mean intensity in a region of the background and then
-  going to Process \> Math \> Subtract. Why do we want to do a uniform
-  subtraction rather than e.g. a rolling ball?
-
-- You will need to have two ROIs in the ROI Manager. One for the square
-  bleached region, and a second ROI for the whole cell (including the
-  frapped region). If you can’t include the whole cell, just include a
-  large region of the same cell which includes the frapped region. When
-  might this non-whole-cell ROI be OK? When might it be problematic?
-
-- Launch the FRAP Profiler plugin (Plugins \> FRAP Profiler v2).
-
-- Enter the correct time interval, so that your recovery rate is in the
-  correct units.
-
-- Run first with a single exponential. Compare the fitted curve to the
-  raw data in the figure that is created (in the procFRAP and normFRAP
-  windows). (Ideally we would compare this quantitatively but the plugin
-  doesn’t support this :( )
-
-- Re-run the plugin with double exponential. Is the fit better? A double
-  exponential models a two step process, e.g., fast but weak association
-  of the molecule of interest, followed by slower stronger association.
-
-- What is the % mobile?
+```{tip}
+Tracking in napari is a thing. Kind of. 
+If you want to learn more about it, maybe this is a good place to start:
+[https://focalplane.biologists.com/2023/06/01/tracking-in-napari/](https://focalplane.biologists.com/2023/06/01/tracking-in-napari/)
+```
