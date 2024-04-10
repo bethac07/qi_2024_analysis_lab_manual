@@ -7,7 +7,6 @@ parts:
 - caption: 
   maxdepth: 4
   chapters:
-  - file: Lab06_3D_Image_Analysis.md
   - file: Lab07_Image_Time_Series_Analysis.md
 - caption:  Additional Resources
   chapters:
