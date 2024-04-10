@@ -16,7 +16,7 @@
 - Bonus: Use Noise2Void in Fiji
 - Bonus: Segmentation with StarDist in “Zero”
 
-Lab Data: [<u>https://bit.ly/3uEFiKg</u>](https://bit.ly/3uEFiKg)
+Lab Data: [<u>https://tinyurl.com/qi2024labs</u>](https://tinyurl.com/qi2024labs)
 
 ## **Overview**
 
