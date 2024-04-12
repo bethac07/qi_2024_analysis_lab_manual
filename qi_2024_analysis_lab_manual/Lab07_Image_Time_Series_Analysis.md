@@ -69,6 +69,8 @@ Apply Fiji's built-in photobleach correction plugin
 
 ### FRAP
 
+In this lab we will be using a FRAP plugin for Fiji. Unfortunately it does not work on the most current version of Fji (Welcome to the world of research software, you should be used to this by now!). Inside the data folder for this lab, we have included a compatible version of Fiji with the plugin already installed in a folder called `Fiji_for_FRAP`. 
+
 - Load the data: FRAP/33108 SU295 try1.tif (Or use your own if you
   prefer)
 
@@ -83,14 +85,7 @@ Apply Fiji's built-in photobleach correction plugin
 - Could we use a photobleaching correction like in the previous
   exercise? Why or why not?
 
-Now we will run a FRAP plugin. This is going to apply a similar analysis
-that you did above: photobleach correction, and then exponential
-fitting, but it will do it using a double-normalization approach. You
-can find this plugin by going to
-[<u>https://bit.ly/3xdsQUR</u>](https://bit.ly/3xdsQUR), or we’ve
-provided a copy in the lab data folder. Then, unzip the plugin and copy
-it to the “plugins” folder inside the folder Fiji is installed in, then
-restart Fiji.
+Now we will run the FRAP plugin. You can find this under the plugin menu, under `FRAP profiler v2`. This is going to apply a similar analysis that you did above: photobleach correction, and then exponential fitting, but it will do it using a double-normalization approach. 
 
 - First, perform a *uniform* background subtraction on your images by
   measuring the mean intensity in a region of the background and then

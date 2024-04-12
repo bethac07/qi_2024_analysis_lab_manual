@@ -4,10 +4,6 @@
 format: jb-book
 root: intro
 parts:
-- caption: 
-  maxdepth: 4
-  chapters:
-  - file: Lab07_Image_Time_Series_Analysis.md
 - caption:  Additional Resources
   chapters:
   - file: bibliography
