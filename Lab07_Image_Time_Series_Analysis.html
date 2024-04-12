@@ -61,8 +61,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Lab07_Image_Time_Series_Analysis';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bibliography" href="bibliography.html" />
-    <link rel="prev" title="Welcome to QI 2024" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -177,10 +177,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Image Time Series Analysis</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Resources</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Resources</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -486,6 +483,7 @@ the photobleach correction affect the SNR?</p></li>
 </section>
 <section id="frap">
 <h3>FRAP<a class="headerlink" href="#frap" title="Link to this heading">#</a></h3>
+<p>In this lab we will be using a FRAP plugin for Fiji. Unfortunately it does not work on the most current version of Fji (Welcome to the world of research software, you should be used to this by now!). Inside the data folder for this lab, we have included a compatible version of Fiji with the plugin already installed in a folder called <code class="docutils literal notranslate"><span class="pre">Fiji_for_FRAP</span></code>.</p>
 <ul class="simple">
 <li><p>Load the data: FRAP/33108 SU295 try1.tif (Or use your own if you
 prefer)</p></li>
@@ -497,14 +495,7 @@ Manager (press ‘t’).</p></li>
 <li><p>Could we use a photobleaching correction like in the previous
 exercise? Why or why not?</p></li>
 </ul>
-<p>Now we will run a FRAP plugin. This is going to apply a similar analysis
-that you did above: photobleach correction, and then exponential
-fitting, but it will do it using a double-normalization approach. You
-can find this plugin by going to
-<a class="reference external" href="https://bit.ly/3xdsQUR"><u>https://bit.ly/3xdsQUR</u></a>, or we’ve
-provided a copy in the lab data folder. Then, unzip the plugin and copy
-it to the “plugins” folder inside the folder Fiji is installed in, then
-restart Fiji.</p>
+<p>Now we will run the FRAP plugin. You can find this under the plugin menu, under <code class="docutils literal notranslate"><span class="pre">FRAP</span> <span class="pre">profiler</span> <span class="pre">v2</span></code>. This is going to apply a similar analysis that you did above: photobleach correction, and then exponential fitting, but it will do it using a double-normalization approach.</p>
 <ul class="simple">
 <li><p>First, perform a <em>uniform</em> background subtraction on your images by
 measuring the mean intensity in a region of the background and then
@@ -535,8 +526,8 @@ of the molecule of interest, followed by slower stronger association.</p></li>
 <h3>Learning Objectives<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>(Semi-)automated Tracking with Mastodon in Fiji</p></li>
-<li><p>Using Trackmate<span id="id2">[<a class="reference internal" href="bibliography.html#id7" title="Jean-Yves Tinevez, Nick Perry, Johannes Schindelin, Genevieve M Hoopes, Gregory D Reynolds, Emmanuel Laplantine, Sebastian Y Bednarek, Spencer L Shorte, and Kevin W Eliceiri. TrackMate: an open and extensible platform for single-particle tracking. Methods, 115:80–90, February 2017.">1</a>]</span> from within Mastodon</p></li>
-<li><p>Tracking with ilastik<span id="id3">[<a class="reference internal" href="bibliography.html#id8" title="Stuart Berg, Dominik Kutra, Thorben Kroeger, Christoph N Straehle, Bernhard X Kausler, Carsten Haubold, Martin Schiegg, Janez Ales, Thorsten Beier, Markus Rudy, Kemal Eren, Jaime I Cervantes, Buote Xu, Fynn Beuttenmueller, Adrian Wolny, Chong Zhang, Ullrich Koethe, Fred A Hamprecht, and Anna Kreshuk. Ilastik: interactive machine learning for (bio)image analysis. Nat. Methods, 16(12):1226–1232, December 2019.">2</a>]</span></p></li>
+<li><p>Using Trackmate<span id="id2">[<a class="reference internal" href="bibliography.html#id7" title="Jean-Yves Tinevez, Nick Perry, Johannes Schindelin, Genevieve M Hoopes, Gregory D Reynolds, Emmanuel Laplantine, Sebastian Y Bednarek, Spencer L Shorte, and Kevin W Eliceiri. TrackMate: an open and extensible platform for single-particle tracking. Methods, 115:80–90, February 2017.">15</a>]</span> from within Mastodon</p></li>
+<li><p>Tracking with ilastik<span id="id3">[<a class="reference internal" href="bibliography.html#id8" title="Stuart Berg, Dominik Kutra, Thorben Kroeger, Christoph N Straehle, Bernhard X Kausler, Carsten Haubold, Martin Schiegg, Janez Ales, Thorsten Beier, Markus Rudy, Kemal Eren, Jaime I Cervantes, Buote Xu, Fynn Beuttenmueller, Adrian Wolny, Chong Zhang, Ullrich Koethe, Fred A Hamprecht, and Anna Kreshuk. Ilastik: interactive machine learning for (bio)image analysis. Nat. Methods, 16(12):1226–1232, December 2019.">7</a>]</span></p></li>
 <li><p>Bonus: exporting from ilastik, editing in Mastodon - note from Beth - this isn’t there</p></li>
 </ul>
 </section>
@@ -815,24 +806,6 @@ If you want to learn more about it, maybe this is a good place to start:
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="intro.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to QI 2024</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="bibliography.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bibliography</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
